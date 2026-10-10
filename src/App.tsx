@@ -54,6 +54,7 @@ const Navigation = ({ onBookClick }: { onBookClick: () => void }) => {
             <a href="#" className="flex-shrink-0"><Logo size="sm" /></a>
             <div className="hidden md:flex items-center gap-8">
               <a href="#services" className="text-sm text-white/70 hover:text-white transition-colors">Services</a>
+              <a href="#features" className="text-sm text-white/70 hover:text-white transition-colors">Why Us</a>
               <a href="#reviews" className="text-sm text-white/70 hover:text-white transition-colors">Reviews</a>
               <a href="#contact" className="text-sm text-white/70 hover:text-white transition-colors">Contact</a>
               <button onClick={onBookClick} className="px-6 py-2.5 bg-white text-black font-medium text-sm rounded-full hover:bg-white/90 transition-colors">Book Now</button>
@@ -76,6 +77,7 @@ const Navigation = ({ onBookClick }: { onBookClick: () => void }) => {
             </div>
             <div className="flex-1 flex flex-col items-center justify-center gap-8 px-8">
               <a href="#services" onClick={() => setMobileOpen(false)} className="text-2xl text-white/90">Services</a>
+              <a href="#features" onClick={() => setMobileOpen(false)} className="text-2xl text-white/90">Why Choose Us</a>
               <a href="#reviews" onClick={() => setMobileOpen(false)} className="text-2xl text-white/90">Reviews</a>
               <a href="#contact" onClick={() => setMobileOpen(false)} className="text-2xl text-white/90">Contact</a>
               <button onClick={() => { setMobileOpen(false); onBookClick(); }} className="w-full py-4 bg-white text-black font-semibold rounded-full mt-4">Book Appointment</button>
@@ -128,6 +130,56 @@ const HeroSection = ({ onBookClick }: { onBookClick: () => void }) => {
     </section>
   );
 };
+
+// ==================== FIRST TIME OFFER ====================
+const FirstTimeOffer = () => (
+  <section className="py-12 bg-gradient-to-r from-gray-900 to-gray-800 text-white">
+    <div className="max-w-4xl mx-auto px-5 sm:px-6 text-center">
+      <Reveal>
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 mb-4">
+          <span className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></span>
+          <span className="text-sm font-medium">New Client Special</span>
+        </div>
+        <h2 className="text-2xl sm:text-3xl font-light">20% OFF Your First 3 Visits</h2>
+        <p className="mt-3 text-white/70">Plus a complimentary Kevin Murphy treatment</p>
+      </Reveal>
+    </div>
+  </section>
+);
+
+// ==================== FEATURES ====================
+const features = [
+  { icon: '🚗', title: 'Complimentary Valet Parking', description: 'Free valet service right at our entrance in Business Bay' },
+  { icon: '☕', title: 'Complimentary Beverages', description: 'Enjoy coffee, tea, or refreshments during your visit' },
+  { icon: '💆', title: '4-Hand & 6-Hand Services', description: 'Simultaneous treatments for maximum efficiency' },
+  { icon: '🛋️', title: 'Luxury Reclining Chairs', description: 'Premium comfort during extended treatments' },
+  { icon: '📶', title: 'High-Speed Wi-Fi', description: 'Stay connected throughout your visit' },
+  { icon: '🎁', title: 'Premium Products', description: 'K18, Tokio Inkarami, Nashi, Kevin Murphy & more' },
+];
+
+const FeaturesSection = () => (
+  <section id="features" className="py-16 sm:py-20 bg-white">
+    <div className="max-w-6xl mx-auto px-5 sm:px-6">
+      <Reveal>
+        <div className="text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl font-light text-gray-900">Why Choose Dukes of Beauty</h2>
+          <p className="mt-3 text-gray-600">Experience luxury at its finest</p>
+        </div>
+      </Reveal>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {features.map((feature, index) => (
+          <Reveal key={index} delay={index * 100}>
+            <div className="p-6 rounded-lg border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all">
+              <div className="text-3xl mb-3">{feature.icon}</div>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">{feature.title}</h3>
+              <p className="text-sm text-gray-600">{feature.description}</p>
+            </div>
+          </Reveal>
+        ))}
+      </div>
+    </div>
+  </section>
+);
 
 // ==================== SERVICES ====================
 type ServiceItem = { name: string; duration: string; price: string };
@@ -389,7 +441,7 @@ const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices }:
   );
 };
 
-// ==================== REVIEWS (Link to Real Google Reviews) ====================
+// ==================== REVIEWS ====================
 const ReviewsSection = () => (
   <section id="reviews" className="py-16 sm:py-20 bg-white">
     <div className="max-w-4xl mx-auto px-5 sm:px-6 text-center">
@@ -425,10 +477,11 @@ const ContactSection = () => (
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Reveal>
           <div className="bg-white rounded-lg p-6 shadow-sm">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">Location</h3>
+            <h3 className="text-lg font-medium text-gray-900 mb-4">Location & Hours</h3>
             <div className="space-y-3 text-sm text-gray-600">
               <p className="flex items-start gap-3"><i className="fas fa-map-marker-alt text-gray-400 mt-1"></i><span>Shop No. 1-Retail, 15 Northside,<br/>Marasi Dr., Business Bay, Dubai, UAE</span></p>
               <p className="flex items-center gap-3"><i className="fas fa-clock text-gray-400"></i><span>Daily: 10:00 AM – 10:00 PM</span></p>
+              <p className="flex items-center gap-3"><i className="fas fa-phone text-gray-400"></i><a href="tel:+971528167306" className="hover:text-gray-900 transition-colors">+971 52 816 7306</a></p>
             </div>
           </div>
         </Reveal>
@@ -438,9 +491,6 @@ const ContactSection = () => (
             <div className="space-y-3">
               <a href="https://wa.me/971528167306" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm text-gray-600 hover:text-green-600 transition-colors">
                 <i className="fab fa-whatsapp text-lg"></i><span>+971 52 816 7306</span>
-              </a>
-              <a href="https://www.instagram.com/dukes_of_beauty.ae/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm text-gray-600 hover:text-pink-600 transition-colors">
-                <i className="fab fa-instagram text-lg"></i><span>@dukes_of_beauty.ae</span>
               </a>
             </div>
           </div>
@@ -458,7 +508,6 @@ const Footer = () => (
         <Logo size="sm" />
         <p className="text-sm text-gray-500">© 2024 Dukes of Beauty. All rights reserved.</p>
         <div className="flex gap-4">
-          <a href="https://www.instagram.com/dukes_of_beauty.ae/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-600 transition-colors"><i className="fab fa-instagram text-lg"></i></a>
           <a href="https://wa.me/971528167306" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-green-600 transition-colors"><i className="fab fa-whatsapp text-lg"></i></a>
         </div>
       </div>
@@ -705,6 +754,8 @@ export default function App() {
     <div className="min-h-screen bg-white text-gray-900">
       <Navigation onBookClick={handleBookClick} />
       <HeroSection onBookClick={handleBookClick} />
+      <FirstTimeOffer />
+      <FeaturesSection />
       <ServicesSection onBookClick={handleBookClick} selectedServices={selectedServices} setSelectedServices={setSelectedServices} />
       <ReviewsSection />
       <ContactSection />
