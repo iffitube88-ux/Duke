@@ -67,7 +67,7 @@ const Navigation = ({ onBookClick }: { onBookClick: () => void }) => {
               <a href="https://www.instagram.com/dukes_of_beauty.ae/" target="_blank" rel="noopener noreferrer" className="text-ivory/60 hover:text-champagne transition-colors">
                 <i className="fab fa-instagram text-lg"></i>
               </a>
-              <button onClick={onBookClick} className="btn-luxury px-6 py-2.5 rounded-full">Book Now</button>
+              <button onClick={onBookClick} className="btn-luxury btn-luxury-sm">Book Now</button>
             </div>
 
             <button onClick={() => setMobileOpen(true)} className="md:hidden text-ivory/70 p-2" aria-label="Menu">
@@ -100,7 +100,7 @@ const Navigation = ({ onBookClick }: { onBookClick: () => void }) => {
                 <i className="fab fa-instagram text-xl"></i>
                 <span className="text-sm">Instagram</span>
               </a>
-              <button onClick={() => { setMobileOpen(false); onBookClick(); }} className="btn-luxury w-full py-4 rounded-full mt-4">Book Appointment</button>
+              <button onClick={() => { setMobileOpen(false); onBookClick(); }} className="btn-luxury w-full mt-4">Book Appointment</button>
             </div>
           </div>
         </div>
@@ -149,10 +149,10 @@ const HeroSection = ({ onBookClick }: { onBookClick: () => void }) => {
 
           {/* CTAs */}
           <div className={`mt-8 sm:mt-10 md:mt-12 flex flex-col sm:flex-row gap-4 transition-all duration-1000 delay-1000 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <button onClick={onBookClick} className="btn-luxury px-8 py-4 rounded-full">
+            <button onClick={onBookClick} className="btn-luxury">
               Reserve Your Visit
             </button>
-            <a href="#services" className="btn-outline px-8 py-4 rounded-full text-center">
+            <a href="#services" className="btn-outline">
               View Services
             </a>
           </div>
@@ -487,7 +487,7 @@ const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices }:
                 <p className="text-ivory text-base font-sans font-medium">{selectedServices.length} service{selectedServices.length > 1 ? 's' : ''} selected</p>
                 <p className="text-champagne text-sm font-sans mt-1">Estimated total: {calculateTotal()} AED</p>
               </div>
-              <button onClick={onBookClick} className="btn-luxury px-8 py-3 rounded-full text-xs">
+              <button onClick={onBookClick} className="btn-luxury btn-luxury-sm">
                 Continue Booking
               </button>
             </div>
@@ -702,7 +702,7 @@ const InstagramSection = () => {
               href="https://www.instagram.com/dukes_of_beauty.ae/"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-luxury inline-flex items-center gap-3 px-10 py-5 rounded-full text-sm"
+              className="btn-luxury inline-flex items-center gap-3"
             >
               <i className="fab fa-instagram text-lg"></i>
               Follow @dukes_of_beauty.ae
@@ -1291,6 +1291,8 @@ const isSlotBooked = (date: string, time: string): boolean => {
 const BookingModal = ({ isOpen, onClose, preSelectedServices = [] }: { isOpen: boolean; onClose: () => void; preSelectedServices?: string[] }) => {
   const [booking, setBooking] = useState<BookingState>({ step: 1, selectedServices: [], selectedDate: '', selectedTime: '', customerName: '', customerPhone: '' });
   const [showCalendar, setShowCalendar] = useState(false);
+  const [activeCategory, setActiveCategory] = useState('hair');
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : '';
@@ -1347,15 +1349,40 @@ const BookingModal = ({ isOpen, onClose, preSelectedServices = [] }: { isOpen: b
   };
 
   const calculateTotalPrice = () => {
-    let total = 0;
+    let minTotal = 0;
+    let maxTotal = 0;
+    let hasVariable = false;
+    
     booking.selectedServices.forEach(serviceName => {
       const service = allServices.find(s => s.name === serviceName);
       if (service) {
-        const priceMatch = service.price.match(/(\d+)/);
-        if (priceMatch) total += parseInt(priceMatch[1]);
+        // Check if price has a range (e.g., "900–1,500 AED")
+        const rangeMatch = service.price.match(/([\d,]+)[–-]([\d,]+)\s*AED/i);
+        if (rangeMatch) {
+          hasVariable = true;
+          const min = parseInt(rangeMatch[1].replace(/,/g, ''));
+          const max = parseInt(rangeMatch[2].replace(/,/g, ''));
+          minTotal += min;
+          maxTotal += max;
+        } else {
+          // Single price or "from X AED"
+          const priceMatch = service.price.match(/([\d,]+)\s*AED/i);
+          if (priceMatch) {
+            const price = parseInt(priceMatch[1].replace(/,/g, ''));
+            if (service.price.toLowerCase().includes('from')) {
+              hasVariable = true;
+              minTotal += price;
+              maxTotal += price * 1.5; // Estimate max as 1.5x for "from" prices
+            } else {
+              minTotal += price;
+              maxTotal += price;
+            }
+          }
+        }
       }
     });
-    return total;
+    
+    return { min: minTotal, max: maxTotal, hasVariable };
   };
 
   const formatWhatsAppDate = (dateStr: string): string => {
@@ -1411,13 +1438,13 @@ const BookingModal = ({ isOpen, onClose, preSelectedServices = [] }: { isOpen: b
     const formattedDate = formatWhatsAppDate(booking.selectedDate);
     const formattedTime = formatWhatsAppTime(booking.selectedTime);
     const totalDuration = calculateTotalDuration();
-    const totalPrice = calculateTotalPrice();
+    const priceInfo = calculateTotalPrice();
+    const totalPriceText = priceInfo.min === priceInfo.max 
+      ? `${priceInfo.min} AED`
+      : `${priceInfo.min}–${priceInfo.max} AED`;
 
     // Check if any service has variable pricing
-    const hasVariablePricing = booking.selectedServices.some(serviceName => {
-      const service = allServices.find(s => s.name === serviceName);
-      return service?.price.toLowerCase().includes('from');
-    });
+    const hasVariablePricing = priceInfo.hasVariable;
 
     // Build service breakdown
     const serviceLines = booking.selectedServices.map(serviceName => {
@@ -1448,7 +1475,7 @@ const BookingModal = ({ isOpen, onClose, preSelectedServices = [] }: { isOpen: b
 ${serviceLines}
 
 ━━━━━━━━━━━━━━━━━━
-💰 *ESTIMATED TOTAL: AED ${totalPrice}*
+💰 *ESTIMATED TOTAL: AED ${totalPriceText}*
 ${hasVariablePricing ? '\n⚠️ _Final price subject to salon confirmation_' : ''}
 
 📍 Dukes of Beauty
@@ -1499,7 +1526,7 @@ Business Bay, Dubai
     <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center" onClick={onClose}>
       <div className="absolute inset-0 bg-obsidian/80 backdrop-blur-sm"></div>
       <div 
-        className="relative w-full sm:max-w-2xl bg-charcoal border border-champagne/10 rounded-t-3xl sm:rounded-2xl max-h-[95vh] sm:max-h-[90vh] overflow-hidden flex flex-col" 
+        className="relative w-full sm:max-w-[680px] bg-charcoal border border-champagne/10 rounded-t-3xl sm:rounded-2xl max-h-[95vh] sm:max-h-[88vh] overflow-hidden flex flex-col" 
         onClick={(e) => e.stopPropagation()}
         style={{ animation: 'slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards' }}
       >
@@ -1532,45 +1559,98 @@ Business Bay, Dubai
         <div className="flex-1 overflow-y-auto p-5 sm:p-6">
           {booking.step === 1 && (
             <div>
-              <p className="text-ivory/60 text-sm font-sans mb-5">Select your treatments:</p>
-              <div className="space-y-6">
-                {serviceCategories.map(category => (
-                  <div key={category.id}>
-                    <h4 className="text-champagne text-xs font-sans tracking-[0.15em] uppercase mb-3 flex items-center gap-2">
-                      <span className="text-base">{category.icon}</span> {category.title}
-                    </h4>
-                    <div className="space-y-1">
-                      {category.services.map(service => (
-                        <label 
-                          key={service.name} 
-                          className={`flex items-center gap-3 p-3 sm:p-4 rounded-lg cursor-pointer transition-all ${
-                            booking.selectedServices.includes(service.name)
-                              ? 'bg-champagne/10 border border-champagne/30'
-                              : 'hover:bg-champagne/[0.03] border border-transparent'
-                          }`}
-                        >
-                          <input 
-                            type="checkbox" 
-                            checked={booking.selectedServices.includes(service.name)} 
-                            onChange={() => toggleService(service.name)} 
-                            className="w-5 h-5 rounded border-champagne/40 bg-transparent flex-shrink-0 accent-champagne" 
-                          />
-                          <div className="flex-1 min-w-0">
-                            <p className="text-ivory/90 text-sm sm:text-base font-sans">{service.name}</p>
-                            <p className="text-ivory/40 text-xs font-sans mt-0.5">{service.duration}</p>
-                          </div>
-                          <p className="text-champagne text-sm font-sans font-medium whitespace-nowrap">{service.price}</p>
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-                ))}
+              <p className="text-ivory/60 text-sm font-sans mb-4">Select your treatments:</p>
+              
+              {/* Search Field */}
+              <div className="mb-4">
+                <div className="relative">
+                  <i className="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-ivory/30"></i>
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Search services..."
+                    className="w-full pl-11 pr-4 py-3.5 bg-obsidian border border-champagne/20 rounded-lg text-ivory font-sans text-sm placeholder:text-ivory/30 focus:border-champagne/50 focus:outline-none transition-colors"
+                  />
+                </div>
               </div>
+
+              {/* Category Tabs */}
+              <div className="mb-5 overflow-x-auto scrollbar-hide">
+                <div className="flex gap-2 pb-2">
+                  {serviceCategories.map(cat => (
+                    <button
+                      key={cat.id}
+                      onClick={() => setActiveCategory(cat.id)}
+                      className={`flex-shrink-0 px-4 py-2.5 rounded-full text-xs font-sans transition-all whitespace-nowrap ${
+                        activeCategory === cat.id
+                          ? 'bg-champagne/15 border border-champagne/30 text-champagne'
+                          : 'bg-obsidian border border-champagne/10 text-ivory/60 hover:border-champagne/20'
+                      }`}
+                    >
+                      <span className="mr-1.5">{cat.icon}</span>
+                      {cat.title}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Service List */}
+              <div className="space-y-2 max-h-[40vh] overflow-y-auto">
+                {serviceCategories
+                  .find(cat => cat.id === activeCategory)
+                  ?.services.filter(service => 
+                    !searchQuery || 
+                    service.name.toLowerCase().includes(searchQuery.toLowerCase())
+                  )
+                  .map(service => (
+                    <label 
+                      key={service.name} 
+                      className={`flex items-center gap-3 p-4 rounded-xl cursor-pointer transition-all ${
+                        booking.selectedServices.includes(service.name)
+                          ? 'glass-row-selected'
+                          : 'glass-row'
+                      }`}
+                    >
+                      <input 
+                        type="checkbox" 
+                        checked={booking.selectedServices.includes(service.name)} 
+                        onChange={() => toggleService(service.name)} 
+                        className="w-5 h-5 rounded border-champagne/40 bg-transparent flex-shrink-0 accent-champagne" 
+                      />
+                      <div className="flex-1 min-w-0">
+                        <p className="text-ivory/90 text-sm font-sans">{service.name}</p>
+                        <p className="text-ivory/40 text-xs font-sans mt-0.5">{service.duration}</p>
+                      </div>
+                      <p className="text-champagne text-sm font-sans font-medium whitespace-nowrap">{service.price}</p>
+                    </label>
+                  ))}
+              </div>
+
+              {/* Selected Services Summary */}
               {booking.selectedServices.length > 0 && (
-                <div className="mt-6 p-4 rounded-lg bg-champagne/5 border border-champagne/20">
-                  <p className="text-champagne text-sm font-sans font-medium">
-                    {booking.selectedServices.length} service{booking.selectedServices.length > 1 ? 's' : ''} selected · {calculateTotalPrice()} AED
-                  </p>
+                <div className="mt-5 p-4 rounded-xl bg-champagne/5 border border-champagne/20">
+                  <div className="flex items-center justify-between mb-2">
+                    <p className="text-champagne text-sm font-sans font-medium">
+                      {booking.selectedServices.length} service{booking.selectedServices.length > 1 ? 's' : ''} selected
+                    </p>
+                    <p className="text-champagne text-sm font-sans font-semibold">
+                      {calculateTotalPrice().min} AED{calculateTotalPrice().hasVariable ? '+' : ''}
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {booking.selectedServices.map(serviceName => (
+                      <span key={serviceName} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-champagne/10 text-champagne text-xs font-sans">
+                        {serviceName}
+                        <button 
+                          onClick={() => toggleService(serviceName)}
+                          className="hover:text-ivory transition-colors"
+                        >
+                          ×
+                        </button>
+                      </span>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>
@@ -1585,13 +1665,14 @@ Business Bay, Dubai
                 <label className="text-champagne text-xs font-sans tracking-[0.15em] uppercase mb-3 block">Date</label>
                 <button
                   onClick={() => setShowCalendar(!showCalendar)}
-                  className="w-full px-5 py-4 bg-obsidian border border-champagne/20 rounded-lg text-left hover:border-champagne/40 transition-colors"
+                  className="w-full px-5 py-4 bg-obsidian border border-champagne/20 rounded-lg text-left hover:border-champagne/40 transition-colors flex items-center justify-between min-h-[56px]"
                 >
                   {booking.selectedDate ? (
-                    <span className="text-ivory text-sm sm:text-base font-sans">{formatDate(booking.selectedDate)}</span>
+                    <span className="text-ivory text-base font-sans">{formatDate(booking.selectedDate)}</span>
                   ) : (
-                    <span className="text-ivory/40 text-sm sm:text-base font-sans">Select a date</span>
+                    <span className="text-ivory/40 text-base font-sans">Select a date</span>
                   )}
+                  <i className="fas fa-calendar text-champagne/60"></i>
                 </button>
                 
                 {showCalendar && (
@@ -1612,29 +1693,30 @@ Business Bay, Dubai
               {booking.selectedDate && (
                 <div>
                   <label className="text-champagne text-xs font-sans tracking-[0.15em] uppercase mb-3 block">Time</label>
-                  <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 sm:gap-3">
+                  <div className="grid grid-cols-3 sm:grid-cols-4 gap-2.5">
                     {generateTimeSlots().map(time => {
                       const booked = isSlotBooked(booking.selectedDate, time);
+                      const displayTime = formatDisplayTime(time);
                       return (
                         <button
                           key={time}
                           disabled={booked}
                           onClick={() => setBooking(prev => ({ ...prev, selectedTime: time }))}
-                          className={`px-4 py-3 rounded-lg text-sm font-sans transition-all min-h-[48px] ${
+                          className={`px-3 py-3.5 rounded-xl text-sm font-sans transition-all min-h-[52px] ${
                             booked
                               ? 'bg-red-500/10 border border-red-500/20 text-red-400/50 cursor-not-allowed line-through'
                               : booking.selectedTime === time
-                              ? 'bg-champagne text-obsidian font-semibold'
-                              : 'bg-obsidian border border-champagne/10 text-ivory/70 hover:border-champagne/30'
+                              ? 'bg-champagne text-obsidian font-semibold shadow-lg shadow-champagne/20'
+                              : 'bg-obsidian border border-champagne/10 text-ivory/70 hover:border-champagne/30 hover:bg-obsidian/80'
                           }`}
                         >
-                          {time}
+                          {displayTime}
                         </button>
                       );
                     })}
                   </div>
-                  <p className="text-ivory/30 text-xs font-sans mt-3">
-                    <span className="inline-block w-3 h-3 bg-red-500/20 border border-red-500/30 rounded mr-1"></span>
+                  <p className="text-ivory/30 text-xs font-sans mt-4 flex items-center gap-2">
+                    <span className="inline-block w-3 h-3 bg-red-500/20 border border-red-500/30 rounded"></span>
                     Unavailable time slots
                   </p>
                 </div>
@@ -1690,8 +1772,17 @@ Business Bay, Dubai
                   </div>
                   <div className="flex justify-between pt-3 border-t border-champagne/10">
                     <span className="text-champagne font-medium">Estimated Total:</span>
-                    <span className="text-champagne font-semibold text-base">{calculateTotalPrice()} AED</span>
+                    <span className="text-champagne font-semibold text-base">
+                      {calculateTotalPrice().min === calculateTotalPrice().max 
+                        ? `${calculateTotalPrice().min} AED`
+                        : `${calculateTotalPrice().min}–${calculateTotalPrice().max} AED`}
+                    </span>
                   </div>
+                  {calculateTotalPrice().hasVariable && (
+                    <p className="text-ivory/40 text-xs font-sans mt-2 italic">
+                      * Final price subject to salon confirmation
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -1708,7 +1799,7 @@ Business Bay, Dubai
             {booking.step > 1 && (
               <button
                 onClick={() => setBooking(prev => ({ ...prev, step: prev.step - 1 }))}
-                className="btn-outline px-6 py-3.5 rounded-full min-w-[100px]"
+                className="btn-outline min-w-[110px]"
               >
                 Back
               </button>
@@ -1722,9 +1813,9 @@ Business Bay, Dubai
                   handleWhatsAppBooking();
                 }
               }}
-              className="btn-luxury flex-1 py-3.5 rounded-full disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
+              className="btn-luxury flex-1"
             >
-              {booking.step === 3 ? 'Confirm & Send' : 'Continue'}
+              {booking.step === 3 ? 'Confirm & Send via WhatsApp' : 'Continue'}
             </button>
           </div>
         </div>

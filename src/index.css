@@ -139,38 +139,87 @@ body {
   background: linear-gradient(90deg, transparent, #C8AD83, transparent);
 }
 
-/* Buttons */
+/* Button System - Consistent Sizing */
 .btn-luxury {
   position: relative;
   background: linear-gradient(135deg, #C8AD83 0%, #D4BE99 50%, #C8AD83 100%);
   background-size: 200% auto;
   color: #0B0B0D;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  font-size: 11px;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.05em;
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  min-height: 52px;
+  padding: 0 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
 }
 
 .btn-luxury:hover {
   background-position: right center;
   transform: translateY(-2px);
-  box-shadow: 0 10px 40px rgba(200, 173, 131, 0.2);
+  box-shadow: 0 10px 40px rgba(200, 173, 131, 0.3);
+}
+
+.btn-luxury:active {
+  transform: translateY(0);
+}
+
+.btn-luxury:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-luxury-sm {
+  min-height: 48px;
+  padding: 0 24px;
+  font-size: 14px;
 }
 
 .btn-outline {
   border: 1px solid rgba(200, 173, 131, 0.3);
   color: #C8AD83;
-  font-weight: 400;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  font-size: 11px;
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0.05em;
   transition: all 0.4s ease;
+  min-height: 52px;
+  padding: 0 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: transparent;
 }
 
 .btn-outline:hover {
   border-color: #C8AD83;
-  background: rgba(200, 173, 131, 0.05);
+  background: rgba(200, 173, 131, 0.08);
+}
+
+.btn-outline:active {
+  background: rgba(200, 173, 131, 0.12);
+}
+
+.btn-ghost {
+  color: #F4EFE7;
+  font-weight: 500;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  min-height: 48px;
+  padding: 0 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: transparent;
+}
+
+.btn-ghost:hover {
+  background: rgba(244, 239, 231, 0.08);
 }
 
 /* Hero overlay - subtle cinematic gradient for text readability */
