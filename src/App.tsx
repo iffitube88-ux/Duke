@@ -159,14 +159,19 @@ const HeroSection = ({ onBookClick }: { onBookClick: () => void }) => {
 
           {/* Small trust indicator */}
           <div className={`transition-all duration-1000 delay-[1200ms] ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <div className="flex items-center gap-3">
+            <a 
+              href="https://www.google.com/maps/place/?q=place_id:ChIJQw1xKtxpXz4R5ZcIoAWMGdE"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+            >
               <div className="flex gap-0.5">
                 {[...Array(5)].map((_, i) => (
                   <svg key={i} className="w-3.5 h-3.5 text-champagne fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
                 ))}
               </div>
-              <span className="text-ivory/60 text-xs font-sans tracking-wide">4.9 · Google</span>
-            </div>
+              <span className="text-ivory/60 text-xs font-sans tracking-wide">View Google Reviews</span>
+            </a>
           </div>
         </div>
       </div>
@@ -842,44 +847,6 @@ const GallerySection = () => {
 // ==================== REVIEWS ====================
 // ==================== REVIEWS ====================
 const ReviewsSection = () => {
-  // Real reviews from Google Maps
-  const reviews = [
-    {
-      name: 'Анастасия Ушакова',
-      avatar: 'https://lh3.googleusercontent.com/a-/ALV-UjXF4DKa4LbbSBvYAX9GWxmopsXfRRQpiShVJ5AkjMRXClcwix0=w36-h36-p-rp-mo-br100',
-      rating: 5,
-      time: '3 months ago',
-      text: 'I visited Dukes of Beauty and everything was absolutely amazing. The staff, service, and overall experience were beyond excellent.',
-      reviewCount: '7 reviews · 7 photos',
-    },
-    {
-      name: 'Milena Klykova',
-      avatar: 'https://lh3.googleusercontent.com/a-/ALV-UjXO0UYtLoE7KW7rUXbASf8-WFNVoePBeTbk4inw21f3vyDiRP0I=w36-h36-p-rp-mo-ba12-br100',
-      rating: 5,
-      time: '4 months ago',
-      text: 'Absolutely loved my experience at Dukes of Beauty 🤍 I came for a manicure and RSL massage, and everything was amazing from the start.',
-      reviewCount: 'Local Guide · 23 reviews · 26 photos',
-      ownerResponse: 'Thank you so much for your kind review 🤍✨ We\'re really happy you enjoyed your manicure and RSL massage!',
-    },
-    {
-      name: 'Maria Egorova',
-      avatar: 'https://lh3.googleusercontent.com/a-/ALV-UjUukgdgeJselqljRC4uRfUo-80J1rd209YC7Mcbah-W7rT2OFqj=w36-h36-p-rp-mo-ba12-br100',
-      rating: 3,
-      time: '2 months ago',
-      text: 'The staff is friendly and polite, the general level is good, comfortable chairs. Pedicure was fine and free neck massage was lovely.',
-      reviewCount: 'Local Guide · 15 reviews · 3 photos',
-    },
-  ];
-
-  const [activeReview, setActiveReview] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveReview((prev) => (prev + 1) % reviews.length);
-    }, 6000);
-    return () => clearInterval(timer);
-  }, []);
-
   return (
     <section id="reviews" className="section-spacing relative">
       <div className="container-luxury">
@@ -887,95 +854,32 @@ const ReviewsSection = () => {
           <div className="text-center mb-12">
             <div className="flex items-center justify-center gap-3 mb-6">
               <span className="w-12 h-px bg-champagne"></span>
-              <span className="text-champagne text-[11px] tracking-[0.3em] uppercase font-sans">Testimonials</span>
+              <span className="text-champagne text-[11px] tracking-[0.3em] uppercase font-sans">Reviews</span>
               <span className="w-12 h-px bg-champagne"></span>
             </div>
             <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-light text-ivory leading-tight">
               Client <span className="italic text-champagne">Reviews</span>
             </h2>
+            <p className="mt-6 text-ivory/60 text-base sm:text-lg font-sans max-w-2xl mx-auto leading-relaxed">
+              Read authentic reviews from our clients on Google Maps.
+            </p>
           </div>
         </Reveal>
 
         <Reveal delay={200}>
-          <div className="mt-12 max-w-4xl mx-auto">
-            {/* Rating Summary */}
-            <div className="text-center mb-12">
-              <div className="flex justify-center gap-1.5 mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <svg key={i} className="w-6 h-6 text-champagne fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
-                ))}
-              </div>
-              <p className="font-serif text-6xl sm:text-7xl text-champagne font-light leading-none">4.6</p>
-              <p className="text-ivory/60 text-sm font-sans mt-3">Based on 107 Google Reviews</p>
-            </div>
-
-            {/* Review Carousel */}
-            <div className="bg-charcoal/30 border border-champagne/10 rounded-2xl p-8 sm:p-12 min-h-[300px]">
-              <div className="relative">
-                {/* Review Card */}
-                <div className="transition-all duration-500">
-                  <div className="flex items-start gap-4 mb-6">
-                    <img
-                      src={reviews[activeReview].avatar}
-                      alt={reviews[activeReview].name}
-                      className="w-12 h-12 rounded-full object-cover"
-                    />
-                    <div className="flex-1">
-                      <h4 className="text-ivory text-base font-sans font-medium">{reviews[activeReview].name}</h4>
-                      <p className="text-ivory/40 text-xs font-sans mt-0.5">{reviews[activeReview].reviewCount}</p>
-                    </div>
-                    <div className="flex gap-0.5">
-                      {[...Array(reviews[activeReview].rating)].map((_, i) => (
-                        <svg key={i} className="w-4 h-4 text-champagne fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
-                      ))}
-                    </div>
-                  </div>
-
-                  <p className="text-ivory/80 text-base sm:text-lg font-sans leading-relaxed mb-4">
-                    "{reviews[activeReview].text}"
-                  </p>
-
-                  <p className="text-ivory/40 text-xs font-sans">{reviews[activeReview].time}</p>
-
-                  {/* Owner Response */}
-                  {reviews[activeReview].ownerResponse && (
-                    <div className="mt-6 pt-6 border-t border-champagne/10">
-                      <p className="text-champagne text-xs font-sans font-medium mb-2">Response from the owner</p>
-                      <p className="text-ivory/60 text-sm font-sans leading-relaxed">
-                        {reviews[activeReview].ownerResponse}
-                      </p>
-                    </div>
-                  )}
-                </div>
-
-                {/* Carousel Dots */}
-                <div className="flex justify-center gap-2 mt-8">
-                  {reviews.map((_, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setActiveReview(i)}
-                      className={`w-2 h-2 rounded-full transition-all ${
-                        i === activeReview ? 'bg-champagne w-8' : 'bg-ivory/20 hover:bg-ivory/40'
-                      }`}
-                      aria-label={`View review ${i + 1}`}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* View All Reviews */}
-            <div className="text-center mt-10">
-              <a
-                href="https://www.google.com/maps/place/?q=place_id:ChIJQw1xKtxpXz4R5ZcIoAWMGdE"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-outline inline-flex items-center gap-3 px-8 py-4 rounded-full text-sm"
-              >
-                <i className="fab fa-google"></i>
-                Read All 107 Reviews on Google
-              </a>
-            </div>
+          <div className="mt-12 max-w-2xl mx-auto text-center">
+            <a
+              href="https://www.google.com/maps/place/?q=place_id:ChIJQw1xKtxpXz4R5ZcIoAWMGdE"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-luxury inline-flex items-center gap-3"
+            >
+              <i className="fab fa-google text-lg"></i>
+              View Reviews on Google
+            </a>
+            <p className="mt-6 text-ivory/40 text-sm font-sans">
+              All reviews are verified and hosted on Google Maps
+            </p>
           </div>
         </Reveal>
       </div>
