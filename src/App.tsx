@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, type ReactNode } from 'react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 // ==================== SCROLL REVEAL ====================
 function useInView(threshold = 0.15) {
@@ -1752,6 +1753,7 @@ export default function App() {
       <Footer />
       <WhatsAppBadge />
       <BookingModal isOpen={bookingOpen} onClose={() => setBookingOpen(false)} preSelectedServices={selectedServices} />
+      <SpeedInsights />
     </div>
   );
 }
