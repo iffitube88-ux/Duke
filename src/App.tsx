@@ -309,6 +309,18 @@ const services = [
     subtitle: 'Cut · Color · Restore',
     description: 'Precision cuts, Airtouch coloring, custom toning & blonde transitions. Restorative treatments with K18, Tokio Inkarami, Nashi & Kevin Murphy.',
     image: 'https://image.qwenlm.ai/generated-images/d5586663-ca77-42db-9343-e37a606cc84f/_result.png',
+    services: [
+      { name: 'Haircut', duration: '1h 30min' },
+      { name: 'Haircut + Styling', duration: '1h' },
+      { name: 'Blow-Dry Classic', duration: '1h' },
+      { name: 'Roots Color', duration: '1h' },
+      { name: 'Full Color', duration: '1h' },
+      { name: 'Airtouch', duration: '1h' },
+      { name: 'Balayage / Sombre', duration: '1h' },
+      { name: 'Tokio Inkarami Classic', duration: '1h' },
+      { name: 'K18 Treatment', duration: '1h' },
+      { name: 'Nashi Filler Therapy', duration: '1h' },
+    ],
   },
   {
     icon: '💅',
@@ -316,6 +328,17 @@ const services = [
     subtitle: '4-Hand · 6-Hand · Luxury',
     description: 'Signature synchronized manicures & pedicures. Maximum luxury, minimum time — flawless results without sacrificing relaxation.',
     image: 'https://image.qwenlm.ai/generated-images/23ff6fff-096a-40e1-9a7d-10d42ff01cd2/_result.png',
+    services: [
+      { name: 'Manicure DeLuxe', duration: '2h', price: 'from 250 AED' },
+      { name: 'Princess Manicure', duration: '40min' },
+      { name: 'Nail Extension', duration: '2h 30min' },
+      { name: 'Nail Refill', duration: '2h' },
+      { name: 'French / Ombre', duration: '30min' },
+      { name: 'Pedicure', duration: '1h' },
+      { name: 'Gelish Pedicure', duration: '2h' },
+      { name: 'Spa Sultan de Saba Manicure', duration: '1h 30min' },
+      { name: 'Japanese Manicure', duration: '1h 15min' },
+    ],
   },
   {
     icon: '✨',
@@ -323,6 +346,16 @@ const services = [
     subtitle: 'HydraFacial · Dermadrop · Oxygen',
     description: 'Medical-grade skin transformations: HydraFacial Syndeo, Dermadrop, oxygen infusion, anti-aging protocols & radiant tone restoration.',
     image: 'https://image.qwenlm.ai/generated-images/96403aaf-d9ad-4da8-84d8-e476efc9db37/_result.png',
+    services: [
+      { name: 'HydraFacial Signature', duration: '30min' },
+      { name: 'HydraFacial Deluxe', duration: '45min' },
+      { name: 'HydraFacial Platinum', duration: '1h' },
+      { name: 'HydraFacial Package (6 sessions)', duration: '1h' },
+      { name: 'Dermadrop', duration: '1h' },
+      { name: 'PRX Peeling', duration: '1h' },
+      { name: 'Collagen Therapy', duration: '1h' },
+      { name: 'Deep Face Cleaning', duration: '1h' },
+    ],
   },
   {
     icon: '👁️',
@@ -330,6 +363,16 @@ const services = [
     subtitle: 'Define · Frame · Transform',
     description: 'Bespoke brow architecture, premium volume lash extensions & flawless makeup — from natural elegance to full glam.',
     image: 'https://image.qwenlm.ai/generated-images/7e2ec489-8869-4376-b4b5-2dda7d0478ca/_result.png',
+    services: [
+      { name: 'Eyelash Extension Classic', duration: '2h' },
+      { name: 'Eyelash Extension 2D/3D', duration: '2h' },
+      { name: 'Eyelash Extension Hollywood', duration: '2h' },
+      { name: 'Eyelash Lamination', duration: '1h' },
+      { name: 'Brow Shape', duration: '30min' },
+      { name: 'Brow Lamination', duration: '1h' },
+      { name: 'Full Brows Package', duration: '1h', price: '250 AED' },
+      { name: 'Full Lashes Package', duration: '1h' },
+    ],
   },
   {
     icon: '🤲',
@@ -337,6 +380,18 @@ const services = [
     subtitle: 'Massage · Therapy · Restore',
     description: 'Exclusive manual full-body relaxation therapies designed to melt away stress and restore your inner balance completely.',
     image: 'https://image.qwenlm.ai/generated-images/00426011-4886-4b46-9be7-b96b3b81b878/_result.png',
+    services: [
+      { name: 'Relaxing Full Body (60min)', duration: '1h', price: '250 AED' },
+      { name: 'Relaxing Full Body (90min)', duration: '1h 30min' },
+      { name: 'Deep Tissue (60min)', duration: '1h' },
+      { name: 'Deep Tissue (90min)', duration: '1h 30min' },
+      { name: 'Hot Stone (60min)', duration: '1h' },
+      { name: 'Hot Stone (90min)', duration: '1h 30min' },
+      { name: 'Swedish Massage', duration: '30-60min' },
+      { name: 'Sports Massage', duration: '30-60min' },
+      { name: 'Lymphatic Massage', duration: '35-60min' },
+      { name: 'Back Massage', duration: '30-60min' },
+    ],
   },
 ];
 
@@ -353,7 +408,7 @@ const ServicesSection = () => {
           </div>
         </Reveal>
 
-        {/* Mobile: stacked cards with images */}
+        {/* Services grid with expandable details */}
         <div className="space-y-4 md:space-y-6">
           {services.map((service, index) => (
             <Reveal key={index} delay={index * 100}>
@@ -376,7 +431,7 @@ const ServicesSection = () => {
                   <div className="flex-1 p-5 sm:p-6 md:p-8">
                     <div className="flex items-start gap-3">
                       <span className="text-2xl">{service.icon}</span>
-                      <div>
+                      <div className="flex-1">
                         <h3 className="font-playfair text-lg sm:text-xl font-medium text-white group-hover:text-gold transition-colors">
                           {service.title}
                         </h3>
@@ -386,6 +441,26 @@ const ServicesSection = () => {
                     <p className="mt-3 text-white/50 text-sm font-inter leading-relaxed">
                       {service.description}
                     </p>
+                    
+                    {/* Service list */}
+                    {service.services && (
+                      <div className="mt-4 pt-4 border-t border-white/5">
+                        <p className="text-[10px] text-gold/60 font-inter tracking-widest uppercase mb-2">Popular Treatments</p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+                          {service.services.slice(0, 6).map((s, i) => (
+                            <div key={i} className="flex items-center justify-between text-xs font-inter">
+                              <span className="text-white/50">{s.name}</span>
+                              <span className="text-white/30 ml-2 whitespace-nowrap">{s.duration}</span>
+                            </div>
+                          ))}
+                        </div>
+                        {service.services.length > 6 && (
+                          <p className="mt-2 text-[10px] text-gold/40 font-inter">
+                            + {service.services.length - 6} more treatments available
+                          </p>
+                        )}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -590,18 +665,18 @@ const TestimonialsSection = () => {
 };
 
 // ==================== GALLERY ====================
-const galleryImages = [
-  { url: 'https://image.qwenlm.ai/generated-images/00426011-4886-4b46-9be7-b96b3b81b878/_result.png', alt: 'Salon interior', tall: true },
-  { url: 'https://image.qwenlm.ai/generated-images/d5586663-ca77-42db-9343-e37a606cc84f/_result.png', alt: 'Hair coloring', tall: false },
-  { url: 'https://image.qwenlm.ai/generated-images/23ff6fff-096a-40e1-9a7d-10d42ff01cd2/_result.png', alt: 'Nail art', tall: true },
-  { url: 'https://image.qwenlm.ai/generated-images/96403aaf-d9ad-4da8-84d8-e476efc9db37/_result.png', alt: 'Facial treatment', tall: false },
-  { url: 'https://image.qwenlm.ai/generated-images/7e2ec489-8869-4376-b4b5-2dda7d0478ca/_result.png', alt: 'Lash & brows', tall: true },
-  { url: 'https://image.qwenlm.ai/generated-images/00426011-4886-4b46-9be7-b96b3b81b878/_result.png', alt: 'Salon lounge', tall: false },
-  { url: 'https://image.qwenlm.ai/generated-images/d5586663-ca77-42db-9343-e37a606cc84f/_result.png', alt: 'Hair transformation', tall: true },
-  { url: 'https://image.qwenlm.ai/generated-images/23ff6fff-096a-40e1-9a7d-10d42ff01cd2/_result.png', alt: 'Manicure', tall: false },
-];
-
 const GallerySection = () => {
+  const instagramPosts = [
+    { id: 'DTuWqL9Cmvt', caption: 'THE AESTHETICS OF DUKES OF BEAUTY' },
+    { id: 'DQ8di2OER4W', caption: 'New-generation salon in Business Bay' },
+    { id: 'DcLNnpbq-pt', caption: "A place where you'll want to stay" },
+    { id: 'Db7onQ8qser', caption: 'Beautiful hair & exceptional service' },
+    { id: 'DQhFNROig67', caption: 'Chocolate-tone French manicure' },
+    { id: 'DO5dCuQivVf', caption: 'Treatments are more than results' },
+    { id: 'DLiDvepPZB8', caption: 'Luxurious evening makeup' },
+    { id: 'DNTGULiJSTC', caption: 'We know everything about you' },
+  ];
+
   return (
     <section id="gallery" className="py-16 sm:py-24 relative">
       <div className="absolute inset-0 bg-gradient-to-b from-warm-dark via-warm to-warm-dark"></div>
@@ -612,43 +687,58 @@ const GallerySection = () => {
           <div className="text-center mb-10 sm:mb-14">
             <span className="text-gold text-[11px] font-inter tracking-[0.2em] uppercase">Portfolio</span>
             <h2 className="section-title mt-3 font-playfair text-2xl sm:text-3xl md:text-5xl font-medium text-white">
-              Our Work
+              Follow Our Journey
             </h2>
+            <p className="mt-4 text-white/40 text-sm sm:text-base font-inter max-w-lg mx-auto">
+              Real transformations from our talented team. See our latest work on Instagram.
+            </p>
             <a
               href="https://www.instagram.com/dukes_of_beauty.ae/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 mt-4 text-gold/70 hover:text-gold transition-colors font-inter text-xs sm:text-sm"
+              className="inline-flex items-center gap-2 mt-6 px-6 py-3 border border-gold/30 rounded-full text-gold hover:bg-gold/10 transition-all font-inter text-sm"
             >
-              <i className="fab fa-instagram"></i>
-              @dukes_of_beauty.ae
+              <i className="fab fa-instagram text-lg"></i>
+              View Full Gallery on Instagram
             </a>
           </div>
         </Reveal>
 
-        <div className="columns-2 md:columns-3 lg:columns-4 gap-3 sm:gap-4 space-y-3 sm:space-y-4">
-          {galleryImages.map((img, index) => (
+        {/* Instagram posts grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+          {instagramPosts.map((post, index) => (
             <Reveal key={index} delay={index * 50}>
-              <div className="break-inside-avoid rounded-xl overflow-hidden relative group cursor-pointer bg-gradient-to-br from-warm-light to-warm-dark">
-                <img
-                  src={img.url}
-                  alt={img.alt}
-                  className={`w-full object-cover img-hover ${img.tall ? 'h-56 sm:h-72 md:h-80' : 'h-40 sm:h-52 md:h-60'}`}
-                  loading="lazy"
-                  onError={(e) => {
-                    e.currentTarget.style.display = 'none';
-                  }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-3 sm:p-4">
-                  <div className="flex items-center gap-1.5">
-                    <i className="fab fa-instagram text-white/80 text-xs"></i>
-                    <span className="text-white/80 text-[10px] sm:text-xs font-inter">@dukes_of_beauty.ae</span>
+              <a
+                href={`https://www.instagram.com/p/${post.id}/`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="card-hover group block aspect-square rounded-xl overflow-hidden bg-gradient-to-br from-warm-light to-warm-dark relative"
+              >
+                <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
+                  <i className="fab fa-instagram text-gold/40 text-3xl sm:text-4xl mb-3 group-hover:text-gold/60 transition-colors"></i>
+                  <p className="text-white/40 text-[10px] sm:text-xs font-inter leading-relaxed line-clamp-2 group-hover:text-white/60 transition-colors">
+                    {post.caption}
+                  </p>
+                  <div className="mt-3 flex items-center gap-1.5 text-gold/50 group-hover:text-gold transition-colors">
+                    <span className="text-[9px] sm:text-[10px] font-inter tracking-wide">VIEW POST</span>
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                    </svg>
                   </div>
                 </div>
-              </div>
+              </a>
             </Reveal>
           ))}
         </div>
+
+        {/* CTA to Instagram */}
+        <Reveal>
+          <div className="mt-10 sm:mt-12 text-center">
+            <p className="text-white/30 text-xs font-inter">
+              Follow <span className="text-gold">@dukes_of_beauty.ae</span> for daily inspiration & exclusive offers
+            </p>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
