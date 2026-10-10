@@ -115,7 +115,7 @@ const HeroSection = ({ onBookClick }: { onBookClick: () => void }) => {
   useEffect(() => { setLoaded(true); }, []);
 
   return (
-    <section className="relative min-h-[100svh] flex items-end overflow-hidden">
+    <section className="relative min-h-[100svh] flex items-center overflow-hidden">
       <div className="absolute inset-0">
         <img
           src="https://i.imgur.com/pFDeBJV_d.webp?maxwidth=760&fidelity=grand"
@@ -126,8 +126,8 @@ const HeroSection = ({ onBookClick }: { onBookClick: () => void }) => {
         <div className="absolute inset-0 hero-overlay"></div>
       </div>
 
-      <div className="relative z-10 w-full px-6 sm:px-10 md:px-16 lg:px-20 pb-20 sm:pb-24 md:pb-32 pt-28 sm:pt-32 md:pt-40">
-        <div className="max-w-[600px]">
+      <div className="relative z-10 w-full px-5 sm:px-8 md:px-12 lg:px-20 py-24 sm:py-32 md:py-40">
+        <div className="max-w-[600px] mx-auto">
           {/* Location tag */}
           <div className={`transition-all duration-1000 delay-500 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="flex items-center gap-3 mb-6">
