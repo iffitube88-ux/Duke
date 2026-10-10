@@ -500,20 +500,21 @@ const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices }:
 
 // ==================== INSTAGRAM SECTION ====================
 const InstagramSection = () => {
-  const posts = [
-    { id: 'DTuWqL9Cmvt', caption: 'The Aesthetics of Dukes of Beauty' },
-    { id: 'DQ8di2OER4W', caption: 'A new-generation salon in Business Bay' },
-    { id: 'DcLNnpbq-pt', caption: 'A place where you\'ll want to stay a little longer' },
-    { id: 'Db7onQ8qser', caption: 'Beautiful hair & exceptional service' },
-    { id: 'DQhFNROig67', caption: 'Chocolate-tone French manicure' },
-    { id: 'DO5dCuQivVf', caption: 'Treatments are more than results' },
+  // Real Instagram post IDs from @dukes_of_beauty.ae
+  const instagramPosts = [
+    'DTuWqL9Cmvt',
+    'DQ8di2OER4W',
+    'DcLNnpbq-pt',
+    'Db7onQ8qser',
+    'DQhFNROig67',
+    'DO5dCuQivVf',
   ];
 
   return (
     <section id="instagram" className="section-spacing relative">
       <div className="container-luxury">
         <Reveal>
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 sm:mb-16">
             <div className="flex items-center justify-center gap-3 mb-6">
               <span className="w-12 h-px bg-champagne"></span>
               <span className="text-champagne text-[11px] tracking-[0.3em] uppercase font-sans">Instagram</span>
@@ -522,28 +523,29 @@ const InstagramSection = () => {
             <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-light text-ivory leading-tight">
               Follow Our <span className="italic text-champagne">Beauty Journey</span>
             </h2>
+            <p className="mt-6 text-ivory/60 text-base sm:text-lg font-sans max-w-2xl mx-auto leading-relaxed">
+              Real transformations and daily inspiration from @dukes_of_beauty.ae
+            </p>
           </div>
         </Reveal>
 
-        {/* Instagram Post Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mb-12">
-          {posts.map((post, index) => (
-            <Reveal key={index} delay={index * 80}>
-              <a
-                href={`https://www.instagram.com/p/${post.id}/`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="card-luxury group relative aspect-square rounded-xl overflow-hidden bg-charcoal/30 border border-champagne/10 flex flex-col items-center justify-center p-6 text-center"
-              >
-                <i className="fab fa-instagram text-champagne/40 text-4xl sm:text-5xl mb-4 group-hover:text-champagne/70 transition-colors"></i>
-                <p className="text-ivory/40 text-xs sm:text-sm font-sans leading-relaxed line-clamp-2 group-hover:text-ivory/70 transition-colors">
-                  {post.caption}
-                </p>
-                <div className="mt-4 flex items-center gap-1.5 text-champagne/40 group-hover:text-champagne transition-colors">
-                  <span className="text-[10px] font-sans tracking-wider uppercase">View Post</span>
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-                </div>
-              </a>
+        {/* Instagram Posts Grid with Real Embeds */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12">
+          {instagramPosts.map((postId, index) => (
+            <Reveal key={postId} delay={index * 100}>
+              <div className="aspect-square bg-charcoal/30 border border-champagne/10 rounded-lg overflow-hidden">
+                <iframe
+                  src={`https://www.instagram.com/p/${postId}/embed`}
+                  width="100%"
+                  height="100%"
+                  frameBorder="0"
+                  scrolling="no"
+                  allowFullScreen
+                  title={`Instagram post ${postId}`}
+                  className="w-full h-full"
+                  style={{ border: 'none', overflow: 'hidden' }}
+                />
+              </div>
             </Reveal>
           ))}
         </div>
