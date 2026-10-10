@@ -115,7 +115,7 @@ const HeroSection = ({ onBookClick }: { onBookClick: () => void }) => {
   useEffect(() => { setLoaded(true); }, []);
 
   return (
-    <section className="relative min-h-[100svh] flex items-center overflow-hidden">
+    <section className="relative min-h-screen flex flex-col justify-end overflow-hidden">
       <div className="absolute inset-0">
         <img
           src="https://i.imgur.com/pFDeBJV_d.webp?maxwidth=760&fidelity=grand"
@@ -126,8 +126,8 @@ const HeroSection = ({ onBookClick }: { onBookClick: () => void }) => {
         <div className="absolute inset-0 hero-overlay"></div>
       </div>
 
-      <div className="relative z-10 w-full px-5 sm:px-8 md:px-12 lg:px-20 py-24 sm:py-32 md:py-40">
-        <div className="max-w-[600px] mx-auto">
+      <div className="relative z-10 w-full px-5 pb-12 pt-32 sm:px-8 sm:pb-16 sm:pt-40 md:px-12 md:pb-20 lg:px-20">
+        <div className="max-w-[640px]">
           {/* Location tag */}
           <div className={`transition-all duration-1000 delay-500 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="flex items-center gap-3 mb-6">
@@ -137,22 +137,22 @@ const HeroSection = ({ onBookClick }: { onBookClick: () => void }) => {
           </div>
 
           {/* Main headline */}
-          <h1 className={`hero-title font-serif text-[clamp(2.5rem,8vw,5rem)] font-light text-ivory leading-[1.1] tracking-tight mb-6 transition-all duration-1000 delay-700 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+          <h1 className={`hero-title font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-ivory leading-[1.05] tracking-tight mb-6 transition-all duration-1000 delay-700 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
             The Art of<br />
             <span className="animate-shimmer italic">Beauty</span>
           </h1>
 
           {/* Subtitle */}
-          <p className={`mb-8 text-ivory/70 text-base sm:text-lg font-sans font-light leading-relaxed transition-all duration-1000 delay-900 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <p className={`mb-8 text-ivory/80 text-base sm:text-lg font-sans font-light leading-relaxed max-w-[500px] transition-all duration-1000 delay-900 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             A sanctuary of luxury where precision meets artistry. Premium hair, nails, aesthetics & wellness in the heart of Dubai.
           </p>
 
           {/* CTAs */}
-          <div className={`mb-6 flex flex-col sm:flex-row gap-4 transition-all duration-1000 delay-1000 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <button onClick={onBookClick} className="btn-luxury">
+          <div className={`mb-8 flex flex-col sm:flex-row gap-3 sm:gap-4 max-w-md transition-all duration-1000 delay-1000 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <button onClick={onBookClick} className="btn-luxury w-full sm:w-auto">
               Reserve Your Visit
             </button>
-            <a href="#services" className="btn-outline">
+            <a href="#services" className="btn-outline w-full sm:w-auto text-center">
               View Services
             </a>
           </div>
@@ -165,7 +165,7 @@ const HeroSection = ({ onBookClick }: { onBookClick: () => void }) => {
                   <svg key={i} className="w-3.5 h-3.5 text-champagne fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
                 ))}
               </div>
-              <span className="text-ivory/50 text-xs font-sans tracking-wide">4.9 · Google</span>
+              <span className="text-ivory/60 text-xs font-sans tracking-wide">4.9 · Google</span>
             </div>
           </div>
         </div>

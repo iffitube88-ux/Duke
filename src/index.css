@@ -222,14 +222,23 @@ body {
   background: rgba(244, 239, 231, 0.08);
 }
 
-/* Hero overlay - subtle cinematic gradient for text readability */
+/* Hero overlay - improved contrast for text readability */
 .hero-overlay {
   background: linear-gradient(
     180deg,
-    rgba(11, 11, 13, 0.2) 0%,
-    rgba(11, 11, 13, 0.35) 50%,
-    rgba(11, 11, 13, 0.75) 100%
+    rgba(11, 11, 13, 0.3) 0%,
+    rgba(11, 11, 13, 0.5) 50%,
+    rgba(11, 11, 13, 0.85) 100%
   );
+}
+
+/* Button constraints for mobile */
+@media (max-width: 640px) {
+  .btn-luxury,
+  .btn-outline {
+    width: 100%;
+    max-width: 320px;
+  }
 }
 
 /* Layout system */
