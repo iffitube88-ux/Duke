@@ -1162,9 +1162,23 @@ const Calendar = ({ selectedDate, onDateSelect, minDate }: { selectedDate: strin
 
   const formatDate = (dateStr: string) => {
     if (!dateStr) return '';
-    const date = new Date(dateStr);
-    const options: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const date = new Date(dateStr + 'T00:00:00'); // Prevent UTC shift
+    const options: Intl.DateTimeFormatOptions = { 
+      weekday: 'long', 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric',
+      timeZone: 'Asia/Dubai'
+    };
     return date.toLocaleDateString('en-US', options);
+  };
+
+  const formatDisplayTime = (timeStr: string): string => {
+    if (!timeStr) return '';
+    const [hours, minutes] = timeStr.split(':').map(Number);
+    const period = hours >= 12 ? 'PM' : 'AM';
+    const displayHours = hours % 12 || 12;
+    return `${displayHours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')} ${period}`;
   };
 
   return (
@@ -1338,11 +1352,106 @@ const BookingModal = ({ isOpen, onClose, preSelectedServices = [] }: { isOpen: b
     return total;
   };
 
+  const formatWhatsAppDate = (dateStr: string): string => {
+    if (!dateStr) return '';
+    const date = new Date(dateStr + 'T00:00:00'); // Prevent UTC shift
+    const options: Intl.DateTimeFormatOptions = { 
+      weekday: 'long', 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric',
+      timeZone: 'Asia/Dubai'
+    };
+    return date.toLocaleDateString('en-US', options);
+  };
+
+  const formatWhatsAppTime = (timeStr: string): string => {
+    if (!timeStr) return '';
+    const [hours, minutes] = timeStr.split(':').map(Number);
+    const period = hours >= 12 ? 'PM' : 'AM';
+    const displayHours = hours % 12 || 12;
+    return `${displayHours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')} ${period}`;
+  };
+
+  const getServiceEmoji = (category: string): string => {
+    const emojiMap: Record<string, string> = {
+      'Hair': '✂️',
+      'Nails': '💅',
+      'Lashes & Brows': '👁️',
+      'HydraFacial & Facials': '✨',
+      'Cosmetology': '🔬',
+      'Massage': '💆',
+      'Body Treatments': '🧴'
+    };
+    return emojiMap[category] || '💎';
+  };
+
   const handleWhatsAppBooking = () => {
-    const services = booking.selectedServices.join(', ');
+    // Validation
+    if (!booking.customerName.trim()) {
+      alert('Please enter your name');
+      return;
+    }
+    if (!booking.customerPhone.trim()) {
+      alert('Please enter your phone number');
+      return;
+    }
+    if (booking.selectedServices.length === 0) {
+      alert('Please select at least one service');
+      return;
+    }
+
+    // Format date and time
+    const formattedDate = formatWhatsAppDate(booking.selectedDate);
+    const formattedTime = formatWhatsAppTime(booking.selectedTime);
     const totalDuration = calculateTotalDuration();
     const totalPrice = calculateTotalPrice();
-    const message = `✨ *New Booking — Dukes of Beauty*\n\n*Customer:*\n${booking.customerName}\n${booking.customerPhone}\n\n*Appointment:*\n📅 ${booking.selectedDate}\n🕐 ${booking.selectedTime}\n⏱ ${totalDuration}\n\n*Services:*\n${services}\n\n*Est. Total:* ${totalPrice} AED\n\nPlease confirm. Thank you!`;
+
+    // Check if any service has variable pricing
+    const hasVariablePricing = booking.selectedServices.some(serviceName => {
+      const service = allServices.find(s => s.name === serviceName);
+      return service?.price.toLowerCase().includes('from');
+    });
+
+    // Build service breakdown
+    const serviceLines = booking.selectedServices.map(serviceName => {
+      const service = allServices.find(s => s.name === serviceName);
+      if (!service) return '';
+      const emoji = getServiceEmoji(service.category);
+      const priceText = service.price.toLowerCase().includes('from') 
+        ? `From ${service.price}` 
+        : service.price;
+      return `${emoji} ${service.name} — ${priceText}`;
+    }).filter(line => line).join('\n');
+
+    // Build message
+    const message = `✨ *DUKES OF BEAUTY* ✨
+💎 *NEW APPOINTMENT REQUEST*
+━━━━━━━━━━━━━━━━━━
+
+👤 *CUSTOMER DETAILS*
+🧑 Name: ${booking.customerName}
+📱 Mobile: ${booking.customerPhone}
+
+📅 *APPOINTMENT DETAILS*
+🗓️ Date: ${formattedDate}
+🕙 Time: ${formattedTime}
+⏳ Duration: ${totalDuration}
+
+💇‍♀️ *SELECTED SERVICES*
+${serviceLines}
+
+━━━━━━━━━━━━━━━━━━
+💰 *ESTIMATED TOTAL: AED ${totalPrice}*
+${hasVariablePricing ? '\n⚠️ _Final price subject to salon confirmation_' : ''}
+
+📍 Dukes of Beauty
+Business Bay, Dubai
+
+📝 Kindly confirm the appointment availability.
+
+⏳ Status: Pending Confirmation`;
+
     const encodedMessage = encodeURIComponent(message);
     const whatsappURL = `https://wa.me/971528167306?text=${encodedMessage}`;
     saveBookedSlot({ date: booking.selectedDate, time: booking.selectedTime, customerName: booking.customerName, timestamp: Date.now() });
@@ -1359,10 +1468,26 @@ const BookingModal = ({ isOpen, onClose, preSelectedServices = [] }: { isOpen: b
 
   const formatDate = (dateStr: string) => {
     if (!dateStr) return '';
-    const date = new Date(dateStr);
-    const options: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const date = new Date(dateStr + 'T00:00:00'); // Prevent UTC shift
+    const options: Intl.DateTimeFormatOptions = { 
+      weekday: 'long', 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric',
+      timeZone: 'Asia/Dubai'
+    };
     return date.toLocaleDateString('en-US', options);
   };
+
+  const formatDisplayTime = (timeStr: string): string => {
+    if (!timeStr) return '';
+    const [hours, minutes] = timeStr.split(':').map(Number);
+    const period = hours >= 12 ? 'PM' : 'AM';
+    const displayHours = hours % 12 || 12;
+    return `${displayHours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')} ${period}`;
+  };
+
+
 
   return (
     <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center" onClick={onClose}>
@@ -1551,7 +1676,7 @@ const BookingModal = ({ isOpen, onClose, preSelectedServices = [] }: { isOpen: b
                   </div>
                   <div className="flex justify-between">
                     <span className="text-ivory/50">Time:</span>
-                    <span className="text-ivory/90">{booking.selectedTime}</span>
+                    <span className="text-ivory/90">{formatDisplayTime(booking.selectedTime)}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-ivory/50">Duration:</span>
