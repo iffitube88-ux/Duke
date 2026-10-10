@@ -250,6 +250,56 @@ body {
   border-bottom: 1px solid #C8AD83;
 }
 
+/* Liquid Glass Effects */
+.liquid-glass {
+  background: rgba(36, 33, 37, 0.4);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(200, 173, 131, 0.15);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.liquid-glass:hover {
+  background: rgba(36, 33, 37, 0.5);
+  border-color: rgba(200, 173, 131, 0.25);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.liquid-glass-active {
+  background: rgba(200, 173, 131, 0.15);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(200, 173, 131, 0.3);
+  box-shadow: 
+    0 8px 32px rgba(200, 173, 131, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.glass-row {
+  background: rgba(36, 33, 37, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(200, 173, 131, 0.08);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-row:hover {
+  background: rgba(36, 33, 37, 0.35);
+  border-color: rgba(200, 173, 131, 0.15);
+}
+
+.glass-row-selected {
+  background: rgba(200, 173, 131, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(200, 173, 131, 0.2);
+}
+
 /* Mobile optimizations */
 @media (max-width: 768px) {
   .hero-title {

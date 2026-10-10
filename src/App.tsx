@@ -179,17 +179,17 @@ const AboutSection = () => (
   <section className="section-spacing relative">
     <div className="container-luxury">
       <Reveal>
-        <div className="text-center">
-          <div className="flex items-center justify-center gap-3 mb-6">
+        <div className="text-center max-w-[820px] mx-auto">
+          <div className="flex items-center justify-center gap-3 mb-8">
             <span className="w-12 h-px bg-champagne"></span>
             <span className="text-champagne text-[11px] tracking-[0.3em] uppercase font-sans">About</span>
             <span className="w-12 h-px bg-champagne"></span>
           </div>
-          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-light text-ivory leading-tight">
+          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-light text-ivory leading-tight mb-10">
             Where Luxury<br />Meets <span className="italic text-champagne">Expertise</span>
           </h2>
-          <div className="mt-8 max-w-3xl mx-auto">
-            <p className="text-ivory/70 text-base sm:text-lg font-sans leading-relaxed mb-6">
+          <div className="space-y-6">
+            <p className="text-ivory/70 text-base sm:text-lg font-sans leading-relaxed">
               Dukes of Beauty is more than a salon — it is a destination for those who appreciate the finest things. Located in the prestigious Business Bay, our atelier combines world-class techniques with premium products from K18, Tokio Inkarami, Nashi, and Kevin Murphy.
             </p>
             <p className="text-ivory/70 text-base sm:text-lg font-sans leading-relaxed">
@@ -377,7 +377,7 @@ const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices }:
 
   return (
     <section id="services" className="section-spacing relative">
-      <div className="container-luxury">
+      <div className="max-w-[1200px] mx-auto px-5 sm:px-8">
         <Reveal>
           <div className="text-center mb-16 sm:mb-20">
             <div className="flex items-center justify-center gap-3 mb-6">
@@ -395,17 +395,17 @@ const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices }:
         </Reveal>
 
         <Reveal>
-          {/* Category Navigation - Larger and more prominent */}
+          {/* Category Navigation - Liquid Glass */}
           <div className="mb-16 sm:mb-20">
             <div className="flex overflow-x-auto gap-3 sm:gap-4 pb-4 scrollbar-hide">
               {serviceCategories.map(cat => (
                 <button
                   key={cat.id}
                   onClick={() => setActiveTab(cat.id)}
-                  className={`flex-shrink-0 px-7 sm:px-10 py-4 sm:py-5 rounded-full text-sm sm:text-base font-sans tracking-wider uppercase transition-all whitespace-nowrap ${
+                  className={`flex-shrink-0 px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl text-sm sm:text-base font-sans tracking-wide transition-all whitespace-nowrap ${
                     activeTab === cat.id
-                      ? 'bg-champagne text-obsidian font-semibold shadow-lg shadow-champagne/20'
-                      : 'bg-charcoal/50 text-ivory/60 border border-champagne/20 hover:border-champagne/40 hover:text-ivory/80'
+                      ? 'liquid-glass-active text-champagne font-medium'
+                      : 'liquid-glass text-ivory/70 hover:text-ivory/90'
                   }`}
                 >
                   <span className="mr-2">{cat.icon}</span>
@@ -427,24 +427,24 @@ const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices }:
               <p className="text-ivory/50 text-sm font-sans mt-3">{activeCategory.services.length} treatments available</p>
             </div>
 
-            {/* Service list with checkbox on right */}
-            <div className="space-y-1">
+            {/* Service list with glass effect */}
+            <div className="space-y-3">
               {activeCategory.services.map((service, i) => {
                 const isSelected = selectedServices.includes(service.name);
                 return (
                   <div
                     key={i}
                     onClick={() => toggleService(service.name)}
-                    className={`group cursor-pointer rounded-xl border transition-all ${
+                    className={`group cursor-pointer rounded-2xl transition-all ${
                       isSelected
-                        ? 'bg-champagne/5 border-champagne/30'
-                        : 'bg-charcoal/20 border-champagne/5 hover:border-champagne/20 hover:bg-charcoal/30'
+                        ? 'glass-row-selected'
+                        : 'glass-row'
                     }`}
                   >
-                    <div className="flex items-center justify-between gap-4 p-6 sm:p-8">
+                    <div className="flex items-center justify-between gap-4 p-5 sm:p-6">
                       {/* Left: Service info */}
                       <div className="flex-1 min-w-0">
-                        <h4 className={`font-serif text-xl sm:text-2xl transition-colors mb-2 ${
+                        <h4 className={`font-serif text-lg sm:text-xl transition-colors mb-1.5 ${
                           isSelected ? 'text-champagne' : 'text-ivory/90 group-hover:text-ivory'
                         }`}>
                           {service.name}
@@ -455,17 +455,17 @@ const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices }:
                       </div>
 
                       {/* Right: Price + Checkbox */}
-                      <div className="flex items-center gap-5 flex-shrink-0">
-                        <p className={`font-sans text-lg sm:text-xl font-medium ${
+                      <div className="flex items-center gap-4 flex-shrink-0">
+                        <p className={`font-sans text-base sm:text-lg font-medium ${
                           isSelected ? 'text-champagne' : 'text-ivory/80'
                         }`}>
                           {service.price}
                         </p>
-                        <div className={`w-7 h-7 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-all ${
+                        <div className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-all ${
                           isSelected ? 'border-champagne bg-champagne' : 'border-ivory/30 group-hover:border-ivory/50'
                         }`}>
                           {isSelected && (
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0B0B0D" strokeWidth="3">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0B0B0D" strokeWidth="3">
                               <polyline points="20 6 9 17 4 12"></polyline>
                             </svg>
                           )}
@@ -1096,7 +1096,13 @@ const WhatsAppBadge = () => {
   useEffect(() => { const t = setTimeout(() => setVisible(true), 2000); return () => clearTimeout(t); }, []);
   if (!visible) return null;
   return (
-    <a href="https://wa.me/971528167306" target="_blank" rel="noopener noreferrer" className="fixed bottom-5 right-5 z-50 w-14 h-14 rounded-full bg-green-500 flex items-center justify-center shadow-lg shadow-green-500/20 hover:bg-green-600 hover:scale-110 transition-all animate-scale-in" title="Chat on WhatsApp">
+    <a 
+      href="https://wa.me/971528167306" 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      className="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-40 w-14 h-14 rounded-full bg-green-500 flex items-center justify-center shadow-lg shadow-green-500/20 hover:bg-green-600 hover:scale-110 transition-all animate-scale-in" 
+      title="Chat on WhatsApp"
+    >
       <i className="fab fa-whatsapp text-white text-2xl"></i>
     </a>
   );
