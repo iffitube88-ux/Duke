@@ -50,7 +50,7 @@ const Logo = ({ size = 'md' }: { size?: 'sm' | 'md' | 'lg' }) => {
       <img
         src="https://qxwmavrgfarmxbexeoxf.supabase.co/storage/v1/render/image/public/images/submissions/logos/1775122019698-77aysv5f01i.png?width=224&quality=80&resize=contain"
         alt="Dukes of Beauty"
-        className={`${sizes[size]} w-auto object-contain`}
+        className={`${sizes[size]} w-auto object-contain brightness-0 invert`}
       />
     </div>
   );
@@ -171,7 +171,7 @@ const HeroSection = ({ onBookClick }: { onBookClick: () => void }) => {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
-          src="https://image.qwenlm.ai/generated-images/87034863-3839-440b-b247-f98923d1cdfd/_result.png"
+          src="https://qxwmavrgfarmxbexeoxf.supabase.co/storage/v1/object/public/images/submissions/covers/1775122063027-ut4x70ufzpg.jpeg"
           alt="Dukes of Beauty luxury salon interior"
           className={`absolute inset-0 w-full h-full object-cover transition-all duration-[2s] ${loaded ? 'scale-100 opacity-100' : 'scale-110 opacity-0'}`}
         />
@@ -303,35 +303,35 @@ const services = [
     title: 'Hair Artistry',
     subtitle: 'Cut · Color · Restore',
     description: 'Precision cuts, Airtouch coloring, custom toning & blonde transitions. Restorative treatments with K18, Tokio Inkarami, Nashi & Kevin Murphy.',
-    image: 'https://image.qwenlm.ai/generated-images/878af96e-9f4a-4550-9dde-8a10a30c953c/_result.png',
+    image: 'https://scontent-mia3-2.cdninstagram.com/v/t51.82787-15/825276752_17915787366459862_3703688318318048158_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=105&ig_cache_key=Mzk5NTk3MDc5MzM5NTMzNDUxNzE3OTE1Nzg3MzYwNDU5ODYy.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjcyMC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ohc=lzhyQ9KwGVUQ7kNvwGImz4z&_nc_ht=scontent-mia3-2.cdninstagram.com&_nc_ss=7a22e&oh=00_AQMPG1bF3lqYPS79vVYM1I2Tm6y_d-HKooh8JeEugtcxBA&oe=6AD0293E',
   },
   {
     icon: '💅',
     title: 'Nail Therapies',
     subtitle: '4-Hand · 6-Hand · Luxury',
     description: 'Signature synchronized manicures & pedicures. Maximum luxury, minimum time — flawless results without sacrificing relaxation.',
-    image: 'https://image.qwenlm.ai/generated-images/b9606f38-0e69-4456-93e9-29554389a9d7/_result.png',
+    image: 'https://scontent-mia5-2.cdninstagram.com/v/t51.82787-15/793867325_17912464953459862_4588223722748153768_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ig_cache_key=Mzk3ODYyNzE1MzE0MDQ2MzU4OQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMzI0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ht=scontent-mia5-2.cdninstagram.com&_nc_ss=7a22e&oh=00_AQMFIz99KHJBVOmQU3AhpHBi2dspBkDc5wJ9cp-ZI7vM-w&oe=6ACFFCBE',
   },
   {
     icon: '✨',
     title: 'Aesthetic Facials',
     subtitle: 'HydraFacial · Dermadrop · Oxygen',
     description: 'Medical-grade skin transformations: HydraFacial Syndeo, Dermadrop, oxygen infusion, anti-aging protocols & radiant tone restoration.',
-    image: 'https://image.qwenlm.ai/generated-images/963d3943-a719-4b76-9135-d70348a65d01/_result.png',
+    image: 'https://scontent-mia5-1.cdninstagram.com/v/t51.82787-15/830405969_17916217938459862_4914123237389401754_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=102&ig_cache_key=Mzk5ODE2NjAwMjA1NzMyMzg2Mg%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMzI0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ht=scontent-mia5-1.cdninstagram.com&_nc_ss=7a22e&oh=00_AQPKrFJgvHOVpviJs2jhbGCyhfXj_LjZ47yrxuAR_NDYMw&oe=6AD02057',
   },
   {
     icon: '👁️',
     title: 'Brows, Lashes & Makeup',
     subtitle: 'Define · Frame · Transform',
     description: 'Bespoke brow architecture, premium volume lash extensions & flawless makeup — from natural elegance to full glam.',
-    image: 'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=600&h=400&fit=crop',
+    image: 'https://scontent-mia3-3.cdninstagram.com/v/t51.82787-15/838966380_17916950916459862_3401286837890639695_n.jpg?stp=dst-jpg_e15_p640x640_tt6&_nc_cat=107&ig_cache_key=NDAwMTc4NTAxMzE1NjQwNzk2OTE3OTE2OTUwOTEzNDU5ODYy.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjcyMC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ht=scontent-mia3-3.cdninstagram.com&_nc_ss=7a22e&oh=00_AQOe3eI5BpBLxpqwi_lHkPuGmeLTmaPLT-97Z7G5d4iYmg&oe=6ACFFD1E',
   },
   {
     icon: '🤲',
     title: 'Body Relaxation',
     subtitle: 'Massage · Therapy · Restore',
     description: 'Exclusive manual full-body relaxation therapies designed to melt away stress and restore your inner balance completely.',
-    image: 'https://image.qwenlm.ai/generated-images/a3fc7be1-c8f0-4619-b94e-97ae14026c1c/_result.png',
+    image: 'https://scontent-mia5-2.cdninstagram.com/v/t51.82787-15/784003051_17910633732459862_7308180445500596592_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=108&ig_cache_key=Mzk2OTE2MTcwNzA4OTY2MDU5NA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMzI0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ht=scontent-mia5-2.cdninstagram.com&_nc_ss=7a22e&oh=00_AQOG8E0IckF4WjSIIoxTr60GbiSmgg8Hiy4Gjq9uQKHpDg&oe=6ACFF9E7',
   },
 ];
 
@@ -583,14 +583,14 @@ const TestimonialsSection = () => {
 
 // ==================== GALLERY ====================
 const galleryImages = [
-  { url: 'https://image.qwenlm.ai/generated-images/87034863-3839-440b-b247-f98923d1cdfd/_result.png', alt: 'Salon interior', tall: true },
-  { url: 'https://image.qwenlm.ai/generated-images/878af96e-9f4a-4550-9dde-8a10a30c953c/_result.png', alt: 'Hair transformation', tall: false },
-  { url: 'https://image.qwenlm.ai/generated-images/b9606f38-0e69-4456-93e9-29554389a9d7/_result.png', alt: 'Nail art', tall: true },
-  { url: 'https://image.qwenlm.ai/generated-images/963d3943-a719-4b76-9135-d70348a65d01/_result.png', alt: 'Facial treatment', tall: false },
-  { url: 'https://image.qwenlm.ai/generated-images/a3fc7be1-c8f0-4619-b94e-97ae14026c1c/_result.png', alt: 'Nail station', tall: true },
-  { url: 'https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=400&h=500&fit=crop', alt: 'Salon ambiance', tall: false },
-  { url: 'https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&h=500&fit=crop', alt: 'Hair coloring', tall: true },
-  { url: 'https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=400&h=400&fit=crop', alt: 'Spa room', tall: false },
+  { url: 'https://scontent-mia5-2.cdninstagram.com/v/t51.82787-15/793867325_17912464953459862_4588223722748153768_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ig_cache_key=Mzk3ODYyNzE1MzE0MDQ2MzU4OQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMzI0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ht=scontent-mia5-2.cdninstagram.com&_nc_ss=7a22e&oh=00_AQMFIz99KHJBVOmQU3AhpHBi2dspBkDc5wJ9cp-ZI7vM-w&oe=6ACFFCBE', alt: 'Beauty day at Dukes', tall: true },
+  { url: 'https://scontent-mia3-2.cdninstagram.com/v/t51.82787-15/825276752_17915787366459862_3703688318318048158_n.jpg?stp=dst-jpg_e15_p640x640_tt6&_nc_cat=105&ig_cache_key=Mzk5NTk3MDc5MzM5NTMzNDUxNzE3OTE1Nzg3MzYwNDU5ODYy.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjcyMC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ht=scontent-mia3-2.cdninstagram.com&_nc_ss=7a22e&oh=00_AQMPG1bF3lqYPS79vVYM1I2Tm6y_d-HKooh8JeEugtcxBA&oe=6AD0293E', alt: 'Hair coloring', tall: false },
+  { url: 'https://scontent-mia5-1.cdninstagram.com/v/t51.82787-15/830405969_17916217938459862_4914123237389401754_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=102&ig_cache_key=Mzk5ODE2NjAwMjA1NzMyMzg2Mg%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMzI0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ht=scontent-mia5-1.cdninstagram.com&_nc_ss=7a22e&oh=00_AQPKrFJgvHOVpviJs2jhbGCyhfXj_LjZ47yrxuAR_NDYMw&oe=6AD02057', alt: 'Tokio Inkarami treatment', tall: true },
+  { url: 'https://scontent-mia3-3.cdninstagram.com/v/t51.82787-15/838966380_17916950916459862_3401286837890639695_n.jpg?stp=dst-jpg_e15_p640x640_tt6&_nc_cat=107&ig_cache_key=NDAwMTc4NTAxMzE1NjQwNzk2OTE3OTE2OTUwOTEzNDU5ODYy.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjcyMC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ht=scontent-mia3-3.cdninstagram.com&_nc_ss=7a22e&oh=00_AQOe3eI5BpBLxpqwi_lHkPuGmeLTmaPLT-97Z7G5d4iYmg&oe=6ACFFD1E', alt: 'Lash lift', tall: false },
+  { url: 'https://scontent-mia5-2.cdninstagram.com/v/t51.82787-15/784003051_17910633732459862_7308180445500596592_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=108&ig_cache_key=Mzk2OTE2MTcwNzA4OTY2MDU5NA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMzI0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ht=scontent-mia5-2.cdninstagram.com&_nc_ss=7a22e&oh=00_AQOG8E0IckF4WjSIIoxTr60GbiSmgg8Hiy4Gjq9uQKHpDg&oe=6ACFF9E7', alt: 'Massage therapy', tall: true },
+  { url: 'https://scontent-mia3-1.cdninstagram.com/v/t51.82787-15/797178261_17912683089459862_3545114082297966271_n.jpg?stp=dst-jpg_e15_p640x640_tt6&_nc_cat=101&ig_cache_key=Mzk3NTcyOTY1NDg0NzI4NzkwMzE3OTEyNjgzMDg2NDU5ODYy.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjczNi5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ht=scontent-mia5-1.cdninstagram.com&_nc_ss=7a22e&oh=00_AQMBLw5wabhibwzcZRGXWenMr3QW92ZygaELJfWby4Rn3w&oe=6AD00551', alt: 'Hair colour + Tokio', tall: false },
+  { url: 'https://scontent-mia5-2.cdninstagram.com/v/t51.82787-15/786656693_17911049229459862_6742517967331863995_n.jpg?stp=dst-jpg_e15_p640x640_tt6&_nc_cat=100&ig_cache_key=Mzk3MTM2ODAzNDAxMjU2ODc4MDE3OTExMDQ5MjI2NDU5ODYy.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjcyMC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ht=scontent-mia5-2.cdninstagram.com&_nc_ss=7a22e&oh=00_AQNRg9Hk_ZJIp0_O2UlYg_AshxOFQx4ZYxPYKsAEGNvMZg&oe=6AD025FB', alt: 'Healthy hair care', tall: true },
+  { url: 'https://scontent-mia5-1.cdninstagram.com/v/t51.82787-15/773723987_17908943646459862_3557193178715476853_n.jpg?stp=dst-jpg_e15_p640x640_tt6&_nc_cat=106&ig_cache_key=Mzk2MTkzODkxNzMyMDIxNDQ0MzE3OTA4OTQzNjQwNDU5ODYy.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjcyMC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ht=scontent-mia5-1.cdninstagram.com&_nc_ss=7a22e&oh=00_AQOp9ER3zspKGm66-UM41QpmuLAT33mupGbTaecCrwfXEg&oe=6AD01F61', alt: 'Beautiful hair experience', tall: false },
 ];
 
 const GallerySection = () => {
