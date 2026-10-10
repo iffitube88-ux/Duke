@@ -956,6 +956,153 @@ const WhatsAppBadge = () => {
   );
 };
 
+// ==================== CUSTOM CALENDAR COMPONENT ====================
+const Calendar = ({ selectedDate, onDateSelect, minDate }: { selectedDate: string; onDateSelect: (date: string) => void; minDate: string }) => {
+  const [currentMonth, setCurrentMonth] = useState(() => {
+    const date = selectedDate ? new Date(selectedDate) : new Date();
+    return { year: date.getFullYear(), month: date.getMonth() };
+  });
+
+  const minDateObj = new Date(minDate);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const daysInMonth = new Date(currentMonth.year, currentMonth.month + 1, 0).getDate();
+  const firstDayOfMonth = new Date(currentMonth.year, currentMonth.month, 1).getDay();
+  
+  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+  const prevMonth = () => {
+    setCurrentMonth(prev => {
+      const newMonth = prev.month - 1;
+      if (newMonth < 0) return { year: prev.year - 1, month: 11 };
+      return { year: prev.year, month: newMonth };
+    });
+  };
+
+  const nextMonth = () => {
+    setCurrentMonth(prev => {
+      const newMonth = prev.month + 1;
+      if (newMonth > 11) return { year: prev.year + 1, month: 0 };
+      return { year: prev.year, month: newMonth };
+    });
+  };
+
+  const isDateDisabled = (day: number) => {
+    const date = new Date(currentMonth.year, currentMonth.month, day);
+    date.setHours(0, 0, 0, 0);
+    return date < minDateObj;
+  };
+
+  const isDateSelected = (day: number) => {
+    if (!selectedDate) return false;
+    const date = new Date(currentMonth.year, currentMonth.month, day);
+    const selected = new Date(selectedDate);
+    return date.toDateString() === selected.toDateString();
+  };
+
+  const handleDateClick = (day: number) => {
+    if (isDateDisabled(day)) return;
+    const date = new Date(currentMonth.year, currentMonth.month, day);
+    const dateStr = date.toISOString().split('T')[0];
+    onDateSelect(dateStr);
+  };
+
+  const canGoPrev = () => {
+    const prevMonthDate = new Date(currentMonth.year, currentMonth.month - 1, 1);
+    return prevMonthDate >= new Date(minDateObj.getFullYear(), minDateObj.getMonth(), 1);
+  };
+
+  const formatDate = (dateStr: string) => {
+    if (!dateStr) return '';
+    const date = new Date(dateStr);
+    const options: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    return date.toLocaleDateString('en-US', options);
+  };
+
+  return (
+    <div className="bg-obsidian border border-champagne/20 rounded-xl p-4 sm:p-6">
+      {/* Header */}
+      <div className="flex items-center justify-between mb-6">
+        <button
+          onClick={prevMonth}
+          disabled={!canGoPrev()}
+          className="w-11 h-11 flex items-center justify-center rounded-full hover:bg-champagne/10 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+          aria-label="Previous month"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M15 18l-6-6 6-6"/>
+          </svg>
+        </button>
+        <h3 className="text-lg sm:text-xl font-serif text-ivory">
+          {monthNames[currentMonth.month]} {currentMonth.year}
+        </h3>
+        <button
+          onClick={nextMonth}
+          className="w-11 h-11 flex items-center justify-center rounded-full hover:bg-champagne/10 transition-colors"
+          aria-label="Next month"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M9 18l6-6-6-6"/>
+          </svg>
+        </button>
+      </div>
+
+      {/* Day names */}
+      <div className="grid grid-cols-7 gap-1 mb-2">
+        {dayNames.map(day => (
+          <div key={day} className="text-center text-[11px] sm:text-xs font-sans text-ivory/40 py-2">
+            {day}
+          </div>
+        ))}
+      </div>
+
+      {/* Calendar grid */}
+      <div className="grid grid-cols-7 gap-1">
+        {/* Empty cells for days before first day of month */}
+        {Array.from({ length: firstDayOfMonth }).map((_, i) => (
+          <div key={`empty-${i}`} className="aspect-square"></div>
+        ))}
+        
+        {/* Days */}
+        {Array.from({ length: daysInMonth }).map((_, i) => {
+          const day = i + 1;
+          const disabled = isDateDisabled(day);
+          const selected = isDateSelected(day);
+          
+          return (
+            <button
+              key={day}
+              onClick={() => handleDateClick(day)}
+              disabled={disabled}
+              className={`aspect-square flex items-center justify-center rounded-lg text-sm sm:text-base font-sans transition-all min-w-[44px] min-h-[44px] ${
+                disabled
+                  ? 'text-ivory/20 cursor-not-allowed'
+                  : selected
+                  ? 'bg-champagne text-obsidian font-semibold'
+                  : 'text-ivory/80 hover:bg-champagne/10'
+              }`}
+              aria-label={`${day} ${monthNames[currentMonth.month]} ${currentMonth.year}`}
+            >
+              {day}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Selected date display */}
+      {selectedDate && (
+        <div className="mt-6 pt-4 border-t border-champagne/10">
+          <p className="text-center text-sm font-sans text-champagne">
+            {formatDate(selectedDate)}
+          </p>
+        </div>
+      )}
+    </div>
+  );
+};
+
 // ==================== BOOKING SYSTEM ====================
 type BookingState = { step: number; selectedServices: string[]; selectedDate: string; selectedTime: string; customerName: string; customerPhone: string; };
 type BookedSlot = { date: string; time: string; customerName: string; timestamp: number; };
@@ -977,6 +1124,7 @@ const isSlotBooked = (date: string, time: string): boolean => {
 
 const BookingModal = ({ isOpen, onClose, preSelectedServices = [] }: { isOpen: boolean; onClose: () => void; preSelectedServices?: string[] }) => {
   const [booking, setBooking] = useState<BookingState>({ step: 1, selectedServices: [], selectedDate: '', selectedTime: '', customerName: '', customerPhone: '' });
+  const [showCalendar, setShowCalendar] = useState(false);
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : '';
@@ -986,6 +1134,7 @@ const BookingModal = ({ isOpen, onClose, preSelectedServices = [] }: { isOpen: b
   useEffect(() => {
     if (!isOpen) {
       setBooking({ step: 1, selectedServices: [], selectedDate: '', selectedTime: '', customerName: '', customerPhone: '' });
+      setShowCalendar(false);
     } else if (preSelectedServices.length > 0) {
       setBooking(prev => ({ ...prev, selectedServices: preSelectedServices }));
     }
@@ -1058,77 +1207,159 @@ const BookingModal = ({ isOpen, onClose, preSelectedServices = [] }: { isOpen: b
   const canProceed = () => {
     if (booking.step === 1) return booking.selectedServices.length > 0;
     if (booking.step === 2) return booking.selectedDate && booking.selectedTime;
-    if (booking.step === 3) return booking.customerName && booking.customerPhone;
+    if (booking.step === 3) return booking.customerName.trim().length > 0 && booking.customerPhone.trim().length > 0;
     return false;
+  };
+
+  const formatDate = (dateStr: string) => {
+    if (!dateStr) return '';
+    const date = new Date(dateStr);
+    const options: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    return date.toLocaleDateString('en-US', options);
   };
 
   return (
     <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center" onClick={onClose}>
       <div className="absolute inset-0 bg-obsidian/80 backdrop-blur-sm"></div>
-      <div className="relative w-full sm:max-w-2xl bg-charcoal border border-champagne/10 rounded-t-3xl sm:rounded-2xl max-h-[90vh] overflow-hidden flex flex-col" onClick={(e) => e.stopPropagation()} style={{ animation: 'slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards' }}>
+      <div 
+        className="relative w-full sm:max-w-2xl bg-charcoal border border-champagne/10 rounded-t-3xl sm:rounded-2xl max-h-[95vh] sm:max-h-[90vh] overflow-hidden flex flex-col" 
+        onClick={(e) => e.stopPropagation()}
+        style={{ animation: 'slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards' }}
+      >
+        {/* Header */}
         <div className="p-5 sm:p-6 border-b border-champagne/10 flex-shrink-0">
-          <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center justify-between mb-4">
             <div>
               <h3 className="font-serif text-xl sm:text-2xl text-ivory">Reserve Your Visit</h3>
-              <p className="text-ivory/40 text-xs font-sans mt-0.5">Step {booking.step} of 3</p>
+              <p className="text-ivory/40 text-xs font-sans mt-1">Step {booking.step} of 3</p>
             </div>
-            <button onClick={onClose} className="text-ivory/30 hover:text-ivory transition-colors p-1">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><line x1="6" y1="6" x2="18" y2="18" /><line x1="18" y1="6" x2="6" y2="18" /></svg>
+            <button 
+              onClick={onClose} 
+              className="w-11 h-11 flex items-center justify-center rounded-full hover:bg-champagne/10 transition-colors text-ivory/50 hover:text-ivory"
+              aria-label="Close booking modal"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <line x1="6" y1="6" x2="18" y2="18" />
+                <line x1="18" y1="6" x2="6" y2="18" />
+              </svg>
             </button>
           </div>
           <div className="flex gap-2">
-            {[1, 2, 3].map(step => (<div key={step} className={`flex-1 h-0.5 rounded-full transition-all ${step <= booking.step ? 'bg-champagne' : 'bg-champagne/10'}`}></div>))}
+            {[1, 2, 3].map(step => (
+              <div key={step} className={`flex-1 h-1 rounded-full transition-all ${step <= booking.step ? 'bg-champagne' : 'bg-champagne/10'}`}></div>
+            ))}
           </div>
         </div>
 
+        {/* Content */}
         <div className="flex-1 overflow-y-auto p-5 sm:p-6">
           {booking.step === 1 && (
             <div>
-              <p className="text-ivory/50 text-sm font-sans mb-4">Select your treatments:</p>
-              <div className="space-y-5">
+              <p className="text-ivory/60 text-sm font-sans mb-5">Select your treatments:</p>
+              <div className="space-y-6">
                 {serviceCategories.map(category => (
                   <div key={category.id}>
-                    <h4 className="text-champagne text-[10px] font-sans tracking-[0.2em] uppercase mb-2 flex items-center gap-2">
-                      <span>{category.icon}</span> {category.title}
+                    <h4 className="text-champagne text-xs font-sans tracking-[0.15em] uppercase mb-3 flex items-center gap-2">
+                      <span className="text-base">{category.icon}</span> {category.title}
                     </h4>
-                    <div className="space-y-0.5">
+                    <div className="space-y-1">
                       {category.services.map(service => (
-                        <label key={service.name} className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-champagne/[0.03] cursor-pointer transition-colors">
-                          <input type="checkbox" checked={booking.selectedServices.includes(service.name)} onChange={() => toggleService(service.name)} className="w-4 h-4 rounded border-champagne/30 bg-transparent flex-shrink-0" />
+                        <label 
+                          key={service.name} 
+                          className={`flex items-center gap-3 p-3 sm:p-4 rounded-lg cursor-pointer transition-all ${
+                            booking.selectedServices.includes(service.name)
+                              ? 'bg-champagne/10 border border-champagne/30'
+                              : 'hover:bg-champagne/[0.03] border border-transparent'
+                          }`}
+                        >
+                          <input 
+                            type="checkbox" 
+                            checked={booking.selectedServices.includes(service.name)} 
+                            onChange={() => toggleService(service.name)} 
+                            className="w-5 h-5 rounded border-champagne/40 bg-transparent flex-shrink-0 accent-champagne" 
+                          />
                           <div className="flex-1 min-w-0">
-                            <p className="text-ivory/80 text-sm font-sans truncate">{service.name}</p>
-                            <p className="text-ivory/30 text-xs font-sans">{service.duration}</p>
+                            <p className="text-ivory/90 text-sm sm:text-base font-sans">{service.name}</p>
+                            <p className="text-ivory/40 text-xs font-sans mt-0.5">{service.duration}</p>
                           </div>
-                          <p className="text-champagne text-xs font-sans font-medium whitespace-nowrap">{service.price}</p>
+                          <p className="text-champagne text-sm font-sans font-medium whitespace-nowrap">{service.price}</p>
                         </label>
                       ))}
                     </div>
                   </div>
                 ))}
               </div>
+              {booking.selectedServices.length > 0 && (
+                <div className="mt-6 p-4 rounded-lg bg-champagne/5 border border-champagne/20">
+                  <p className="text-champagne text-sm font-sans font-medium">
+                    {booking.selectedServices.length} service{booking.selectedServices.length > 1 ? 's' : ''} selected · {calculateTotalPrice()} AED
+                  </p>
+                </div>
+              )}
             </div>
           )}
 
           {booking.step === 2 && (
             <div>
-              <p className="text-ivory/50 text-sm font-sans mb-4">Choose your preferred date & time:</p>
+              <p className="text-ivory/60 text-sm font-sans mb-5">Choose your preferred date & time:</p>
+              
+              {/* Date Selection */}
               <div className="mb-6">
-                <label className="text-champagne text-[10px] font-sans tracking-[0.2em] uppercase mb-2 block">Date</label>
-                <input type="date" min={getMinDate()} value={booking.selectedDate} onChange={(e) => setBooking(prev => ({ ...prev, selectedDate: e.target.value, selectedTime: '' }))} className="w-full px-4 py-3 bg-obsidian border border-champagne/20 rounded-lg text-ivory font-sans text-sm focus:border-champagne/50" />
+                <label className="text-champagne text-xs font-sans tracking-[0.15em] uppercase mb-3 block">Date</label>
+                <button
+                  onClick={() => setShowCalendar(!showCalendar)}
+                  className="w-full px-5 py-4 bg-obsidian border border-champagne/20 rounded-lg text-left hover:border-champagne/40 transition-colors"
+                >
+                  {booking.selectedDate ? (
+                    <span className="text-ivory text-sm sm:text-base font-sans">{formatDate(booking.selectedDate)}</span>
+                  ) : (
+                    <span className="text-ivory/40 text-sm sm:text-base font-sans">Select a date</span>
+                  )}
+                </button>
+                
+                {showCalendar && (
+                  <div className="mt-4">
+                    <Calendar
+                      selectedDate={booking.selectedDate}
+                      onDateSelect={(date) => {
+                        setBooking(prev => ({ ...prev, selectedDate: date, selectedTime: '' }));
+                        setShowCalendar(false);
+                      }}
+                      minDate={getMinDate()}
+                    />
+                  </div>
+                )}
               </div>
+
+              {/* Time Selection */}
               {booking.selectedDate && (
                 <div>
-                  <label className="text-champagne text-[10px] font-sans tracking-[0.2em] uppercase mb-2 block">Time</label>
-                  <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
+                  <label className="text-champagne text-xs font-sans tracking-[0.15em] uppercase mb-3 block">Time</label>
+                  <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 sm:gap-3">
                     {generateTimeSlots().map(time => {
                       const booked = isSlotBooked(booking.selectedDate, time);
                       return (
-                        <button key={time} disabled={booked} onClick={() => setBooking(prev => ({ ...prev, selectedTime: time }))} className={`px-3 py-2.5 rounded-lg text-xs font-sans transition-all ${booked ? 'bg-red-500/10 border border-red-500/20 text-red-400/50 cursor-not-allowed line-through' : booking.selectedTime === time ? 'bg-champagne text-obsidian font-medium' : 'bg-obsidian border border-champagne/10 text-ivory/60 hover:border-champagne/30'}`}>
+                        <button
+                          key={time}
+                          disabled={booked}
+                          onClick={() => setBooking(prev => ({ ...prev, selectedTime: time }))}
+                          className={`px-4 py-3 rounded-lg text-sm font-sans transition-all min-h-[48px] ${
+                            booked
+                              ? 'bg-red-500/10 border border-red-500/20 text-red-400/50 cursor-not-allowed line-through'
+                              : booking.selectedTime === time
+                              ? 'bg-champagne text-obsidian font-semibold'
+                              : 'bg-obsidian border border-champagne/10 text-ivory/70 hover:border-champagne/30'
+                          }`}
+                        >
                           {time}
                         </button>
                       );
                     })}
                   </div>
+                  <p className="text-ivory/30 text-xs font-sans mt-3">
+                    <span className="inline-block w-3 h-3 bg-red-500/20 border border-red-500/30 rounded mr-1"></span>
+                    Unavailable time slots
+                  </p>
                 </div>
               )}
             </div>
@@ -1136,37 +1367,86 @@ const BookingModal = ({ isOpen, onClose, preSelectedServices = [] }: { isOpen: b
 
           {booking.step === 3 && (
             <div>
-              <p className="text-ivory/50 text-sm font-sans mb-4">Your details:</p>
-              <div className="space-y-4">
+              <p className="text-ivory/60 text-sm font-sans mb-5">Your details:</p>
+              <div className="space-y-5">
                 <div>
-                  <label className="text-champagne text-[10px] font-sans tracking-[0.2em] uppercase mb-2 block">Name</label>
-                  <input type="text" value={booking.customerName} onChange={(e) => setBooking(prev => ({ ...prev, customerName: e.target.value }))} placeholder="Your name" className="w-full px-4 py-3 bg-obsidian border border-champagne/20 rounded-lg text-ivory font-sans text-sm placeholder:text-ivory/20 focus:border-champagne/50" />
+                  <label className="text-champagne text-xs font-sans tracking-[0.15em] uppercase mb-3 block">Name</label>
+                  <input
+                    type="text"
+                    value={booking.customerName}
+                    onChange={(e) => setBooking(prev => ({ ...prev, customerName: e.target.value }))}
+                    placeholder="Your full name"
+                    className="w-full px-5 py-4 bg-obsidian border border-champagne/20 rounded-lg text-ivory font-sans text-base placeholder:text-ivory/30 focus:border-champagne/50 focus:outline-none transition-colors"
+                  />
                 </div>
                 <div>
-                  <label className="text-champagne text-[10px] font-sans tracking-[0.2em] uppercase mb-2 block">Phone</label>
-                  <input type="tel" value={booking.customerPhone} onChange={(e) => setBooking(prev => ({ ...prev, customerPhone: e.target.value }))} placeholder="+971 XX XXX XXXX" className="w-full px-4 py-3 bg-obsidian border border-champagne/20 rounded-lg text-ivory font-sans text-sm placeholder:text-ivory/20 focus:border-champagne/50" />
+                  <label className="text-champagne text-xs font-sans tracking-[0.15em] uppercase mb-3 block">Phone</label>
+                  <input
+                    type="tel"
+                    value={booking.customerPhone}
+                    onChange={(e) => setBooking(prev => ({ ...prev, customerPhone: e.target.value }))}
+                    placeholder="+971 XX XXX XXXX"
+                    className="w-full px-5 py-4 bg-obsidian border border-champagne/20 rounded-lg text-ivory font-sans text-base placeholder:text-ivory/30 focus:border-champagne/50 focus:outline-none transition-colors"
+                  />
                 </div>
               </div>
-              <div className="mt-6 p-4 rounded-lg bg-obsidian border border-champagne/10">
-                <h4 className="text-champagne text-[10px] font-sans tracking-[0.2em] uppercase mb-3">Summary</h4>
-                <div className="space-y-2 text-sm font-sans">
-                  <div className="flex justify-between"><span className="text-ivory/40">Services:</span><span className="text-ivory/80">{booking.selectedServices.length}</span></div>
-                  <div className="flex justify-between"><span className="text-ivory/40">Date:</span><span className="text-ivory/80">{booking.selectedDate}</span></div>
-                  <div className="flex justify-between"><span className="text-ivory/40">Time:</span><span className="text-ivory/80">{booking.selectedTime}</span></div>
-                  <div className="flex justify-between"><span className="text-ivory/40">Duration:</span><span className="text-ivory/80">{calculateTotalDuration()}</span></div>
-                  <div className="flex justify-between pt-2 border-t border-champagne/10"><span className="text-champagne font-medium">Total:</span><span className="text-champagne font-medium">{calculateTotalPrice()} AED</span></div>
+
+              {/* Booking Summary */}
+              <div className="mt-6 p-5 rounded-lg bg-obsidian border border-champagne/20">
+                <h4 className="text-champagne text-xs font-sans tracking-[0.15em] uppercase mb-4">Booking Summary</h4>
+                <div className="space-y-3 text-sm font-sans">
+                  <div className="flex justify-between">
+                    <span className="text-ivory/50">Services:</span>
+                    <span className="text-ivory/90">{booking.selectedServices.length}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-ivory/50">Date:</span>
+                    <span className="text-ivory/90">{formatDate(booking.selectedDate)}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-ivory/50">Time:</span>
+                    <span className="text-ivory/90">{booking.selectedTime}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-ivory/50">Duration:</span>
+                    <span className="text-ivory/90">{calculateTotalDuration()}</span>
+                  </div>
+                  <div className="flex justify-between pt-3 border-t border-champagne/10">
+                    <span className="text-champagne font-medium">Estimated Total:</span>
+                    <span className="text-champagne font-semibold text-base">{calculateTotalPrice()} AED</span>
+                  </div>
                 </div>
               </div>
+
+              <p className="text-ivory/40 text-xs font-sans mt-4 text-center">
+                Your booking request will be sent via WhatsApp for confirmation
+              </p>
             </div>
           )}
         </div>
 
-        <div className="p-5 sm:p-6 border-t border-champagne/10 flex-shrink-0">
+        {/* Footer */}
+        <div className="p-5 sm:p-6 border-t border-champagne/10 flex-shrink-0 bg-charcoal">
           <div className="flex gap-3">
             {booking.step > 1 && (
-              <button onClick={() => setBooking(prev => ({ ...prev, step: prev.step - 1 }))} className="btn-outline px-6 py-3 rounded-full">Back</button>
+              <button
+                onClick={() => setBooking(prev => ({ ...prev, step: prev.step - 1 }))}
+                className="btn-outline px-6 py-3.5 rounded-full min-w-[100px]"
+              >
+                Back
+              </button>
             )}
-            <button disabled={!canProceed()} onClick={() => { if (booking.step < 3) { setBooking(prev => ({ ...prev, step: prev.step + 1 })); } else { handleWhatsAppBooking(); } }} className="btn-luxury flex-1 py-3 rounded-full disabled:opacity-50 disabled:cursor-not-allowed">
+            <button
+              disabled={!canProceed()}
+              onClick={() => {
+                if (booking.step < 3) {
+                  setBooking(prev => ({ ...prev, step: prev.step + 1 }));
+                } else {
+                  handleWhatsAppBooking();
+                }
+              }}
+              className="btn-luxury flex-1 py-3.5 rounded-full disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
+            >
               {booking.step === 3 ? 'Confirm & Send' : 'Continue'}
             </button>
           </div>
