@@ -106,11 +106,14 @@ const HeroSection = ({ onBookClick }: { onBookClick: () => void }) => {
           Premium Beauty Salon in Business Bay, Dubai
         </p>
         <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
-          <button onClick={onBookClick} className="px-8 py-4 bg-white text-black font-medium rounded-full hover:bg-white/90 transition-colors">
+          <button 
+            onClick={onBookClick} 
+            className="px-10 py-4 bg-white text-black font-semibold rounded-full hover:bg-gray-100 transition-colors shadow-lg text-base"
+          >
             Book Appointment
           </button>
-          <a href="https://wa.me/971528167306" target="_blank" rel="noopener noreferrer" className="px-8 py-4 border border-white/30 text-white font-medium rounded-full hover:bg-white/10 transition-colors flex items-center justify-center gap-2">
-            <i className="fab fa-whatsapp"></i> WhatsApp
+          <a href="https://wa.me/971528167306" target="_blank" rel="noopener noreferrer" className="px-8 py-4 border-2 border-white/50 text-white font-medium rounded-full hover:bg-white/10 transition-colors flex items-center justify-center gap-2">
+            <i className="fab fa-whatsapp text-lg"></i> WhatsApp
           </a>
         </div>
         <div className="mt-8 flex items-center justify-center gap-2">
@@ -279,7 +282,7 @@ const serviceCategories: ServiceCategory[] = [
   },
 ];
 
-const ServiceCategoryCard = ({ category }: { category: ServiceCategory }) => {
+const ServiceCategoryCard = ({ category, selectedServices, onToggleService }: { category: ServiceCategory; selectedServices: string[]; onToggleService: (name: string) => void }) => {
   const [expanded, setExpanded] = useState(false);
   const visibleServices = expanded ? category.services : category.services.slice(0, 5);
   const hasMore = category.services.length > 5;
@@ -298,13 +301,19 @@ const ServiceCategoryCard = ({ category }: { category: ServiceCategory }) => {
         <div className="px-5 pb-5 border-t border-gray-100">
           <div className="space-y-0">
             {visibleServices.map((service, i) => (
-              <div key={i} className="flex items-center justify-between py-3 border-b border-gray-50 last:border-0">
-                <div className="flex-1">
+              <label key={i} className="flex items-center gap-3 py-3 border-b border-gray-50 last:border-0 cursor-pointer hover:bg-gray-50 -mx-2 px-2 rounded transition-colors">
+                <input
+                  type="checkbox"
+                  checked={selectedServices.includes(service.name)}
+                  onChange={() => onToggleService(service.name)}
+                  className="w-4 h-4 rounded border-gray-300 text-black focus:ring-black flex-shrink-0"
+                />
+                <div className="flex-1 min-w-0">
                   <p className="text-sm text-gray-900">{service.name}</p>
                   <p className="text-xs text-gray-500 mt-0.5">{service.duration}</p>
                 </div>
                 <p className="text-sm font-medium text-gray-900 ml-4 whitespace-nowrap">{service.price}</p>
-              </div>
+              </label>
             ))}
           </div>
           {hasMore && !expanded && (
@@ -318,21 +327,67 @@ const ServiceCategoryCard = ({ category }: { category: ServiceCategory }) => {
   );
 };
 
-const ServicesSection = () => (
-  <section id="services" className="py-16 sm:py-20 bg-gray-50">
-    <div className="max-w-4xl mx-auto px-5 sm:px-6">
-      <Reveal>
-        <div className="text-center mb-10">
-          <h2 className="text-3xl sm:text-4xl font-light text-gray-900">Services & Prices</h2>
-          <p className="mt-3 text-gray-600">All prices in AED</p>
+const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices }: { onBookClick: () => void; selectedServices: string[]; setSelectedServices: React.Dispatch<React.SetStateAction<string[]>> }) => {
+  const toggleService = (serviceName: string) => {
+    setSelectedServices(prev => 
+      prev.includes(serviceName) 
+        ? prev.filter(s => s !== serviceName)
+        : [...prev, serviceName]
+    );
+  };
+
+  const calculateTotal = () => {
+    let total = 0;
+    selectedServices.forEach(serviceName => {
+      const service = serviceCategories.flatMap(cat => cat.services).find(s => s.name === serviceName);
+      if (service) {
+        const priceMatch = service.price.match(/(\d+)/);
+        if (priceMatch) total += parseInt(priceMatch[1]);
+      }
+    });
+    return total;
+  };
+
+  return (
+    <section id="services" className="py-16 sm:py-20 bg-gray-50">
+      <div className="max-w-4xl mx-auto px-5 sm:px-6">
+        <Reveal>
+          <div className="text-center mb-10">
+            <h2 className="text-3xl sm:text-4xl font-light text-gray-900">Services & Prices</h2>
+            <p className="mt-3 text-gray-600">Select services to book • All prices in AED</p>
+          </div>
+        </Reveal>
+        <div className="space-y-3">
+          {serviceCategories.map((cat) => (
+            <ServiceCategoryCard 
+              key={cat.id} 
+              category={cat} 
+              selectedServices={selectedServices}
+              onToggleService={toggleService}
+            />
+          ))}
         </div>
-      </Reveal>
-      <div className="space-y-3">
-        {serviceCategories.map((cat) => <ServiceCategoryCard key={cat.id} category={cat} />)}
+        
+        {selectedServices.length > 0 && (
+          <div className="sticky bottom-0 mt-6 bg-white rounded-lg shadow-lg p-4 border border-gray-200">
+            <div className="flex items-center justify-between mb-3">
+              <div>
+                <p className="text-sm font-medium text-gray-900">{selectedServices.length} service{selectedServices.length > 1 ? 's' : ''} selected</p>
+                <p className="text-xs text-gray-500">Estimated total: {calculateTotal()} AED</p>
+              </div>
+              <button 
+                onClick={onBookClick}
+                className="px-6 py-2.5 bg-black text-white font-medium text-sm rounded-full hover:bg-gray-800 transition-colors"
+              >
+                Book Now
+              </button>
+            </div>
+          </div>
+        )}
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 // ==================== REVIEWS (Link to Real Google Reviews) ====================
 const ReviewsSection = () => (
@@ -442,7 +497,7 @@ const isSlotBooked = (date: string, time: string): boolean => {
   return slots.some(slot => slot.date === date && slot.time === time);
 };
 
-const BookingModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
+const BookingModal = ({ isOpen, onClose, preSelectedServices = [] }: { isOpen: boolean; onClose: () => void; preSelectedServices?: string[] }) => {
   const [booking, setBooking] = useState<BookingState>({ step: 1, selectedServices: [], selectedDate: '', selectedTime: '', customerName: '', customerPhone: '' });
 
   useEffect(() => {
@@ -451,8 +506,12 @@ const BookingModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
   }, [isOpen]);
 
   useEffect(() => {
-    if (!isOpen) setBooking({ step: 1, selectedServices: [], selectedDate: '', selectedTime: '', customerName: '', customerPhone: '' });
-  }, [isOpen]);
+    if (!isOpen) {
+      setBooking({ step: 1, selectedServices: [], selectedDate: '', selectedTime: '', customerName: '', customerPhone: '' });
+    } else if (preSelectedServices.length > 0) {
+      setBooking(prev => ({ ...prev, selectedServices: preSelectedServices }));
+    }
+  }, [isOpen, preSelectedServices]);
 
   if (!isOpen) return null;
 
@@ -636,16 +695,22 @@ const BookingModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
 // ==================== MAIN APP ====================
 export default function App() {
   const [bookingOpen, setBookingOpen] = useState(false);
+  const [selectedServices, setSelectedServices] = useState<string[]>([]);
+
+  const handleBookClick = () => {
+    setBookingOpen(true);
+  };
+
   return (
     <div className="min-h-screen bg-white text-gray-900">
-      <Navigation onBookClick={() => setBookingOpen(true)} />
-      <HeroSection onBookClick={() => setBookingOpen(true)} />
-      <ServicesSection />
+      <Navigation onBookClick={handleBookClick} />
+      <HeroSection onBookClick={handleBookClick} />
+      <ServicesSection onBookClick={handleBookClick} selectedServices={selectedServices} setSelectedServices={setSelectedServices} />
       <ReviewsSection />
       <ContactSection />
       <Footer />
       <WhatsAppBadge />
-      <BookingModal isOpen={bookingOpen} onClose={() => setBookingOpen(false)} />
+      <BookingModal isOpen={bookingOpen} onClose={() => setBookingOpen(false)} preSelectedServices={selectedServices} />
     </div>
   );
 }
