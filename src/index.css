@@ -147,15 +147,50 @@ body {
   background: rgba(200, 173, 131, 0.05);
 }
 
-/* Hero overlay */
+/* Hero overlay - lighter for brighter images */
 .hero-overlay {
   background: linear-gradient(
     180deg,
-    rgba(11, 11, 13, 0.1) 0%,
-    rgba(11, 11, 13, 0.3) 40%,
-    rgba(11, 11, 13, 0.7) 75%,
-    rgba(11, 11, 13, 0.95) 100%
+    rgba(11, 11, 13, 0.2) 0%,
+    rgba(11, 11, 13, 0.4) 50%,
+    rgba(11, 11, 13, 0.8) 100%
   );
+}
+
+/* Layout system */
+.container-luxury {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+@media (min-width: 640px) {
+  .container-luxury {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-luxury {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+}
+
+/* Section spacing */
+.section-spacing {
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+@media (min-width: 1024px) {
+  .section-spacing {
+    padding-top: 96px;
+    padding-bottom: 96px;
+  }
 }
 
 /* Section divider */

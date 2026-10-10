@@ -118,15 +118,15 @@ const HeroSection = ({ onBookClick }: { onBookClick: () => void }) => {
     <section className="relative min-h-[100svh] flex items-end overflow-hidden">
       <div className="absolute inset-0">
         <img
-          src="https://qxwmavrgfarmxbexeoxf.supabase.co/storage/v1/object/public/images/submissions/covers/1775122063027-ut4x70ufzpg.jpeg"
-          alt="Dukes of Beauty Salon"
+          src="https://image.qwenlm.ai/generated-images/4680c584-44a7-47eb-a5ae-bde65cb14c85/_result.png"
+          alt="Dukes of Beauty Salon Interior"
           className={`absolute inset-0 w-full h-full object-cover ${loaded ? 'animate-ken-burns' : 'opacity-0'}`}
           onError={(e) => { e.currentTarget.style.display = 'none'; }}
         />
         <div className="absolute inset-0 hero-overlay"></div>
       </div>
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-8 pb-20 sm:pb-32 pt-32">
+      <div className="relative z-10 w-full container-luxury pb-20 sm:pb-32 pt-32">
         <div className="max-w-3xl">
           {/* Location tag */}
           <div className={`transition-all duration-1000 delay-500 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
@@ -143,7 +143,7 @@ const HeroSection = ({ onBookClick }: { onBookClick: () => void }) => {
           </h1>
 
           {/* Subtitle */}
-          <p className={`mt-8 sm:mt-10 text-ivory/60 text-base sm:text-lg font-sans font-light leading-relaxed max-w-lg transition-all duration-1000 delay-900 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <p className={`mt-8 sm:mt-10 text-ivory/70 text-base sm:text-lg font-sans font-light leading-relaxed max-w-lg transition-all duration-1000 delay-900 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             A sanctuary of luxury where precision meets artistry. Premium hair, nails, aesthetics & wellness in the heart of Dubai.
           </p>
 
@@ -165,7 +165,7 @@ const HeroSection = ({ onBookClick }: { onBookClick: () => void }) => {
                   <svg key={i} className="w-3 h-3 text-champagne fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
                 ))}
               </div>
-              <span className="text-ivory/40 text-[11px] font-sans tracking-wide">4.9 · Google</span>
+              <span className="text-ivory/50 text-[11px] font-sans tracking-wide">4.9 · Google</span>
             </div>
           </div>
         </div>
@@ -176,8 +176,8 @@ const HeroSection = ({ onBookClick }: { onBookClick: () => void }) => {
 
 // ==================== ABOUT SECTION ====================
 const AboutSection = () => (
-  <section className="py-20 sm:py-32 relative">
-    <div className="max-w-5xl mx-auto px-5 sm:px-8">
+  <section className="section-spacing relative">
+    <div className="container-luxury">
       <Reveal>
         <div className="text-center">
           <div className="flex items-center justify-center gap-3 mb-6">
@@ -376,8 +376,8 @@ const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices }:
   };
 
   return (
-    <section id="services" className="py-24 sm:py-32 relative">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8">
+    <section id="services" className="section-spacing relative">
+      <div className="container-luxury">
         <Reveal>
           <div className="text-center mb-16 sm:mb-20">
             <div className="flex items-center justify-center gap-3 mb-6">
@@ -500,8 +500,8 @@ const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices }:
 
 // ==================== INSTAGRAM SECTION ====================
 const InstagramSection = () => (
-  <section id="instagram" className="py-32 sm:py-40 relative">
-    <div className="max-w-5xl mx-auto px-5 sm:px-8">
+  <section id="instagram" className="section-spacing relative">
+    <div className="container-luxury">
       <Reveal>
         <div className="text-center">
           <div className="flex items-center justify-center gap-3 mb-6">
@@ -539,8 +539,8 @@ const InstagramSection = () => (
 
 // ==================== GALLERY ====================
 const GallerySection = () => (
-  <section id="gallery" className="py-32 sm:py-40 relative">
-    <div className="max-w-5xl mx-auto px-5 sm:px-8">
+  <section id="gallery" className="section-spacing relative">
+    <div className="container-luxury">
       <Reveal>
         <div className="text-center">
           <div className="flex items-center justify-center gap-3 mb-6">
@@ -581,8 +581,8 @@ const GallerySection = () => (
 
 // ==================== REVIEWS ====================
 const ReviewsSection = () => (
-  <section id="reviews" className="py-32 sm:py-40 relative">
-    <div className="max-w-5xl mx-auto px-5 sm:px-8">
+  <section id="reviews" className="section-spacing relative">
+    <div className="container-luxury">
       <Reveal>
         <div className="text-center">
           <div className="flex items-center justify-center gap-3 mb-6">
@@ -638,8 +638,8 @@ const ReviewsSection = () => (
 
 // ==================== CONTACT ====================
 const ContactSection = () => (
-  <section id="contact" className="py-32 sm:py-40 relative">
-    <div className="max-w-6xl mx-auto px-5 sm:px-8">
+  <section id="contact" className="section-spacing relative">
+    <div className="container-luxury">
       <Reveal>
         <div className="text-center mb-16">
           <div className="flex items-center justify-center gap-3 mb-6">
@@ -709,29 +709,33 @@ const ContactSection = () => (
 );
 
 // ==================== FOOTER ====================
-const Footer = () => (
-  <footer className="border-t border-champagne/10 py-10 sm:py-14">
-    <div className="max-w-7xl mx-auto px-5 sm:px-8">
-      <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-        <Logo size="md" />
-        
-        <div className="flex items-center gap-6">
-          <a href="https://www.instagram.com/dukes_of_beauty.ae/" target="_blank" rel="noopener noreferrer" className="text-ivory/40 hover:text-champagne transition-colors">
-            <i className="fab fa-instagram text-lg"></i>
-          </a>
-          <a href="https://wa.me/971528167306" target="_blank" rel="noopener noreferrer" className="text-ivory/40 hover:text-green-400 transition-colors">
-            <i className="fab fa-whatsapp text-lg"></i>
-          </a>
-          <a href="tel:+971528167306" className="text-ivory/40 hover:text-champagne transition-colors">
-            <i className="fas fa-phone text-lg"></i>
-          </a>
-        </div>
+const Footer = () => {
+  const currentYear = new Date().getFullYear();
+  
+  return (
+    <footer className="border-t border-champagne/10 py-12 sm:py-16">
+      <div className="container-luxury">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          <Logo size="md" />
+          
+          <div className="flex items-center gap-6">
+            <a href="https://www.instagram.com/dukes_of_beauty.ae/" target="_blank" rel="noopener noreferrer" className="text-ivory/40 hover:text-champagne transition-colors">
+              <i className="fab fa-instagram text-lg"></i>
+            </a>
+            <a href="https://wa.me/971528167306" target="_blank" rel="noopener noreferrer" className="text-ivory/40 hover:text-green-400 transition-colors">
+              <i className="fab fa-whatsapp text-lg"></i>
+            </a>
+            <a href="tel:+971528167306" className="text-ivory/40 hover:text-champagne transition-colors">
+              <i className="fas fa-phone text-lg"></i>
+            </a>
+          </div>
 
-        <p className="text-ivory/20 text-xs font-sans">© 2024 Dukes of Beauty. All rights reserved.</p>
+          <p className="text-ivory/20 text-xs font-sans">© {currentYear} Dukes of Beauty. All rights reserved.</p>
+        </div>
       </div>
-    </div>
-  </footer>
-);
+    </footer>
+  );
+};
 
 // ==================== WHATSAPP BADGE ====================
 const WhatsAppBadge = () => {
