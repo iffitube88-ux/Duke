@@ -226,9 +226,9 @@ body {
 .hero-overlay {
   background: linear-gradient(
     180deg,
-    rgba(11, 11, 13, 0.1) 0%,
-    rgba(11, 11, 13, 0.25) 40%,
-    rgba(11, 11, 13, 0.6) 100%
+    rgba(11, 11, 13, 0.2) 0%,
+    rgba(11, 11, 13, 0.35) 50%,
+    rgba(11, 11, 13, 0.75) 100%
   );
 }
 
@@ -369,10 +369,17 @@ body {
   border-color: rgba(200, 173, 131, 0.6);
 }
 
-/* Section spacing */
+/* Section spacing - consistent scale */
 .section-spacing {
-  padding-top: 48px;
-  padding-bottom: 48px;
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+
+@media (min-width: 640px) {
+  .section-spacing {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
 }
 
 @media (min-width: 1024px) {

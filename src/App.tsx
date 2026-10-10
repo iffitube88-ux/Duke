@@ -115,7 +115,7 @@ const HeroSection = ({ onBookClick }: { onBookClick: () => void }) => {
   useEffect(() => { setLoaded(true); }, []);
 
   return (
-    <section className="relative h-[70vh] sm:h-[75vh] md:h-[85vh] lg:h-[90vh] flex items-end overflow-hidden">
+    <section className="relative min-h-[100svh] flex items-end overflow-hidden">
       <div className="absolute inset-0">
         <img
           src="https://i.imgur.com/pFDeBJV_d.webp?maxwidth=760&fidelity=grand"
@@ -126,29 +126,29 @@ const HeroSection = ({ onBookClick }: { onBookClick: () => void }) => {
         <div className="absolute inset-0 hero-overlay"></div>
       </div>
 
-      <div className="relative z-10 w-full container-luxury pb-16 sm:pb-20 md:pb-24 lg:pb-32 pt-24 sm:pt-28 md:pt-32">
-        <div className="max-w-3xl">
+      <div className="relative z-10 w-full px-6 sm:px-10 md:px-16 lg:px-20 pb-20 sm:pb-24 md:pb-32 pt-28 sm:pt-32 md:pt-40">
+        <div className="max-w-[600px]">
           {/* Location tag */}
           <div className={`transition-all duration-1000 delay-500 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <div className="flex items-center gap-3 mb-6 sm:mb-8">
+            <div className="flex items-center gap-3 mb-6">
               <span className="w-12 h-px bg-champagne"></span>
-              <span className="text-champagne text-[10px] sm:text-[11px] tracking-[0.3em] uppercase font-sans">Business Bay · Dubai</span>
+              <span className="text-champagne text-[11px] tracking-[0.3em] uppercase font-sans">Business Bay · Dubai</span>
             </div>
           </div>
 
           {/* Main headline */}
-          <h1 className={`hero-title font-serif text-[2.5rem] sm:text-6xl md:text-7xl lg:text-8xl font-light text-ivory leading-[0.95] tracking-tight transition-all duration-1000 delay-700 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+          <h1 className={`hero-title font-serif text-[clamp(2.5rem,8vw,5rem)] font-light text-ivory leading-[1.1] tracking-tight mb-6 transition-all duration-1000 delay-700 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
             The Art of<br />
             <span className="animate-shimmer italic">Beauty</span>
           </h1>
 
           {/* Subtitle */}
-          <p className={`mt-6 sm:mt-8 md:mt-10 text-ivory/70 text-base sm:text-lg font-sans font-light leading-relaxed max-w-lg transition-all duration-1000 delay-900 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <p className={`mb-8 text-ivory/70 text-base sm:text-lg font-sans font-light leading-relaxed transition-all duration-1000 delay-900 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             A sanctuary of luxury where precision meets artistry. Premium hair, nails, aesthetics & wellness in the heart of Dubai.
           </p>
 
           {/* CTAs */}
-          <div className={`mt-8 sm:mt-10 md:mt-12 flex flex-col sm:flex-row gap-4 transition-all duration-1000 delay-1000 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className={`mb-6 flex flex-col sm:flex-row gap-4 transition-all duration-1000 delay-1000 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <button onClick={onBookClick} className="btn-luxury">
               Reserve Your Visit
             </button>
@@ -158,14 +158,14 @@ const HeroSection = ({ onBookClick }: { onBookClick: () => void }) => {
           </div>
 
           {/* Small trust indicator */}
-          <div className={`mt-12 sm:mt-14 md:mt-16 transition-all duration-1000 delay-[1200ms] ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className={`transition-all duration-1000 delay-[1200ms] ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="flex items-center gap-3">
               <div className="flex gap-0.5">
                 {[...Array(5)].map((_, i) => (
-                  <svg key={i} className="w-3 h-3 text-champagne fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                  <svg key={i} className="w-3.5 h-3.5 text-champagne fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
                 ))}
               </div>
-              <span className="text-ivory/50 text-[11px] font-sans tracking-wide">4.9 · Google</span>
+              <span className="text-ivory/50 text-xs font-sans tracking-wide">4.9 · Google</span>
             </div>
           </div>
         </div>
@@ -176,7 +176,7 @@ const HeroSection = ({ onBookClick }: { onBookClick: () => void }) => {
 
 // ==================== ABOUT SECTION ====================
 const AboutSection = () => (
-  <section className="section-spacing relative">
+  <section className="py-24 sm:py-32 md:py-40 relative">
     <div className="container-luxury">
       <Reveal>
         <div className="text-center max-w-[820px] mx-auto">
