@@ -377,7 +377,7 @@ const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices }:
 
   return (
     <section id="services" className="section-spacing relative">
-      <div className="max-w-[1200px] mx-auto px-5 sm:px-8">
+      <div className="container-luxury">
         <Reveal>
           <div className="text-center mb-16 sm:mb-20">
             <div className="flex items-center justify-center gap-3 mb-6">
@@ -396,20 +396,20 @@ const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices }:
 
         <Reveal>
           {/* Category Navigation - Liquid Glass */}
-          <div className="mb-16 sm:mb-20">
-            <div className="flex overflow-x-auto gap-3 sm:gap-4 pb-4 scrollbar-hide">
+          <div className="mb-12 sm:mb-16">
+            <div className="flex overflow-x-auto gap-3 pb-3 scrollbar-hide">
               {serviceCategories.map(cat => (
                 <button
                   key={cat.id}
                   onClick={() => setActiveTab(cat.id)}
-                  className={`flex-shrink-0 px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl text-sm sm:text-base font-sans tracking-wide transition-all whitespace-nowrap ${
+                  className={`category-tab flex-shrink-0 rounded-xl font-sans transition-all whitespace-nowrap ${
                     activeTab === cat.id
-                      ? 'liquid-glass-active text-champagne font-medium'
-                      : 'liquid-glass text-ivory/70 hover:text-ivory/90'
+                      ? 'category-tab-active text-champagne font-medium'
+                      : 'text-ivory/70 hover:text-ivory/90'
                   }`}
                 >
-                  <span className="mr-2">{cat.icon}</span>
-                  {cat.title}
+                  <span className="mr-2 text-lg">{cat.icon}</span>
+                  <span className="text-[15px]">{cat.title}</span>
                 </button>
               ))}
             </div>
@@ -435,41 +435,35 @@ const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices }:
                   <div
                     key={i}
                     onClick={() => toggleService(service.name)}
-                    className={`group cursor-pointer rounded-2xl transition-all ${
-                      isSelected
-                        ? 'glass-row-selected'
-                        : 'glass-row'
+                    className={`service-row rounded-xl cursor-pointer flex items-center gap-4 ${
+                      isSelected ? 'service-row-selected' : ''
                     }`}
                   >
-                    <div className="flex items-center justify-between gap-4 p-5 sm:p-6">
-                      {/* Left: Service info */}
-                      <div className="flex-1 min-w-0">
-                        <h4 className={`font-serif text-lg sm:text-xl transition-colors mb-1.5 ${
-                          isSelected ? 'text-champagne' : 'text-ivory/90 group-hover:text-ivory'
-                        }`}>
-                          {service.name}
-                        </h4>
-                        <p className="text-ivory/50 text-sm font-sans">
-                          {service.duration}
-                        </p>
-                      </div>
+                    {/* Left: Service info */}
+                    <div className="flex-1 min-w-0">
+                      <h4 className={`font-serif text-lg sm:text-xl transition-colors leading-snug ${
+                        isSelected ? 'text-champagne' : 'text-ivory/90 group-hover:text-ivory'
+                      }`}>
+                        {service.name}
+                      </h4>
+                      <p className="text-ivory/50 text-sm font-sans mt-1">
+                        {service.duration}
+                      </p>
+                    </div>
 
-                      {/* Right: Price + Checkbox */}
-                      <div className="flex items-center gap-4 flex-shrink-0">
-                        <p className={`font-sans text-base sm:text-lg font-medium ${
-                          isSelected ? 'text-champagne' : 'text-ivory/80'
-                        }`}>
-                          {service.price}
-                        </p>
-                        <div className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-all ${
-                          isSelected ? 'border-champagne bg-champagne' : 'border-ivory/30 group-hover:border-ivory/50'
-                        }`}>
-                          {isSelected && (
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0B0B0D" strokeWidth="3">
-                              <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                          )}
-                        </div>
+                    {/* Right: Price + Checkbox */}
+                    <div className="flex items-center gap-4 flex-shrink-0">
+                      <p className={`font-sans text-base sm:text-lg font-semibold whitespace-nowrap ${
+                        isSelected ? 'text-champagne' : 'text-ivory/80'
+                      }`}>
+                        {service.price}
+                      </p>
+                      <div className={`custom-checkbox ${isSelected ? 'custom-checkbox-checked' : ''}`}>
+                        {isSelected && (
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C8AD83" strokeWidth="3">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                          </svg>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -481,13 +475,13 @@ const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices }:
 
         {/* Floating Booking Bar */}
         {selectedServices.length > 0 && (
-          <div className="sticky bottom-4 mt-8 bg-charcoal/95 backdrop-blur-xl border border-champagne/20 rounded-2xl p-5 sm:p-6 shadow-2xl shadow-black/50 z-40">
+          <div className="sticky bottom-6 mt-8 booking-modal rounded-2xl p-6 z-40">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <p className="text-ivory text-base font-sans font-medium">{selectedServices.length} service{selectedServices.length > 1 ? 's' : ''} selected</p>
-                <p className="text-champagne text-sm font-sans mt-1">Estimated total: {calculateTotal()} AED</p>
+                <p className="text-ivory text-lg font-sans font-medium">{selectedServices.length} service{selectedServices.length > 1 ? 's' : ''} selected</p>
+                <p className="text-champagne text-base font-sans font-semibold mt-1">Estimated total: {calculateTotal()} AED</p>
               </div>
-              <button onClick={onBookClick} className="btn-luxury btn-luxury-sm">
+              <button onClick={onBookClick} className="btn-luxury">
                 Continue Booking
               </button>
             </div>
@@ -1526,20 +1520,20 @@ Business Bay, Dubai
     <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center" onClick={onClose}>
       <div className="absolute inset-0 bg-obsidian/80 backdrop-blur-sm"></div>
       <div 
-        className="relative w-full sm:max-w-[680px] bg-charcoal border border-champagne/10 rounded-t-3xl sm:rounded-2xl max-h-[95vh] sm:max-h-[88vh] overflow-hidden flex flex-col" 
+        className="booking-modal relative w-full sm:max-w-[760px] rounded-t-3xl sm:rounded-2xl max-h-[95dvh] sm:max-h-[88dvh] overflow-hidden flex flex-col" 
         onClick={(e) => e.stopPropagation()}
         style={{ animation: 'slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards' }}
       >
         {/* Header */}
-        <div className="p-5 sm:p-6 border-b border-champagne/10 flex-shrink-0">
+        <div className="booking-modal-content border-b border-champagne/10 flex-shrink-0 pb-6">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h3 className="font-serif text-xl sm:text-2xl text-ivory">Reserve Your Visit</h3>
-              <p className="text-ivory/40 text-xs font-sans mt-1">Step {booking.step} of 3</p>
+              <h3 className="font-serif text-2xl sm:text-3xl text-ivory">Reserve Your Visit</h3>
+              <p className="text-ivory/50 text-sm font-sans mt-2">Step {booking.step} of 3</p>
             </div>
             <button 
               onClick={onClose} 
-              className="w-11 h-11 flex items-center justify-center rounded-full hover:bg-champagne/10 transition-colors text-ivory/50 hover:text-ivory"
+              className="w-12 h-12 flex items-center justify-center rounded-full hover:bg-champagne/10 transition-colors text-ivory/50 hover:text-ivory"
               aria-label="Close booking modal"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -1550,53 +1544,53 @@ Business Bay, Dubai
           </div>
           <div className="flex gap-2">
             {[1, 2, 3].map(step => (
-              <div key={step} className={`flex-1 h-1 rounded-full transition-all ${step <= booking.step ? 'bg-champagne' : 'bg-champagne/10'}`}></div>
+              <div key={step} className={`flex-1 h-1.5 rounded-full transition-all ${step <= booking.step ? 'bg-champagne' : 'bg-champagne/10'}`}></div>
             ))}
           </div>
         </div>
 
         {/* Content */}
-        <div className="flex-1 overflow-y-auto p-5 sm:p-6">
+        <div className="flex-1 overflow-y-auto booking-modal-content">
           {booking.step === 1 && (
             <div>
-              <p className="text-ivory/60 text-sm font-sans mb-4">Select your treatments:</p>
+              <p className="text-ivory/70 text-base font-sans mb-6">Select your treatments:</p>
               
               {/* Search Field */}
-              <div className="mb-4">
+              <div className="mb-6">
                 <div className="relative">
-                  <i className="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-ivory/30"></i>
+                  <i className="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-ivory/40 text-lg"></i>
                   <input
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search services..."
-                    className="w-full pl-11 pr-4 py-3.5 bg-obsidian border border-champagne/20 rounded-lg text-ivory font-sans text-sm placeholder:text-ivory/30 focus:border-champagne/50 focus:outline-none transition-colors"
+                    className="search-field w-full pl-14 pr-5 rounded-xl text-ivory font-sans placeholder:text-ivory/30 transition-colors"
                   />
                 </div>
               </div>
 
               {/* Category Tabs */}
-              <div className="mb-5 overflow-x-auto scrollbar-hide">
-                <div className="flex gap-2 pb-2">
+              <div className="mb-6 overflow-x-auto scrollbar-hide">
+                <div className="flex gap-3 pb-2">
                   {serviceCategories.map(cat => (
                     <button
                       key={cat.id}
                       onClick={() => setActiveCategory(cat.id)}
-                      className={`flex-shrink-0 px-4 py-2.5 rounded-full text-xs font-sans transition-all whitespace-nowrap ${
+                      className={`category-tab flex-shrink-0 rounded-xl font-sans transition-all whitespace-nowrap ${
                         activeCategory === cat.id
-                          ? 'bg-champagne/15 border border-champagne/30 text-champagne'
-                          : 'bg-obsidian border border-champagne/10 text-ivory/60 hover:border-champagne/20'
+                          ? 'category-tab-active text-champagne font-medium'
+                          : 'text-ivory/70 hover:text-ivory/90'
                       }`}
                     >
-                      <span className="mr-1.5">{cat.icon}</span>
-                      {cat.title}
+                      <span className="mr-2 text-lg">{cat.icon}</span>
+                      <span>{cat.title}</span>
                     </button>
                   ))}
                 </div>
               </div>
 
               {/* Service List */}
-              <div className="space-y-2 max-h-[40vh] overflow-y-auto">
+              <div className="space-y-3 max-h-[50vh] overflow-y-auto pr-2">
                 {serviceCategories
                   .find(cat => cat.id === activeCategory)
                   ?.services.filter(service => 
@@ -1604,47 +1598,53 @@ Business Bay, Dubai
                     service.name.toLowerCase().includes(searchQuery.toLowerCase())
                   )
                   .map(service => (
-                    <label 
+                    <div 
                       key={service.name} 
-                      className={`flex items-center gap-3 p-4 rounded-xl cursor-pointer transition-all ${
+                      className={`service-row rounded-xl cursor-pointer flex items-center gap-4 ${
                         booking.selectedServices.includes(service.name)
-                          ? 'glass-row-selected'
-                          : 'glass-row'
+                          ? 'service-row-selected'
+                          : ''
                       }`}
+                      onClick={() => toggleService(service.name)}
                     >
-                      <input 
-                        type="checkbox" 
-                        checked={booking.selectedServices.includes(service.name)} 
-                        onChange={() => toggleService(service.name)} 
-                        className="w-5 h-5 rounded border-champagne/40 bg-transparent flex-shrink-0 accent-champagne" 
-                      />
                       <div className="flex-1 min-w-0">
-                        <p className="text-ivory/90 text-sm font-sans">{service.name}</p>
-                        <p className="text-ivory/40 text-xs font-sans mt-0.5">{service.duration}</p>
+                        <p className="text-ivory/90 text-base font-sans font-medium leading-snug">{service.name}</p>
+                        <p className="text-ivory/50 text-sm font-sans mt-1">{service.duration}</p>
                       </div>
-                      <p className="text-champagne text-sm font-sans font-medium whitespace-nowrap">{service.price}</p>
-                    </label>
+                      <div className="flex items-center gap-4 flex-shrink-0">
+                        <p className="text-champagne text-base font-sans font-semibold whitespace-nowrap">{service.price}</p>
+                        <div className={`custom-checkbox ${
+                          booking.selectedServices.includes(service.name) ? 'custom-checkbox-checked' : ''
+                        }`}>
+                          {booking.selectedServices.includes(service.name) && (
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C8AD83" strokeWidth="3">
+                              <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                          )}
+                        </div>
+                      </div>
+                    </div>
                   ))}
               </div>
 
               {/* Selected Services Summary */}
               {booking.selectedServices.length > 0 && (
-                <div className="mt-5 p-4 rounded-xl bg-champagne/5 border border-champagne/20">
-                  <div className="flex items-center justify-between mb-2">
-                    <p className="text-champagne text-sm font-sans font-medium">
+                <div className="mt-6 p-5 rounded-xl bg-champagne/5 border border-champagne/20">
+                  <div className="flex items-center justify-between mb-3">
+                    <p className="text-champagne text-base font-sans font-medium">
                       {booking.selectedServices.length} service{booking.selectedServices.length > 1 ? 's' : ''} selected
                     </p>
-                    <p className="text-champagne text-sm font-sans font-semibold">
+                    <p className="text-champagne text-lg font-sans font-bold">
                       {calculateTotalPrice().min} AED{calculateTotalPrice().hasVariable ? '+' : ''}
                     </p>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {booking.selectedServices.map(serviceName => (
-                      <span key={serviceName} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-champagne/10 text-champagne text-xs font-sans">
+                      <span key={serviceName} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-champagne/10 text-champagne text-sm font-sans">
                         {serviceName}
                         <button 
                           onClick={() => toggleService(serviceName)}
-                          className="hover:text-ivory transition-colors"
+                          className="hover:text-ivory transition-colors text-lg leading-none"
                         >
                           ×
                         </button>
@@ -1658,21 +1658,21 @@ Business Bay, Dubai
 
           {booking.step === 2 && (
             <div>
-              <p className="text-ivory/60 text-sm font-sans mb-5">Choose your preferred date & time:</p>
+              <p className="text-ivory/70 text-base font-sans mb-6">Choose your preferred date & time:</p>
               
               {/* Date Selection */}
-              <div className="mb-6">
-                <label className="text-champagne text-xs font-sans tracking-[0.15em] uppercase mb-3 block">Date</label>
+              <div className="mb-8">
+                <label className="text-champagne text-sm font-sans tracking-wide uppercase mb-3 block">Date</label>
                 <button
                   onClick={() => setShowCalendar(!showCalendar)}
-                  className="w-full px-5 py-4 bg-obsidian border border-champagne/20 rounded-lg text-left hover:border-champagne/40 transition-colors flex items-center justify-between min-h-[56px]"
+                  className="search-field w-full rounded-xl text-left flex items-center justify-between"
                 >
                   {booking.selectedDate ? (
-                    <span className="text-ivory text-base font-sans">{formatDate(booking.selectedDate)}</span>
+                    <span className="text-ivory text-base font-sans font-medium">{formatDate(booking.selectedDate)}</span>
                   ) : (
                     <span className="text-ivory/40 text-base font-sans">Select a date</span>
                   )}
-                  <i className="fas fa-calendar text-champagne/60"></i>
+                  <i className="fas fa-calendar text-champagne text-xl"></i>
                 </button>
                 
                 {showCalendar && (
@@ -1692,8 +1692,8 @@ Business Bay, Dubai
               {/* Time Selection */}
               {booking.selectedDate && (
                 <div>
-                  <label className="text-champagne text-xs font-sans tracking-[0.15em] uppercase mb-3 block">Time</label>
-                  <div className="grid grid-cols-3 sm:grid-cols-4 gap-2.5">
+                  <label className="text-champagne text-sm font-sans tracking-wide uppercase mb-4 block">Time</label>
+                  <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
                     {generateTimeSlots().map(time => {
                       const booked = isSlotBooked(booking.selectedDate, time);
                       const displayTime = formatDisplayTime(time);
@@ -1702,12 +1702,12 @@ Business Bay, Dubai
                           key={time}
                           disabled={booked}
                           onClick={() => setBooking(prev => ({ ...prev, selectedTime: time }))}
-                          className={`px-3 py-3.5 rounded-xl text-sm font-sans transition-all min-h-[52px] ${
+                          className={`px-4 py-4 rounded-xl text-base font-sans transition-all min-h-[56px] ${
                             booked
                               ? 'bg-red-500/10 border border-red-500/20 text-red-400/50 cursor-not-allowed line-through'
                               : booking.selectedTime === time
                               ? 'bg-champagne text-obsidian font-semibold shadow-lg shadow-champagne/20'
-                              : 'bg-obsidian border border-champagne/10 text-ivory/70 hover:border-champagne/30 hover:bg-obsidian/80'
+                              : 'bg-obsidian/60 border border-champagne/10 text-ivory/80 hover:border-champagne/30 hover:bg-obsidian/80'
                           }`}
                         >
                           {displayTime}
@@ -1715,7 +1715,7 @@ Business Bay, Dubai
                       );
                     })}
                   </div>
-                  <p className="text-ivory/30 text-xs font-sans mt-4 flex items-center gap-2">
+                  <p className="text-ivory/40 text-sm font-sans mt-5 flex items-center gap-2">
                     <span className="inline-block w-3 h-3 bg-red-500/20 border border-red-500/30 rounded"></span>
                     Unavailable time slots
                   </p>
@@ -1726,67 +1726,67 @@ Business Bay, Dubai
 
           {booking.step === 3 && (
             <div>
-              <p className="text-ivory/60 text-sm font-sans mb-5">Your details:</p>
-              <div className="space-y-5">
+              <p className="text-ivory/70 text-base font-sans mb-6">Your details:</p>
+              <div className="space-y-6">
                 <div>
-                  <label className="text-champagne text-xs font-sans tracking-[0.15em] uppercase mb-3 block">Name</label>
+                  <label className="text-champagne text-sm font-sans tracking-wide uppercase mb-3 block">Name</label>
                   <input
                     type="text"
                     value={booking.customerName}
                     onChange={(e) => setBooking(prev => ({ ...prev, customerName: e.target.value }))}
                     placeholder="Your full name"
-                    className="w-full px-5 py-4 bg-obsidian border border-champagne/20 rounded-lg text-ivory font-sans text-base placeholder:text-ivory/30 focus:border-champagne/50 focus:outline-none transition-colors"
+                    className="search-field w-full rounded-xl text-ivory font-sans placeholder:text-ivory/30"
                   />
                 </div>
                 <div>
-                  <label className="text-champagne text-xs font-sans tracking-[0.15em] uppercase mb-3 block">Phone</label>
+                  <label className="text-champagne text-sm font-sans tracking-wide uppercase mb-3 block">Phone</label>
                   <input
                     type="tel"
                     value={booking.customerPhone}
                     onChange={(e) => setBooking(prev => ({ ...prev, customerPhone: e.target.value }))}
                     placeholder="+971 XX XXX XXXX"
-                    className="w-full px-5 py-4 bg-obsidian border border-champagne/20 rounded-lg text-ivory font-sans text-base placeholder:text-ivory/30 focus:border-champagne/50 focus:outline-none transition-colors"
+                    className="search-field w-full rounded-xl text-ivory font-sans placeholder:text-ivory/30"
                   />
                 </div>
               </div>
 
               {/* Booking Summary */}
-              <div className="mt-6 p-5 rounded-lg bg-obsidian border border-champagne/20">
-                <h4 className="text-champagne text-xs font-sans tracking-[0.15em] uppercase mb-4">Booking Summary</h4>
-                <div className="space-y-3 text-sm font-sans">
+              <div className="mt-8 p-6 rounded-xl service-row-selected">
+                <h4 className="text-champagne text-sm font-sans tracking-wide uppercase mb-5 font-medium">Booking Summary</h4>
+                <div className="space-y-4 text-base font-sans">
                   <div className="flex justify-between">
-                    <span className="text-ivory/50">Services:</span>
-                    <span className="text-ivory/90">{booking.selectedServices.length}</span>
+                    <span className="text-ivory/60">Services:</span>
+                    <span className="text-ivory/90 font-medium">{booking.selectedServices.length}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-ivory/50">Date:</span>
-                    <span className="text-ivory/90">{formatDate(booking.selectedDate)}</span>
+                    <span className="text-ivory/60">Date:</span>
+                    <span className="text-ivory/90 font-medium">{formatDate(booking.selectedDate)}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-ivory/50">Time:</span>
-                    <span className="text-ivory/90">{formatDisplayTime(booking.selectedTime)}</span>
+                    <span className="text-ivory/60">Time:</span>
+                    <span className="text-ivory/90 font-medium">{formatDisplayTime(booking.selectedTime)}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-ivory/50">Duration:</span>
-                    <span className="text-ivory/90">{calculateTotalDuration()}</span>
+                    <span className="text-ivory/60">Duration:</span>
+                    <span className="text-ivory/90 font-medium">{calculateTotalDuration()}</span>
                   </div>
-                  <div className="flex justify-between pt-3 border-t border-champagne/10">
-                    <span className="text-champagne font-medium">Estimated Total:</span>
-                    <span className="text-champagne font-semibold text-base">
+                  <div className="flex justify-between pt-4 border-t border-champagne/20">
+                    <span className="text-champagne font-semibold">Estimated Total:</span>
+                    <span className="text-champagne font-bold text-lg">
                       {calculateTotalPrice().min === calculateTotalPrice().max 
                         ? `${calculateTotalPrice().min} AED`
                         : `${calculateTotalPrice().min}–${calculateTotalPrice().max} AED`}
                     </span>
                   </div>
                   {calculateTotalPrice().hasVariable && (
-                    <p className="text-ivory/40 text-xs font-sans mt-2 italic">
+                    <p className="text-ivory/50 text-sm font-sans mt-3 italic">
                       * Final price subject to salon confirmation
                     </p>
                   )}
                 </div>
               </div>
 
-              <p className="text-ivory/40 text-xs font-sans mt-4 text-center">
+              <p className="text-ivory/50 text-sm font-sans mt-6 text-center">
                 Your booking request will be sent via WhatsApp for confirmation
               </p>
             </div>
@@ -1794,12 +1794,12 @@ Business Bay, Dubai
         </div>
 
         {/* Footer */}
-        <div className="p-5 sm:p-6 border-t border-champagne/10 flex-shrink-0 bg-charcoal">
-          <div className="flex gap-3">
+        <div className="booking-modal-content border-t border-champagne/10 flex-shrink-0 pt-6">
+          <div className="flex gap-4">
             {booking.step > 1 && (
               <button
                 onClick={() => setBooking(prev => ({ ...prev, step: prev.step - 1 }))}
-                className="btn-outline min-w-[110px]"
+                className="btn-outline min-w-[120px]"
               >
                 Back
               </button>

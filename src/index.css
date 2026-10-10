@@ -239,6 +239,8 @@ body {
   margin-right: auto;
   padding-left: 20px;
   padding-right: 20px;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 @media (min-width: 640px) {
@@ -253,6 +255,118 @@ body {
     padding-left: 48px;
     padding-right: 48px;
   }
+}
+
+/* Booking Modal - Liquid Glass */
+.booking-modal {
+  background: rgba(36, 33, 37, 0.85);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(200, 173, 131, 0.2);
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.booking-modal-content {
+  padding: 24px;
+}
+
+@media (min-width: 640px) {
+  .booking-modal-content {
+    padding: 32px;
+  }
+}
+
+/* Service Row - Liquid Glass */
+.service-row {
+  background: rgba(36, 33, 37, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(200, 173, 131, 0.1);
+  min-height: 72px;
+  padding: 16px 20px;
+  transition: all 0.3s ease;
+}
+
+.service-row:hover {
+  background: rgba(36, 33, 37, 0.4);
+  border-color: rgba(200, 173, 131, 0.2);
+}
+
+.service-row-selected {
+  background: rgba(200, 173, 131, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(200, 173, 131, 0.3);
+  box-shadow: 0 4px 12px rgba(200, 173, 131, 0.1);
+}
+
+/* Category Tab - Liquid Glass */
+.category-tab {
+  background: rgba(36, 33, 37, 0.4);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(200, 173, 131, 0.15);
+  min-height: 44px;
+  padding: 0 20px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.category-tab:hover {
+  background: rgba(36, 33, 37, 0.5);
+  border-color: rgba(200, 173, 131, 0.25);
+}
+
+.category-tab-active {
+  background: rgba(200, 173, 131, 0.15);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(200, 173, 131, 0.3);
+  box-shadow: 0 4px 12px rgba(200, 173, 131, 0.15);
+}
+
+/* Search Field - Liquid Glass */
+.search-field {
+  background: rgba(11, 11, 13, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(200, 173, 131, 0.15);
+  min-height: 52px;
+  padding: 0 20px;
+  font-size: 15px;
+}
+
+.search-field:focus {
+  border-color: rgba(200, 173, 131, 0.4);
+  outline: none;
+}
+
+/* Custom Checkbox */
+.custom-checkbox {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  border: 2px solid rgba(200, 173, 131, 0.3);
+  background: rgba(36, 33, 37, 0.5);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.custom-checkbox:hover {
+  border-color: rgba(200, 173, 131, 0.5);
+  background: rgba(36, 33, 37, 0.6);
+}
+
+.custom-checkbox-checked {
+  background: rgba(200, 173, 131, 0.2);
+  border-color: rgba(200, 173, 131, 0.6);
 }
 
 /* Section spacing */
