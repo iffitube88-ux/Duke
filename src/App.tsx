@@ -118,8 +118,8 @@ const HeroSection = ({ onBookClick }: { onBookClick: () => void }) => {
     <section className="relative min-h-[100svh] flex items-end overflow-hidden">
       <div className="absolute inset-0">
         <img
-          src="https://image.qwenlm.ai/generated-images/4680c584-44a7-47eb-a5ae-bde65cb14c85/_result.png"
-          alt="Dukes of Beauty Salon Interior"
+          src="https://lh3.googleusercontent.com/grass-cs/AABkmLepqXC8WfGKqv2OiIwBa47A1_Vutpvq6CpuhI1YmJelex6kFpD-2_BQze6jf_vCNQ37J12SRUBsPKFCSq1zJH49Gbs-NiMLekysbDvj7-jD1yKY2RonGYrB5V60U2YZ5eo10BV7ms9cyX2v=w1920-h1080-k-no"
+          alt="Dukes of Beauty Salon Interior - Business Bay, Dubai"
           className={`absolute inset-0 w-full h-full object-cover ${loaded ? 'animate-ken-burns' : 'opacity-0'}`}
           onError={(e) => { e.currentTarget.style.display = 'none'; }}
         />
@@ -499,142 +499,347 @@ const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices }:
 };
 
 // ==================== INSTAGRAM SECTION ====================
-const InstagramSection = () => (
-  <section id="instagram" className="section-spacing relative">
-    <div className="container-luxury">
-      <Reveal>
-        <div className="text-center">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <span className="w-12 h-px bg-champagne"></span>
-            <span className="text-champagne text-[11px] tracking-[0.3em] uppercase font-sans">Instagram</span>
-            <span className="w-12 h-px bg-champagne"></span>
-          </div>
-          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-light text-ivory leading-tight">
-            Follow Our <span className="italic text-champagne">Beauty Journey</span>
-          </h2>
-          <p className="mt-8 text-ivory/60 text-base sm:text-lg font-sans max-w-2xl mx-auto leading-relaxed">
-            Daily inspiration, transformations, and behind-the-scenes moments from our salon.
-          </p>
-        </div>
-      </Reveal>
+const InstagramSection = () => {
+  const posts = [
+    { id: 'DTuWqL9Cmvt', caption: 'The Aesthetics of Dukes of Beauty' },
+    { id: 'DQ8di2OER4W', caption: 'A new-generation salon in Business Bay' },
+    { id: 'DcLNnpbq-pt', caption: 'A place where you\'ll want to stay a little longer' },
+    { id: 'Db7onQ8qser', caption: 'Beautiful hair & exceptional service' },
+    { id: 'DQhFNROig67', caption: 'Chocolate-tone French manicure' },
+    { id: 'DO5dCuQivVf', caption: 'Treatments are more than results' },
+  ];
 
-      <Reveal delay={200}>
-        <div className="mt-16 text-center">
-          <i className="fab fa-instagram text-champagne text-6xl sm:text-7xl mb-8 block"></i>
-          <h3 className="font-serif text-2xl sm:text-3xl text-ivory mb-6">@dukes_of_beauty.ae</h3>
-          <a
-            href="https://www.instagram.com/dukes_of_beauty.ae/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-luxury inline-flex items-center gap-3 px-10 py-5 rounded-full text-sm"
-          >
-            <i className="fab fa-instagram text-lg"></i>
-            Follow on Instagram
-          </a>
-        </div>
-      </Reveal>
-    </div>
-  </section>
-);
-
-// ==================== GALLERY ====================
-const GallerySection = () => (
-  <section id="gallery" className="section-spacing relative">
-    <div className="container-luxury">
-      <Reveal>
-        <div className="text-center">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <span className="w-12 h-px bg-champagne"></span>
-            <span className="text-champagne text-[11px] tracking-[0.3em] uppercase font-sans">Gallery</span>
-            <span className="w-12 h-px bg-champagne"></span>
-          </div>
-          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-light text-ivory leading-tight">
-            Our <span className="italic text-champagne">Salon</span>
-          </h2>
-        </div>
-      </Reveal>
-
-      <Reveal delay={200}>
-        <div className="mt-16 text-center">
-          <i className="fas fa-camera text-champagne text-6xl sm:text-7xl mb-8 block"></i>
-          <h3 className="font-serif text-2xl sm:text-3xl text-ivory mb-6">Salon Photography</h3>
-          <p className="text-ivory/60 text-base sm:text-lg font-sans leading-relaxed mb-10 max-w-2xl mx-auto">
-            View authentic photographs of our salon interior, treatment rooms, and beauty services.
-          </p>
-          <a
-            href="https://www.google.com/maps/place/?q=place_id:ChIJQw1xKtxpXz4R5ZcIoAWMGdE"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-luxury inline-flex items-center gap-3 px-10 py-5 rounded-full text-sm"
-          >
-            <i className="fas fa-images text-lg"></i>
-            View Gallery on Google Maps
-          </a>
-          <p className="mt-8 text-ivory/40 text-xs font-sans tracking-wide">
-            Interior • Treatments • Beauty Services • Amenities
-          </p>
-        </div>
-      </Reveal>
-    </div>
-  </section>
-);
-
-// ==================== REVIEWS ====================
-const ReviewsSection = () => (
-  <section id="reviews" className="section-spacing relative">
-    <div className="container-luxury">
-      <Reveal>
-        <div className="text-center">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <span className="w-12 h-px bg-champagne"></span>
-            <span className="text-champagne text-[11px] tracking-[0.3em] uppercase font-sans">Testimonials</span>
-            <span className="w-12 h-px bg-champagne"></span>
-          </div>
-          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-light text-ivory leading-tight">
-            Client <span className="italic text-champagne">Reviews</span>
-          </h2>
-          <p className="mt-8 text-ivory/60 text-base sm:text-lg font-sans max-w-2xl mx-auto leading-relaxed">
-            Read authentic reviews from our valued clients on Google.
-          </p>
-        </div>
-      </Reveal>
-
-      <Reveal delay={200}>
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
-          {/* Rating Display */}
-          <div className="text-center md:text-right">
-            <div className="flex justify-center md:justify-end gap-1.5 mb-5">
-              {[...Array(5)].map((_, i) => (
-                <svg key={i} className="w-7 h-7 text-champagne fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
-              ))}
+  return (
+    <section id="instagram" className="section-spacing relative">
+      <div className="container-luxury">
+        <Reveal>
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <span className="w-12 h-px bg-champagne"></span>
+              <span className="text-champagne text-[11px] tracking-[0.3em] uppercase font-sans">Instagram</span>
+              <span className="w-12 h-px bg-champagne"></span>
             </div>
-            <p className="font-serif text-7xl sm:text-8xl text-champagne font-light leading-none">4.9</p>
-            <p className="text-ivory/70 text-base font-sans mt-4 tracking-wide">Google Rating</p>
+            <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-light text-ivory leading-tight">
+              Follow Our <span className="italic text-champagne">Beauty Journey</span>
+            </h2>
           </div>
+        </Reveal>
 
-          {/* CTA */}
-          <div className="text-center md:text-left">
-            <h3 className="font-serif text-3xl sm:text-4xl text-ivory mb-6">
-              What Our Clients Say
-            </h3>
-            <p className="text-ivory/60 text-base sm:text-lg font-sans leading-relaxed mb-10">
-              Discover why our clients trust Dukes of Beauty for their premium beauty needs. Read verified reviews on Google Maps.
-            </p>
+        {/* Instagram Post Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mb-12">
+          {posts.map((post, index) => (
+            <Reveal key={index} delay={index * 80}>
+              <a
+                href={`https://www.instagram.com/p/${post.id}/`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="card-luxury group relative aspect-square rounded-xl overflow-hidden bg-charcoal/30 border border-champagne/10 flex flex-col items-center justify-center p-6 text-center"
+              >
+                <i className="fab fa-instagram text-champagne/40 text-4xl sm:text-5xl mb-4 group-hover:text-champagne/70 transition-colors"></i>
+                <p className="text-ivory/40 text-xs sm:text-sm font-sans leading-relaxed line-clamp-2 group-hover:text-ivory/70 transition-colors">
+                  {post.caption}
+                </p>
+                <div className="mt-4 flex items-center gap-1.5 text-champagne/40 group-hover:text-champagne transition-colors">
+                  <span className="text-[10px] font-sans tracking-wider uppercase">View Post</span>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                </div>
+              </a>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal>
+          <div className="text-center">
             <a
-              href="https://www.google.com/maps/place/?q=place_id:ChIJQw1xKtxpXz4R5ZcIoAWMGdE"
+              href="https://www.instagram.com/dukes_of_beauty.ae/"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-luxury inline-flex items-center gap-3 px-10 py-5 rounded-full text-sm"
             >
-              <i className="fab fa-google text-lg"></i>
-              Read Reviews on Google
+              <i className="fab fa-instagram text-lg"></i>
+              Follow @dukes_of_beauty.ae
             </a>
           </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+};
+
+// ==================== GALLERY ====================
+const GallerySection = () => {
+  // Real photos from Google Maps / Customer reviews
+  const galleryPhotos = [
+    {
+      url: 'https://lh3.googleusercontent.com/grass-cs/AABkmLepqXC8WfGKqv2OiIwBa47A1_Vutpvq6CpuhI1YmJelex6kFpD-2_BQze6jf_vCNQ37J12SRUBsPKFCSq1zJH49Gbs-NiMLekysbDvj7-jD1yKY2RonGYrB5V60U2YZ5eo10BV7ms9cyX2v=w408-h272-k-no',
+      alt: 'Dukes of Beauty Salon Interior',
+      tall: true,
+    },
+    {
+      url: 'https://lh3.googleusercontent.com/grass-cs/AABkmLe1lghQhDEox6l1AiBB6bQCE5edZLx74Y-uYMjvRLdQlXLZDy78GAjENWWNGjHXomqRFacbee8Gq7SfIi6FceJuEG0ka417s3QawyhHy5EqVknbU8qqjgVzyT_FlrB6fdXc-ZZibMkgvA4=w300-h225-p-k-no',
+      alt: 'Classic nude gel manicure',
+      tall: false,
+    },
+    {
+      url: 'https://lh3.googleusercontent.com/grass-cs/AABkmLdxn7fDMixNP4QwrmWHMxY7pucYYxcNwpN1fWUD5GCLpdGtDNS1FoDt1-AdGCBYzqVPd1vWLXcU_NR8_Rw2cg02384HU2az_qcqhP7yUWuZiILVgebdqykC3BxfXPKKJvEbOY9dEc9Pkjp0=w300-h225-p-k-no',
+      alt: 'Dark polish pedicure',
+      tall: true,
+    },
+    {
+      url: 'https://lh3.googleusercontent.com/grass-cs/AABkmLdbamwjCV8eFXHQUaF3JZ9LqRjniGMocwNkgkJjJ8ZLWmoKn0Z-aDyHmXBZ9mWPfDp_SXODTdzm4SWOCGbhDBikXnoZw-huMXwjJO9SE9qevoU8yJiQiWbEa15JLTyAWh4QmvBLAESPzogV=w300-h225-p-k-no',
+      alt: 'Pedicure polish palette',
+      tall: false,
+    },
+    {
+      url: 'https://lh3.googleusercontent.com/grass-cs/AABkmLdUHFf6d-RfR9HUylEsHuad15y4HImeHgRiheo5YJsnwXWdl5FQ3eeBuj-a9u6OyGS-_Z9xK-t4OTYswDwYRDB7VdC7Y48ClKnfqWGqbaIUQNquBLLWEwNskAMZHWXgLFsRB_y-9IYfa68=w300-h225-p-k-no',
+      alt: 'Salon treatment area',
+      tall: true,
+    },
+    {
+      url: 'https://lh3.googleusercontent.com/grass-cs/AABkmLd0HqNDBhLoZ2BuWfMIuLeWhL-0c7rAwjioX3aT6uoaY9Fy63IVhWvsEL63PVnfK5jTWh3f1bFBeFXQsahPcH5XIuc-dWFYJu4pwx-huHr-e2UwhjCDosS_wMmbK1MISrgaJ8u35NyK6k81=w300-h450-p-k-no',
+      alt: 'Customer treatment result',
+      tall: false,
+    },
+    {
+      url: 'https://lh3.googleusercontent.com/grass-cs/AABkmLeu9Q5yXY6W7k5P3Eqff3oin_YEfMAKnVHvDYyTRb_112WIUHTDPKUrR59Zzx1rEVaUjsmZNwnBPzb1GBRkUlJEDLcBz6UbZ8KTA2IghxBPy0Nz35NiarqcAK_Au8I1HOt2cvYxWWOu7dc=w300-h225-p-k-no',
+      alt: 'Salon service',
+      tall: true,
+    },
+    {
+      url: 'https://lh3.googleusercontent.com/grass-cs/AABkmLdZsjCK9S94u33uIbgN_6WOjIurnAiuVtKQEMKtUSBHttOGaXTTdGtGSO2M-eJRLYDZH1PFbwKjncF4LAiyY3vIJGNO5l-feWUyN6I8pb7tNVl2-ogmxM8kTuuSBFKW0YFz5WB5TmTkglvO=w300-h225-p-k-no',
+      alt: 'Beauty treatment',
+      tall: false,
+    },
+  ];
+
+  const [lightboxImage, setLightboxImage] = useState<string | null>(null);
+
+  return (
+    <section id="gallery" className="section-spacing relative">
+      <div className="container-luxury">
+        <Reveal>
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <span className="w-12 h-px bg-champagne"></span>
+              <span className="text-champagne text-[11px] tracking-[0.3em] uppercase font-sans">Gallery</span>
+              <span className="w-12 h-px bg-champagne"></span>
+            </div>
+            <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-light text-ivory leading-tight">
+              Our <span className="italic text-champagne">Salon</span>
+            </h2>
+            <p className="mt-6 text-ivory/60 text-base sm:text-lg font-sans max-w-2xl mx-auto">
+              Real photographs from our salon and client experiences.
+            </p>
+          </div>
+        </Reveal>
+
+        {/* Photo Grid */}
+        <div className="columns-2 md:columns-3 lg:columns-4 gap-3 sm:gap-4 space-y-3 sm:space-y-4">
+          {galleryPhotos.map((photo, index) => (
+            <Reveal key={index} delay={index * 60}>
+              <button
+                onClick={() => setLightboxImage(photo.url)}
+                className="break-inside-avoid rounded-xl overflow-hidden relative group cursor-pointer block w-full"
+              >
+                <img
+                  src={photo.url}
+                  alt={photo.alt}
+                  className={`w-full object-cover img-luxury ${photo.tall ? 'h-64 sm:h-80 md:h-96' : 'h-48 sm:h-56 md:h-64'}`}
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
+                  <i className="fas fa-expand text-white text-xl opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                </div>
+              </button>
+            </Reveal>
+          ))}
         </div>
-      </Reveal>
-    </div>
-  </section>
-);
+
+        {/* View More on Google Maps */}
+        <Reveal>
+          <div className="text-center mt-12">
+            <a
+              href="https://www.google.com/maps/place/?q=place_id:ChIJQw1xKtxpXz4R5ZcIoAWMGdE"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-outline inline-flex items-center gap-3 px-8 py-4 rounded-full text-sm"
+            >
+              <i className="fab fa-google"></i>
+              View All 244 Photos on Google Maps
+            </a>
+          </div>
+        </Reveal>
+      </div>
+
+      {/* Lightbox */}
+      {lightboxImage && (
+        <div
+          className="fixed inset-0 z-[200] bg-black/95 flex items-center justify-center p-4 animate-fade-in"
+          onClick={() => setLightboxImage(null)}
+        >
+          <button
+            className="absolute top-4 right-4 text-white/60 hover:text-white p-2"
+            onClick={() => setLightboxImage(null)}
+          >
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <line x1="6" y1="6" x2="18" y2="18" /><line x1="18" y1="6" x2="6" y2="18" />
+            </svg>
+          </button>
+          <img
+            src={lightboxImage.replace(/=w\d+-h\d+/, '=w1200-h900')}
+            alt="Salon photo"
+            className="max-w-full max-h-[90vh] object-contain rounded-lg"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
+    </section>
+  );
+};
+
+// ==================== REVIEWS ====================
+// ==================== REVIEWS ====================
+const ReviewsSection = () => {
+  // Real reviews from Google Maps
+  const reviews = [
+    {
+      name: 'Анастасия Ушакова',
+      avatar: 'https://lh3.googleusercontent.com/a-/ALV-UjXF4DKa4LbbSBvYAX9GWxmopsXfRRQpiShVJ5AkjMRXClcwix0=w36-h36-p-rp-mo-br100',
+      rating: 5,
+      time: '3 months ago',
+      text: 'I visited Dukes of Beauty and everything was absolutely amazing. The staff, service, and overall experience were beyond excellent.',
+      reviewCount: '7 reviews · 7 photos',
+    },
+    {
+      name: 'Milena Klykova',
+      avatar: 'https://lh3.googleusercontent.com/a-/ALV-UjXO0UYtLoE7KW7rUXbASf8-WFNVoePBeTbk4inw21f3vyDiRP0I=w36-h36-p-rp-mo-ba12-br100',
+      rating: 5,
+      time: '4 months ago',
+      text: 'Absolutely loved my experience at Dukes of Beauty 🤍 I came for a manicure and RSL massage, and everything was amazing from the start.',
+      reviewCount: 'Local Guide · 23 reviews · 26 photos',
+      ownerResponse: 'Thank you so much for your kind review 🤍✨ We\'re really happy you enjoyed your manicure and RSL massage!',
+    },
+    {
+      name: 'Maria Egorova',
+      avatar: 'https://lh3.googleusercontent.com/a-/ALV-UjUukgdgeJselqljRC4uRfUo-80J1rd209YC7Mcbah-W7rT2OFqj=w36-h36-p-rp-mo-ba12-br100',
+      rating: 3,
+      time: '2 months ago',
+      text: 'The staff is friendly and polite, the general level is good, comfortable chairs. Pedicure was fine and free neck massage was lovely.',
+      reviewCount: 'Local Guide · 15 reviews · 3 photos',
+    },
+  ];
+
+  const [activeReview, setActiveReview] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveReview((prev) => (prev + 1) % reviews.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <section id="reviews" className="section-spacing relative">
+      <div className="container-luxury">
+        <Reveal>
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <span className="w-12 h-px bg-champagne"></span>
+              <span className="text-champagne text-[11px] tracking-[0.3em] uppercase font-sans">Testimonials</span>
+              <span className="w-12 h-px bg-champagne"></span>
+            </div>
+            <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-light text-ivory leading-tight">
+              Client <span className="italic text-champagne">Reviews</span>
+            </h2>
+          </div>
+        </Reveal>
+
+        <Reveal delay={200}>
+          <div className="mt-12 max-w-4xl mx-auto">
+            {/* Rating Summary */}
+            <div className="text-center mb-12">
+              <div className="flex justify-center gap-1.5 mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} className="w-6 h-6 text-champagne fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                ))}
+              </div>
+              <p className="font-serif text-6xl sm:text-7xl text-champagne font-light leading-none">4.6</p>
+              <p className="text-ivory/60 text-sm font-sans mt-3">Based on 107 Google Reviews</p>
+            </div>
+
+            {/* Review Carousel */}
+            <div className="bg-charcoal/30 border border-champagne/10 rounded-2xl p-8 sm:p-12 min-h-[300px]">
+              <div className="relative">
+                {/* Review Card */}
+                <div className="transition-all duration-500">
+                  <div className="flex items-start gap-4 mb-6">
+                    <img
+                      src={reviews[activeReview].avatar}
+                      alt={reviews[activeReview].name}
+                      className="w-12 h-12 rounded-full object-cover"
+                    />
+                    <div className="flex-1">
+                      <h4 className="text-ivory text-base font-sans font-medium">{reviews[activeReview].name}</h4>
+                      <p className="text-ivory/40 text-xs font-sans mt-0.5">{reviews[activeReview].reviewCount}</p>
+                    </div>
+                    <div className="flex gap-0.5">
+                      {[...Array(reviews[activeReview].rating)].map((_, i) => (
+                        <svg key={i} className="w-4 h-4 text-champagne fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                      ))}
+                    </div>
+                  </div>
+
+                  <p className="text-ivory/80 text-base sm:text-lg font-sans leading-relaxed mb-4">
+                    "{reviews[activeReview].text}"
+                  </p>
+
+                  <p className="text-ivory/40 text-xs font-sans">{reviews[activeReview].time}</p>
+
+                  {/* Owner Response */}
+                  {reviews[activeReview].ownerResponse && (
+                    <div className="mt-6 pt-6 border-t border-champagne/10">
+                      <p className="text-champagne text-xs font-sans font-medium mb-2">Response from the owner</p>
+                      <p className="text-ivory/60 text-sm font-sans leading-relaxed">
+                        {reviews[activeReview].ownerResponse}
+                      </p>
+                    </div>
+                  )}
+                </div>
+
+                {/* Carousel Dots */}
+                <div className="flex justify-center gap-2 mt-8">
+                  {reviews.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setActiveReview(i)}
+                      className={`w-2 h-2 rounded-full transition-all ${
+                        i === activeReview ? 'bg-champagne w-8' : 'bg-ivory/20 hover:bg-ivory/40'
+                      }`}
+                      aria-label={`View review ${i + 1}`}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* View All Reviews */}
+            <div className="text-center mt-10">
+              <a
+                href="https://www.google.com/maps/place/?q=place_id:ChIJQw1xKtxpXz4R5ZcIoAWMGdE"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-outline inline-flex items-center gap-3 px-8 py-4 rounded-full text-sm"
+              >
+                <i className="fab fa-google"></i>
+                Read All 107 Reviews on Google
+              </a>
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+};
 
 // ==================== CONTACT ====================
 const ContactSection = () => (
