@@ -107,7 +107,7 @@ const Navigation = ({ onBookClick }: { onBookClick: () => void }) => {
               <button onClick={() => { setMobileOpen(false); onBookClick(); }} className="btn-primary w-full py-4 text-warm-dark font-bold text-sm rounded-full tracking-wider uppercase mt-4">Reserve Appointment</button>
               <div className="flex gap-6 mt-4">
                 <a href="https://www.instagram.com/dukes_of_beauty.ae/" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-gold transition-colors"><i className="fab fa-instagram text-xl"></i></a>
-                <a href="https://wa.me/971000000000" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-green-400 transition-colors"><i className="fab fa-whatsapp text-xl"></i></a>
+                <a href="https://wa.me/971528167306" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-green-400 transition-colors"><i className="fab fa-whatsapp text-xl"></i></a>
               </div>
             </div>
           </div>
@@ -657,7 +657,7 @@ const FinalCta = ({ onBookClick }: { onBookClick: () => void }) => (
         <p className="mt-5 text-white/40 text-sm sm:text-base font-inter max-w-md mx-auto">Join our community of clients who refuse to settle for anything less than exceptional.</p>
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
           <button onClick={onBookClick} className="btn-primary animate-pulse-glow w-full sm:w-auto px-8 py-4 text-warm-dark font-bold text-sm rounded-full tracking-wider uppercase">Book Your Appointment</button>
-          <a href="https://wa.me/971000000000" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto px-8 py-4 border border-green-500/20 text-green-400/80 font-medium text-sm rounded-full hover:bg-green-500/5 transition-all flex items-center justify-center gap-2">
+          <a href="https://wa.me/971528167306" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto px-8 py-4 border border-green-500/20 text-green-400/80 font-medium text-sm rounded-full hover:bg-green-500/5 transition-all flex items-center justify-center gap-2">
             <i className="fab fa-whatsapp"></i>WhatsApp Us
           </a>
         </div>
@@ -692,7 +692,7 @@ const Footer = () => (
           <h4 className="text-white/60 text-[11px] font-inter tracking-[0.15em] uppercase mb-4">Connect</h4>
           <div className="flex gap-3 mt-2">
             <a href="https://www.instagram.com/dukes_of_beauty.ae/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-gold/10 hover:text-gold transition-all text-white/30"><i className="fab fa-instagram"></i></a>
-            <a href="https://wa.me/971000000000" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-green-500/10 hover:text-green-400 transition-all text-white/30"><i className="fab fa-whatsapp"></i></a>
+            <a href="https://wa.me/971528167306" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-green-500/10 hover:text-green-400 transition-all text-white/30"><i className="fab fa-whatsapp"></i></a>
             <a href="https://n1359631.alteg.io/company/1297862/about" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-gold/10 hover:text-gold transition-all text-white/30"><i className="fas fa-calendar"></i></a>
           </div>
         </div>
@@ -711,7 +711,7 @@ const WhatsAppBadge = () => {
   useEffect(() => { const t = setTimeout(() => setVisible(true), 3000); return () => clearTimeout(t); }, []);
   if (!visible) return null;
   return (
-    <a href="https://wa.me/971000000000" target="_blank" rel="noopener noreferrer" className="fixed bottom-5 right-5 z-50 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-green-500 flex items-center justify-center shadow-lg shadow-green-500/20 hover:bg-green-600 hover:scale-110 transition-all animate-scale-in" title="Chat with us">
+    <a href="https://wa.me/971528167306" target="_blank" rel="noopener noreferrer" className="fixed bottom-5 right-5 z-50 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-green-500 flex items-center justify-center shadow-lg shadow-green-500/20 hover:bg-green-600 hover:scale-110 transition-all animate-scale-in" title="Chat with us">
       <i className="fab fa-whatsapp text-white text-xl sm:text-2xl"></i>
     </a>
   );
@@ -871,7 +871,7 @@ ${services}
 Please confirm my booking. Thank you! ✨`;
 
     const encodedMessage = encodeURIComponent(message);
-    const whatsappURL = `https://wa.me/971000000000?text=${encodedMessage}`;
+    const whatsappURL = `https://wa.me/971528167306?text=${encodedMessage}`;
 
     saveBookedSlot({
       date: booking.selectedDate,
