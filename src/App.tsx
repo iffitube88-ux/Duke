@@ -170,50 +170,27 @@ const HeroSection = ({ onBookClick }: { onBookClick: () => void }) => {
 // ==================== ABOUT SECTION ====================
 const AboutSection = () => (
   <section className="py-20 sm:py-32 relative">
-    <div className="max-w-7xl mx-auto px-5 sm:px-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
-        <Reveal>
-          <div>
-            <div className="flex items-center gap-3 mb-6">
-              <span className="w-8 h-px bg-champagne"></span>
-              <span className="text-champagne text-[10px] tracking-[0.3em] uppercase font-sans">About</span>
-            </div>
-            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light text-ivory leading-tight">
-              Where Luxury<br />Meets <span className="italic text-champagne">Expertise</span>
-            </h2>
-            <p className="mt-6 text-ivory/50 text-sm sm:text-base font-sans leading-relaxed">
+    <div className="max-w-5xl mx-auto px-5 sm:px-8">
+      <Reveal>
+        <div className="text-center">
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <span className="w-12 h-px bg-champagne"></span>
+            <span className="text-champagne text-[11px] tracking-[0.3em] uppercase font-sans">About</span>
+            <span className="w-12 h-px bg-champagne"></span>
+          </div>
+          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-light text-ivory leading-tight">
+            Where Luxury<br />Meets <span className="italic text-champagne">Expertise</span>
+          </h2>
+          <div className="mt-8 max-w-3xl mx-auto">
+            <p className="text-ivory/70 text-base sm:text-lg font-sans leading-relaxed mb-6">
               Dukes of Beauty is more than a salon — it is a destination for those who appreciate the finest things. Located in the prestigious Business Bay, our atelier combines world-class techniques with premium products from K18, Tokio Inkarami, Nashi, and Kevin Murphy.
             </p>
-            <p className="mt-4 text-ivory/50 text-sm sm:text-base font-sans leading-relaxed">
+            <p className="text-ivory/70 text-base sm:text-lg font-sans leading-relaxed">
               From synchronized 4-hand and 6-hand treatments to advanced HydraFacial Syndeo protocols, every service is designed to deliver an unparalleled experience.
             </p>
           </div>
-        </Reveal>
-        <Reveal delay={200}>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-4">
-              <div className="bg-charcoal/50 border border-champagne/10 rounded-2xl p-6 text-center">
-                <p className="font-serif text-3xl sm:text-4xl text-champagne">4.9</p>
-                <p className="text-ivory/40 text-xs font-sans mt-1 tracking-wide uppercase">Google Rating</p>
-              </div>
-              <div className="bg-charcoal/50 border border-champagne/10 rounded-2xl p-6 text-center">
-                <p className="font-serif text-3xl sm:text-4xl text-champagne">111+</p>
-                <p className="text-ivory/40 text-xs font-sans mt-1 tracking-wide uppercase">Services</p>
-              </div>
-            </div>
-            <div className="space-y-4 mt-8">
-              <div className="bg-charcoal/50 border border-champagne/10 rounded-2xl p-6 text-center">
-                <p className="font-serif text-3xl sm:text-4xl text-champagne">7</p>
-                <p className="text-ivory/40 text-xs font-sans mt-1 tracking-wide uppercase">Categories</p>
-              </div>
-              <div className="bg-charcoal/50 border border-champagne/10 rounded-2xl p-6 text-center">
-                <p className="font-serif text-3xl sm:text-4xl text-champagne">5★</p>
-                <p className="text-ivory/40 text-xs font-sans mt-1 tracking-wide uppercase">Premium</p>
-              </div>
-            </div>
-          </div>
-        </Reveal>
-      </div>
+        </div>
+      </Reveal>
     </div>
   </section>
 );
@@ -395,89 +372,123 @@ const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices }:
     <section id="services" className="py-20 sm:py-32 relative">
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
         <Reveal>
-          <div className="text-center mb-12 sm:mb-16">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <span className="w-8 h-px bg-champagne"></span>
-              <span className="text-champagne text-[10px] tracking-[0.3em] uppercase font-sans">Treatment Menu</span>
-              <span className="w-8 h-px bg-champagne"></span>
+          <div className="text-center mb-16 sm:mb-20">
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <span className="w-12 h-px bg-champagne"></span>
+              <span className="text-champagne text-[11px] tracking-[0.3em] uppercase font-sans">Treatment Menu</span>
+              <span className="w-12 h-px bg-champagne"></span>
             </div>
-            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light text-ivory">
+            <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-light text-ivory leading-tight">
               Our <span className="italic text-champagne">Services</span>
             </h2>
-            <p className="mt-4 text-ivory/40 text-sm sm:text-base font-sans max-w-lg mx-auto">
-              Select your treatments below. All prices in AED.
+            <p className="mt-6 text-ivory/60 text-base sm:text-lg font-sans max-w-2xl mx-auto leading-relaxed">
+              Discover our comprehensive range of premium beauty treatments. All prices in AED.
             </p>
           </div>
         </Reveal>
 
         <Reveal>
-          {/* Category Tabs */}
-          <div className="flex overflow-x-auto gap-1 sm:gap-2 mb-8 sm:mb-12 pb-2 scrollbar-hide">
-            {serviceCategories.map(cat => (
-              <button
-                key={cat.id}
-                onClick={() => setActiveTab(cat.id)}
-                className={`flex-shrink-0 px-4 sm:px-6 py-2.5 rounded-full text-[11px] sm:text-xs font-sans tracking-wider uppercase transition-all whitespace-nowrap ${
-                  activeTab === cat.id
-                    ? 'bg-champagne text-obsidian'
-                    : 'bg-charcoal/50 text-ivory/50 border border-champagne/10 hover:border-champagne/30 hover:text-ivory/80'
-                }`}
-              >
-                <span className="mr-1.5">{cat.icon}</span>
-                {cat.title}
-              </button>
-            ))}
+          {/* Category Navigation */}
+          <div className="mb-12 sm:mb-16">
+            <div className="flex overflow-x-auto gap-2 sm:gap-3 pb-4 scrollbar-hide">
+              {serviceCategories.map(cat => (
+                <button
+                  key={cat.id}
+                  onClick={() => setActiveTab(cat.id)}
+                  className={`flex-shrink-0 px-6 sm:px-8 py-3 sm:py-4 rounded-full text-xs sm:text-sm font-sans tracking-wider uppercase transition-all whitespace-nowrap ${
+                    activeTab === cat.id
+                      ? 'bg-champagne text-obsidian font-medium'
+                      : 'bg-charcoal/50 text-ivory/60 border border-champagne/20 hover:border-champagne/40 hover:text-ivory/80'
+                  }`}
+                >
+                  <span className="mr-2">{cat.icon}</span>
+                  {cat.title}
+                </button>
+              ))}
+            </div>
           </div>
         </Reveal>
 
-        {/* Services List */}
+        {/* Services Catalog */}
         <Reveal>
-          <div className="bg-charcoal/30 border border-champagne/10 rounded-2xl overflow-hidden">
-            <div className="p-5 sm:p-8 border-b border-champagne/10 flex items-center justify-between">
+          <div className="mb-8">
+            <div className="flex items-center justify-between mb-8 pb-6 border-b border-champagne/10">
               <div>
-                <h3 className="font-serif text-xl sm:text-2xl text-ivory flex items-center gap-2">
-                  <span>{activeCategory.icon}</span>
+                <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl text-ivory flex items-center gap-3">
+                  <span className="text-3xl sm:text-4xl">{activeCategory.icon}</span>
                   {activeCategory.title}
                 </h3>
-                <p className="text-ivory/40 text-xs font-sans mt-1">{activeCategory.services.length} treatments available</p>
+                <p className="text-ivory/50 text-sm font-sans mt-2">{activeCategory.services.length} treatments available</p>
               </div>
-              <button
-                onClick={onBookClick}
-                className="btn-luxury px-5 py-2.5 rounded-full text-[10px]"
-              >
-                Book Selected
-              </button>
+              {selectedServices.length > 0 && (
+                <button
+                  onClick={onBookClick}
+                  className="btn-luxury px-6 py-3 rounded-full text-xs hidden sm:block"
+                >
+                  Book Selected
+                </button>
+              )}
             </div>
 
-            <div className="divide-y divide-champagne/5">
-              {activeCategory.services.map((service, i) => (
-                <label key={i} className="flex items-center gap-4 px-5 sm:px-8 py-4 hover:bg-champagne/[0.02] cursor-pointer transition-colors group">
-                  <input
-                    type="checkbox"
-                    checked={selectedServices.includes(service.name)}
-                    onChange={() => toggleService(service.name)}
-                    className="w-4 h-4 rounded border-champagne/30 bg-transparent flex-shrink-0"
-                  />
-                  <div className="flex-1 min-w-0">
-                    <p className="text-ivory/80 text-sm font-sans group-hover:text-champagne transition-colors truncate">{service.name}</p>
-                    <p className="text-ivory/30 text-xs font-sans mt-0.5">{service.duration}</p>
+            <div className="space-y-2">
+              {activeCategory.services.map((service, i) => {
+                const isSelected = selectedServices.includes(service.name);
+                return (
+                  <div
+                    key={i}
+                    onClick={() => toggleService(service.name)}
+                    className={`group cursor-pointer p-5 sm:p-6 rounded-xl border transition-all ${
+                      isSelected
+                        ? 'bg-champagne/5 border-champagne/30'
+                        : 'bg-charcoal/20 border-champagne/5 hover:border-champagne/20 hover:bg-charcoal/30'
+                    }`}
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-3 mb-2">
+                          <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-all ${
+                            isSelected ? 'border-champagne bg-champagne' : 'border-ivory/30'
+                          }`}>
+                            {isSelected && (
+                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0B0B0D" strokeWidth="3">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                              </svg>
+                            )}
+                          </div>
+                          <h4 className={`font-serif text-lg sm:text-xl transition-colors ${
+                            isSelected ? 'text-champagne' : 'text-ivory/90 group-hover:text-ivory'
+                          }`}>
+                            {service.name}
+                          </h4>
+                        </div>
+                        <p className="text-ivory/50 text-sm font-sans ml-8">
+                          Duration: {service.duration}
+                        </p>
+                      </div>
+                      <div className="text-right flex-shrink-0">
+                        <p className={`font-sans text-base sm:text-lg font-medium ${
+                          isSelected ? 'text-champagne' : 'text-ivory/80'
+                        }`}>
+                          {service.price}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-champagne text-sm font-sans font-medium whitespace-nowrap">{service.price}</p>
-                </label>
-              ))}
+                );
+              })}
             </div>
           </div>
         </Reveal>
 
         {/* Floating Booking Bar */}
         {selectedServices.length > 0 && (
-          <div className="sticky bottom-4 mt-6 bg-charcoal border border-champagne/20 rounded-2xl p-4 sm:p-5 shadow-2xl shadow-black/50 backdrop-blur-xl z-40">
+          <div className="sticky bottom-4 mt-8 bg-charcoal/95 backdrop-blur-xl border border-champagne/20 rounded-2xl p-5 sm:p-6 shadow-2xl shadow-black/50 z-40">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <p className="text-ivory text-sm font-sans font-medium">{selectedServices.length} service{selectedServices.length > 1 ? 's' : ''} selected</p>
-                <p className="text-champagne text-xs font-sans mt-0.5">Estimated: {calculateTotal()} AED</p>
+                <p className="text-ivory text-base font-sans font-medium">{selectedServices.length} service{selectedServices.length > 1 ? 's' : ''} selected</p>
+                <p className="text-champagne text-sm font-sans mt-1">Estimated total: {calculateTotal()} AED</p>
               </div>
-              <button onClick={onBookClick} className="btn-luxury px-6 py-3 rounded-full text-[10px]">
+              <button onClick={onBookClick} className="btn-luxury px-8 py-3 rounded-full text-xs">
                 Continue Booking
               </button>
             </div>
@@ -489,76 +500,48 @@ const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices }:
 };
 
 // ==================== INSTAGRAM SECTION ====================
-const InstagramSection = () => {
-  const posts = [
-    { id: 'DTuWqL9Cmvt', caption: 'The Aesthetics of Dukes of Beauty' },
-    { id: 'DQ8di2OER4W', caption: 'A new-generation salon in Business Bay' },
-    { id: 'DcLNnpbq-pt', caption: 'A place where you\'ll want to stay a little longer' },
-    { id: 'Db7onQ8qser', caption: 'Beautiful hair & exceptional service' },
-    { id: 'DQhFNROig67', caption: 'Chocolate-tone French manicure' },
-    { id: 'DO5dCuQivVf', caption: 'Treatments are more than results' },
-  ];
-
-  return (
-    <section id="instagram" className="py-20 sm:py-32 relative">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8">
-        <Reveal>
-          <div className="text-center mb-12">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <span className="w-8 h-px bg-champagne"></span>
-              <span className="text-champagne text-[10px] tracking-[0.3em] uppercase font-sans">Instagram</span>
-              <span className="w-8 h-px bg-champagne"></span>
-            </div>
-            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light text-ivory">
-              Follow Our <span className="italic text-champagne">Beauty Journey</span>
-            </h2>
-            <p className="mt-4 text-ivory/40 text-sm sm:text-base font-sans max-w-lg mx-auto">
-              Daily inspiration, transformations, and behind-the-scenes moments.
-            </p>
+const InstagramSection = () => (
+  <section id="instagram" className="py-20 sm:py-32 relative">
+    <div className="max-w-7xl mx-auto px-5 sm:px-8">
+      <Reveal>
+        <div className="text-center mb-12">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <span className="w-8 h-px bg-champagne"></span>
+            <span className="text-champagne text-[10px] tracking-[0.3em] uppercase font-sans">Instagram</span>
+            <span className="w-8 h-px bg-champagne"></span>
           </div>
-        </Reveal>
-
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
-          {posts.map((post, index) => (
-            <Reveal key={index} delay={index * 80}>
-              <a
-                href={`https://www.instagram.com/p/${post.id}/`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="card-luxury group relative aspect-square rounded-xl overflow-hidden bg-charcoal/50 border border-champagne/10"
-              >
-                <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
-                  <i className="fab fa-instagram text-champagne/30 text-3xl sm:text-4xl mb-3 group-hover:text-champagne/60 transition-colors"></i>
-                  <p className="text-ivory/30 text-[10px] sm:text-xs font-sans leading-relaxed line-clamp-2 group-hover:text-ivory/60 transition-colors">
-                    {post.caption}
-                  </p>
-                  <div className="mt-3 flex items-center gap-1.5 text-champagne/40 group-hover:text-champagne transition-colors">
-                    <span className="text-[9px] font-sans tracking-wider uppercase">View Post</span>
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-                  </div>
-                </div>
-              </a>
-            </Reveal>
-          ))}
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light text-ivory">
+            Follow Our <span className="italic text-champagne">Beauty Journey</span>
+          </h2>
+          <p className="mt-4 text-ivory/60 text-sm sm:text-base font-sans max-w-lg mx-auto">
+            Daily inspiration, transformations, and behind-the-scenes moments from our salon.
+          </p>
         </div>
+      </Reveal>
 
-        <Reveal>
-          <div className="text-center mt-10">
+      <Reveal>
+        <div className="max-w-2xl mx-auto text-center">
+          <div className="bg-charcoal/30 border border-champagne/10 rounded-3xl p-8 sm:p-12">
+            <i className="fab fa-instagram text-champagne text-5xl sm:text-6xl mb-6"></i>
+            <h3 className="font-serif text-2xl sm:text-3xl text-ivory mb-4">@dukes_of_beauty.ae</h3>
+            <p className="text-ivory/60 text-sm sm:text-base font-sans leading-relaxed mb-8">
+              View our latest transformations, salon moments, and beauty inspiration on Instagram.
+            </p>
             <a
               href="https://www.instagram.com/dukes_of_beauty.ae/"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-outline inline-flex items-center gap-2 px-6 py-3 rounded-full"
+              className="btn-luxury inline-flex items-center gap-2 px-8 py-4 rounded-full"
             >
               <i className="fab fa-instagram"></i>
-              Follow @dukes_of_beauty.ae
+              Follow on Instagram
             </a>
           </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-};
+        </div>
+      </Reveal>
+    </div>
+  </section>
+);
 
 // ==================== GALLERY ====================
 const GallerySection = () => (
@@ -574,26 +557,30 @@ const GallerySection = () => (
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light text-ivory">
             Our <span className="italic text-champagne">Salon</span>
           </h2>
-          <p className="mt-4 text-ivory/40 text-sm sm:text-base font-sans max-w-lg mx-auto">
-            View authentic photos of our salon on Google Maps.
-          </p>
         </div>
       </Reveal>
 
       <Reveal>
-        <div className="text-center">
-          <a
-            href="https://www.google.com/maps/place/?q=place_id:ChIJQw1xKtxpXz4R5ZcIoAWMGdE"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-outline inline-flex items-center gap-2 px-6 py-3 rounded-full"
-          >
-            <i className="fas fa-images"></i>
-            View Photos on Google Maps
-          </a>
-          <p className="mt-4 text-ivory/30 text-xs font-sans">
-            Interior, treatments, beauty services & more
-          </p>
+        <div className="max-w-3xl mx-auto">
+          <div className="bg-charcoal/30 border border-champagne/10 rounded-3xl p-8 sm:p-12 text-center">
+            <i className="fas fa-camera text-champagne text-4xl sm:text-5xl mb-6"></i>
+            <h3 className="font-serif text-2xl sm:text-3xl text-ivory mb-4">Salon Photography</h3>
+            <p className="text-ivory/60 text-sm sm:text-base font-sans leading-relaxed mb-8 max-w-md mx-auto">
+              View authentic photographs of our salon interior, treatment rooms, and beauty services.
+            </p>
+            <a
+              href="https://www.google.com/maps/place/?q=place_id:ChIJQw1xKtxpXz4R5ZcIoAWMGdE"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-luxury inline-flex items-center gap-2 px-8 py-4 rounded-full"
+            >
+              <i className="fas fa-images"></i>
+              View Gallery on Google Maps
+            </a>
+            <p className="mt-6 text-ivory/40 text-xs font-sans">
+              Interior • Treatments • Beauty Services • Amenities
+            </p>
+          </div>
         </div>
       </Reveal>
     </div>
@@ -614,33 +601,45 @@ const ReviewsSection = () => (
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light text-ivory">
             Client <span className="italic text-champagne">Reviews</span>
           </h2>
+          <p className="mt-4 text-ivory/60 text-base sm:text-lg font-sans max-w-2xl mx-auto">
+            Read authentic reviews from our valued clients on Google.
+          </p>
         </div>
       </Reveal>
 
       <Reveal>
-        <div className="max-w-3xl mx-auto">
-          <div className="bg-charcoal/30 border border-champagne/10 rounded-3xl p-8 sm:p-12 text-center">
-            <div className="flex justify-center gap-1 mb-6">
-              {[...Array(5)].map((_, i) => (
-                <svg key={i} className="w-5 h-5 text-champagne fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
-              ))}
-            </div>
-            <p className="font-serif text-5xl sm:text-6xl md:text-7xl text-champagne font-light">4.9</p>
-            <p className="text-ivory/50 text-sm font-sans mt-2">Based on Google Reviews</p>
-            
-            <div className="mt-8 pt-8 border-t border-champagne/10">
-              <p className="text-ivory/60 text-sm sm:text-base font-sans leading-relaxed max-w-md mx-auto">
-                Read authentic reviews from our valued clients. See what they say about our services, team, and salon experience.
-              </p>
-              <a
-                href="https://www.google.com/maps/place/?q=place_id:ChIJQw1xKtxpXz4R5ZcIoAWMGdE"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-luxury inline-flex items-center gap-2 px-6 py-3 rounded-full mt-6"
-              >
-                <i className="fab fa-google"></i>
-                View on Google
-              </a>
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-charcoal/30 border border-champagne/10 rounded-3xl p-8 sm:p-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+              {/* Rating Display */}
+              <div className="text-center md:text-left">
+                <div className="flex justify-center md:justify-start gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className="w-6 h-6 text-champagne fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                  ))}
+                </div>
+                <p className="font-serif text-6xl sm:text-7xl text-champagne font-light leading-none">4.9</p>
+                <p className="text-ivory/70 text-base font-sans mt-3">Google Rating</p>
+              </div>
+
+              {/* CTA */}
+              <div className="text-center md:text-left">
+                <h3 className="font-serif text-2xl sm:text-3xl text-ivory mb-4">
+                  What Our Clients Say
+                </h3>
+                <p className="text-ivory/60 text-sm sm:text-base font-sans leading-relaxed mb-6">
+                  Discover why our clients trust Dukes of Beauty for their premium beauty needs. Read verified reviews on Google Maps.
+                </p>
+                <a
+                  href="https://www.google.com/maps/place/?q=place_id:ChIJQw1xKtxpXz4R5ZcIoAWMGdE"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-luxury inline-flex items-center gap-2 px-6 py-3 rounded-full"
+                >
+                  <i className="fab fa-google"></i>
+                  Read Reviews on Google
+                </a>
+              </div>
             </div>
           </div>
         </div>
