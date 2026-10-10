@@ -55,6 +55,7 @@ const Navigation = ({ onBookClick }: { onBookClick: () => void }) => {
             <div className="hidden md:flex items-center gap-8">
               <a href="#services" className="text-sm text-white/70 hover:text-white transition-colors">Services</a>
               <a href="#features" className="text-sm text-white/70 hover:text-white transition-colors">Why Us</a>
+              <a href="#gallery" className="text-sm text-white/70 hover:text-white transition-colors">Gallery</a>
               <a href="#reviews" className="text-sm text-white/70 hover:text-white transition-colors">Reviews</a>
               <a href="#contact" className="text-sm text-white/70 hover:text-white transition-colors">Contact</a>
               <button onClick={onBookClick} className="px-6 py-2.5 bg-white text-black font-medium text-sm rounded-full hover:bg-white/90 transition-colors">Book Now</button>
@@ -78,6 +79,7 @@ const Navigation = ({ onBookClick }: { onBookClick: () => void }) => {
             <div className="flex-1 flex flex-col items-center justify-center gap-8 px-8">
               <a href="#services" onClick={() => setMobileOpen(false)} className="text-2xl text-white/90">Services</a>
               <a href="#features" onClick={() => setMobileOpen(false)} className="text-2xl text-white/90">Why Choose Us</a>
+              <a href="#gallery" onClick={() => setMobileOpen(false)} className="text-2xl text-white/90">Gallery</a>
               <a href="#reviews" onClick={() => setMobileOpen(false)} className="text-2xl text-white/90">Reviews</a>
               <a href="#contact" onClick={() => setMobileOpen(false)} className="text-2xl text-white/90">Contact</a>
               <button onClick={() => { setMobileOpen(false); onBookClick(); }} className="w-full py-4 bg-white text-black font-semibold rounded-full mt-4">Book Appointment</button>
@@ -430,22 +432,100 @@ const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices }:
 // ==================== REVIEWS ====================
 const ReviewsSection = () => (
   <section id="reviews" className="py-16 sm:py-20 bg-white">
-    <div className="max-w-4xl mx-auto px-5 sm:px-6 text-center">
+    <div className="max-w-4xl mx-auto px-5 sm:px-6">
       <Reveal>
-        <h2 className="text-3xl sm:text-4xl font-light text-gray-900">What Our Clients Say</h2>
-        <div className="mt-6 flex items-center justify-center gap-2">
-          <div className="flex gap-0.5">
-            {[...Array(5)].map((_, i) => (
-              <svg key={i} className="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
-            ))}
-          </div>
-          <span className="text-xl font-medium text-gray-900">4.9</span>
+        <div className="text-center mb-10">
+          <h2 className="text-3xl sm:text-4xl font-light text-gray-900">Google Reviews</h2>
+          <p className="mt-3 text-gray-600">Authentic reviews from our valued clients</p>
         </div>
-        <p className="mt-2 text-gray-600">Based on 1,600+ Google Reviews</p>
-        <a href="https://www.google.com/maps/search/?api=1&query=25.186447,55.286751&query_place_id=ChIJQw1xK9xpXz4R5ZcIoAWMGdE" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 mt-6 px-6 py-3 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-50 transition-colors">
-          <i className="fab fa-google text-lg"></i>
-          Read All Reviews on Google
-        </a>
+      </Reveal>
+
+      <Reveal>
+        <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 sm:p-10 border border-gray-200 shadow-sm">
+          <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-8">
+            {/* Rating Display */}
+            <div className="text-center sm:text-left">
+              <div className="flex items-center gap-3 justify-center sm:justify-start">
+                <span className="text-5xl sm:text-6xl font-light text-gray-900">4.9</span>
+                <div>
+                  <div className="flex gap-0.5 mb-1">
+                    {[...Array(5)].map((_, i) => (
+                      <svg key={i} className="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                    ))}
+                  </div>
+                  <p className="text-sm text-gray-600">Based on Google Reviews</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Divider */}
+            <div className="hidden sm:block w-px h-16 bg-gray-200"></div>
+
+            {/* CTA */}
+            <div className="flex-1 text-center sm:text-left">
+              <p className="text-gray-700 mb-4">
+                Read authentic reviews from our clients on Google. See what they say about our services, staff, and salon experience.
+              </p>
+              <a 
+                href="https://www.google.com/maps/place/?q=place_id:ChIJQw1xKtxpXz4R5ZcIoAWMGdE" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-full hover:bg-gray-800 transition-colors font-medium"
+              >
+                <i className="fab fa-google"></i>
+                Read Reviews on Google
+              </a>
+            </div>
+          </div>
+
+          {/* Note */}
+          <div className="mt-8 pt-6 border-t border-gray-200">
+            <p className="text-xs text-gray-500 text-center sm:text-left">
+              <i className="fas fa-info-circle mr-1"></i>
+              Reviews are displayed on Google Maps. Click the button above to view authentic customer reviews, ratings, and photos.
+            </p>
+          </div>
+        </div>
+      </Reveal>
+    </div>
+  </section>
+);
+
+// ==================== GALLERY ====================
+const GallerySection = () => (
+  <section id="gallery" className="py-16 sm:py-20 bg-gray-50">
+    <div className="max-w-4xl mx-auto px-5 sm:px-6">
+      <Reveal>
+        <div className="text-center mb-10">
+          <h2 className="text-3xl sm:text-4xl font-light text-gray-900">Salon Gallery</h2>
+          <p className="mt-3 text-gray-600">View our salon interior and services on Google Maps</p>
+        </div>
+      </Reveal>
+
+      <Reveal>
+        <div className="bg-white rounded-2xl p-8 sm:p-10 border border-gray-200 shadow-sm text-center">
+          <div className="max-w-md mx-auto">
+            <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gray-100 flex items-center justify-center">
+              <i className="fas fa-camera text-2xl text-gray-600"></i>
+            </div>
+            <h3 className="text-xl font-medium text-gray-900 mb-3">See Our Salon</h3>
+            <p className="text-gray-600 mb-6">
+              View authentic photos of our salon interior, treatment rooms, and beauty services on Google Maps.
+            </p>
+            <a 
+              href="https://www.google.com/maps/place/?q=place_id:ChIJQw1xKtxpXz4R5ZcIoAWMGdE" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-full hover:bg-gray-800 transition-colors font-medium"
+            >
+              <i className="fas fa-images"></i>
+              View Photos on Google Maps
+            </a>
+            <p className="mt-4 text-xs text-gray-500">
+              Photos include salon interior, nail treatments, beauty services, and more
+            </p>
+          </div>
+        </div>
       </Reveal>
     </div>
   </section>
@@ -453,30 +533,76 @@ const ReviewsSection = () => (
 
 // ==================== CONTACT ====================
 const ContactSection = () => (
-  <section id="contact" className="py-16 sm:py-20 bg-gray-50">
+  <section id="contact" className="py-16 sm:py-20 bg-white">
     <div className="max-w-4xl mx-auto px-5 sm:px-6">
       <Reveal>
         <div className="text-center mb-10">
-          <h2 className="text-3xl sm:text-4xl font-light text-gray-900">Visit Us</h2>
+          <h2 className="text-3xl sm:text-4xl font-light text-gray-900">Contact & Location</h2>
+          <p className="mt-3 text-gray-600">Get in touch or visit us in Business Bay</p>
         </div>
       </Reveal>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Reveal>
-          <div className="bg-white rounded-lg p-6 shadow-sm">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">Location & Hours</h3>
+          <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+            <h3 className="text-lg font-medium text-gray-900 mb-4 flex items-center gap-2">
+              <i className="fas fa-map-marker-alt text-gray-600"></i>
+              Location & Hours
+            </h3>
             <div className="space-y-3 text-sm text-gray-600">
-              <p className="flex items-start gap-3"><i className="fas fa-map-marker-alt text-gray-400 mt-1"></i><span>Shop No. 1-Retail, 15 Northside,<br/>Marasi Dr., Business Bay, Dubai, UAE</span></p>
-              <p className="flex items-center gap-3"><i className="fas fa-clock text-gray-400"></i><span>Daily: 10:00 AM – 10:00 PM</span></p>
-              <p className="flex items-center gap-3"><i className="fas fa-phone text-gray-400"></i><a href="tel:+971528167306" className="hover:text-gray-900 transition-colors">+971 52 816 7306</a></p>
+              <p className="flex items-start gap-3">
+                <span className="text-gray-400 mt-1">📍</span>
+                <span>Shop No. 1-Retail, 15 Northside,<br/>Marasi Dr., Business Bay, Dubai, UAE</span>
+              </p>
+              <p className="flex items-center gap-3">
+                <span className="text-gray-400">🕐</span>
+                <span>Daily: 10:00 AM – 10:00 PM</span>
+              </p>
+              <p className="flex items-center gap-3">
+                <span className="text-gray-400">📞</span>
+                <a href="tel:+971528167306" className="hover:text-gray-900 transition-colors">+971 52 816 7306</a>
+              </p>
             </div>
+            <a 
+              href="https://www.google.com/maps/place/?q=place_id:ChIJQw1xKtxpXz4R5ZcIoAWMGdE" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="mt-4 inline-flex items-center gap-2 text-sm text-gray-700 hover:text-gray-900 transition-colors"
+            >
+              <i className="fas fa-directions"></i>
+              Get Directions
+            </a>
           </div>
         </Reveal>
+
         <Reveal delay={100}>
-          <div className="bg-white rounded-lg p-6 shadow-sm">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">Connect</h3>
+          <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+            <h3 className="text-lg font-medium text-gray-900 mb-4 flex items-center gap-2">
+              <i className="fas fa-share-alt text-gray-600"></i>
+              Connect With Us
+            </h3>
             <div className="space-y-3">
-              <a href="https://wa.me/971528167306" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm text-gray-600 hover:text-green-600 transition-colors">
-                <i className="fab fa-whatsapp text-lg"></i><span>+971 52 816 7306</span>
+              <a 
+                href="https://wa.me/971528167306" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="flex items-center gap-3 p-3 rounded-lg bg-white border border-gray-200 hover:border-green-300 hover:bg-green-50 transition-all"
+              >
+                <i className="fab fa-whatsapp text-2xl text-green-600"></i>
+                <div>
+                  <p className="text-sm font-medium text-gray-900">WhatsApp</p>
+                  <p className="text-xs text-gray-600">+971 52 816 7306</p>
+                </div>
+              </a>
+              <a 
+                href="tel:+971528167306" 
+                className="flex items-center gap-3 p-3 rounded-lg bg-white border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all"
+              >
+                <i className="fas fa-phone text-2xl text-blue-600"></i>
+                <div>
+                  <p className="text-sm font-medium text-gray-900">Call Us</p>
+                  <p className="text-xs text-gray-600">+971 52 816 7306</p>
+                </div>
               </a>
             </div>
           </div>
@@ -742,6 +868,7 @@ export default function App() {
       <HeroSection onBookClick={handleBookClick} />
       <FeaturesSection />
       <ServicesSection onBookClick={handleBookClick} selectedServices={selectedServices} setSelectedServices={setSelectedServices} />
+      <GallerySection />
       <ReviewsSection />
       <ContactSection />
       <Footer />
