@@ -717,28 +717,377 @@ const WhatsAppBadge = () => {
   );
 };
 
-// ==================== BOOKING MODAL ====================
+// ==================== BOOKING SYSTEM ====================
+type BookingState = {
+  step: number;
+  selectedServices: string[];
+  selectedDate: string;
+  selectedTime: string;
+  customerName: string;
+  customerPhone: string;
+};
+
+type BookedSlot = {
+  date: string;
+  time: string;
+  customerName: string;
+  timestamp: number;
+};
+
+const getBookedSlots = (): BookedSlot[] => {
+  try {
+    const stored = localStorage.getItem('dukes_booked_slots');
+    return stored ? JSON.parse(stored) : [];
+  } catch {
+    return [];
+  }
+};
+
+const saveBookedSlot = (slot: BookedSlot) => {
+  const slots = getBookedSlots();
+  slots.push(slot);
+  localStorage.setItem('dukes_booked_slots', JSON.stringify(slots));
+};
+
+const isSlotBooked = (date: string, time: string): boolean => {
+  const slots = getBookedSlots();
+  return slots.some(slot => slot.date === date && slot.time === time);
+};
+
 const BookingModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
+  const [booking, setBooking] = useState<BookingState>({
+    step: 1,
+    selectedServices: [],
+    selectedDate: '',
+    selectedTime: '',
+    customerName: '',
+    customerPhone: '',
+  });
+
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) {
+      setBooking({
+        step: 1,
+        selectedServices: [],
+        selectedDate: '',
+        selectedTime: '',
+        customerName: '',
+        customerPhone: '',
+      });
+    }
+  }, [isOpen]);
+
   if (!isOpen) return null;
+
+  const allServices = serviceCategories.flatMap(cat => 
+    cat.services.map(s => ({ ...s, category: cat.title }))
+  );
+
+  const toggleService = (serviceName: string) => {
+    setBooking(prev => ({
+      ...prev,
+      selectedServices: prev.selectedServices.includes(serviceName)
+        ? prev.selectedServices.filter(s => s !== serviceName)
+        : [...prev.selectedServices, serviceName]
+    }));
+  };
+
+  const generateTimeSlots = () => {
+    const slots = [];
+    for (let hour = 10; hour < 22; hour++) {
+      for (let min = 0; min < 60; min += 30) {
+        const time = `${hour.toString().padStart(2, '0')}:${min.toString().padStart(2, '0')}`;
+        slots.push(time);
+      }
+    }
+    return slots;
+  };
+
+  const getMinDate = () => {
+    const today = new Date();
+    return today.toISOString().split('T')[0];
+  };
+
+  const calculateTotalDuration = () => {
+    let totalMinutes = 0;
+    booking.selectedServices.forEach(serviceName => {
+      const service = allServices.find(s => s.name === serviceName);
+      if (service) {
+        const duration = service.duration;
+        if (duration.includes('h')) {
+          const hours = parseInt(duration.match(/(\d+)h/)?.[1] || '0');
+          const mins = parseInt(duration.match(/(\d+)min/)?.[1] || '0');
+          totalMinutes += (hours * 60) + mins;
+        } else if (duration.includes('min')) {
+          totalMinutes += parseInt(duration.match(/(\d+)min/)?.[1] || '0');
+        }
+      }
+    });
+    const hours = Math.floor(totalMinutes / 60);
+    const mins = totalMinutes % 60;
+    return hours > 0 ? `${hours}h ${mins > 0 ? mins + 'min' : ''}` : `${mins}min`;
+  };
+
+  const calculateTotalPrice = () => {
+    let total = 0;
+    booking.selectedServices.forEach(serviceName => {
+      const service = allServices.find(s => s.name === serviceName);
+      if (service) {
+        const priceMatch = service.price.match(/(\d+)/);
+        if (priceMatch) {
+          total += parseInt(priceMatch[1]);
+        }
+      }
+    });
+    return total;
+  };
+
+  const handleWhatsAppBooking = () => {
+    const services = booking.selectedServices.join(', ');
+    const totalDuration = calculateTotalDuration();
+    const totalPrice = calculateTotalPrice();
+    
+    const message = `🌟 *New Booking Request* 🌟
+
+*Customer Details:*
+Name: ${booking.customerName}
+Phone: ${booking.customerPhone}
+
+*Booking Details:*
+Date: ${booking.selectedDate}
+Time: ${booking.selectedTime}
+Duration: ${totalDuration}
+
+*Services Selected:*
+${services}
+
+*Estimated Total:* ${totalPrice} AED
+
+Please confirm my booking. Thank you! ✨`;
+
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappURL = `https://wa.me/971000000000?text=${encodedMessage}`;
+
+    saveBookedSlot({
+      date: booking.selectedDate,
+      time: booking.selectedTime,
+      customerName: booking.customerName,
+      timestamp: Date.now()
+    });
+
+    window.open(whatsappURL, '_blank');
+    onClose();
+  };
+
+  const canProceed = () => {
+    if (booking.step === 1) return booking.selectedServices.length > 0;
+    if (booking.step === 2) return booking.selectedDate && booking.selectedTime;
+    if (booking.step === 3) return booking.customerName && booking.customerPhone;
+    return false;
+  };
+
   return (
     <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center" onClick={onClose}>
       <div className="absolute inset-0 bg-black/80 backdrop-blur-sm animate-fade-in"></div>
-      <div className="relative w-full sm:max-w-md bg-warm border border-white/10 rounded-t-3xl sm:rounded-3xl p-7 sm:p-8" onClick={(e) => e.stopPropagation()} style={{ animation: 'slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards' }}>
-        <button onClick={onClose} className="absolute top-4 right-4 text-white/30 hover:text-white transition-colors p-1">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><line x1="6" y1="6" x2="18" y2="18" /><line x1="18" y1="6" x2="6" y2="18" /></svg>
-        </button>
-        <div className="text-center">
-          <div className="w-14 h-14 mx-auto rounded-full bg-gradient-to-br from-gold/20 to-gold/5 border border-gold/20 flex items-center justify-center mb-5">
-            <span className="text-gold text-xl">✦</span>
+      <div 
+        className="relative w-full sm:max-w-2xl bg-warm border border-white/10 rounded-t-3xl sm:rounded-3xl max-h-[90vh] overflow-hidden flex flex-col"
+        onClick={(e) => e.stopPropagation()}
+        style={{ animation: 'slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards' }}
+      >
+        {/* Header */}
+        <div className="p-5 sm:p-6 border-b border-white/5 flex-shrink-0">
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h3 className="font-playfair text-xl sm:text-2xl font-medium text-white">Book Your Appointment</h3>
+              <p className="text-white/40 text-xs sm:text-sm font-inter mt-1">Step {booking.step} of 3</p>
+            </div>
+            <button onClick={onClose} className="text-white/30 hover:text-white transition-colors p-1">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <line x1="6" y1="6" x2="18" y2="18" /><line x1="18" y1="6" x2="6" y2="18" />
+              </svg>
+            </button>
           </div>
-          <h3 className="font-playfair text-xl sm:text-2xl font-medium text-white mb-2">Reserve Your Visit</h3>
-          <p className="text-white/40 text-sm font-inter mb-7">Select your preferred treatment, date & time on our secure booking platform.</p>
-          <a href="https://n1359631.alteg.io/company/1297862/about" target="_blank" rel="noopener noreferrer" className="btn-primary block w-full py-4 text-warm-dark font-bold text-sm rounded-full tracking-wider uppercase">Open Booking System</a>
-          <p className="mt-4 text-white/20 text-[10px] font-inter">Powered by Altegio · Instant Confirmation</p>
+          {/* Progress bar */}
+          <div className="flex gap-2">
+            {[1, 2, 3].map(step => (
+              <div key={step} className={`flex-1 h-1 rounded-full transition-all ${step <= booking.step ? 'bg-gold' : 'bg-white/10'}`}></div>
+            ))}
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="flex-1 overflow-y-auto p-5 sm:p-6">
+          {/* Step 1: Select Services */}
+          {booking.step === 1 && (
+            <div>
+              <p className="text-white/60 text-sm font-inter mb-4">Select the services you'd like to book:</p>
+              <div className="space-y-4">
+                {serviceCategories.map(category => (
+                  <div key={category.id}>
+                    <h4 className="text-gold text-xs font-inter tracking-widest uppercase mb-2">{category.title}</h4>
+                    <div className="space-y-1">
+                      {category.services.map(service => (
+                        <label key={service.name} className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-white/[0.02] cursor-pointer transition-colors">
+                          <input
+                            type="checkbox"
+                            checked={booking.selectedServices.includes(service.name)}
+                            onChange={() => toggleService(service.name)}
+                            className="w-4 h-4 rounded border-white/20 bg-transparent text-gold focus:ring-gold focus:ring-offset-0"
+                          />
+                          <div className="flex-1 min-w-0">
+                            <p className="text-white/80 text-sm font-inter truncate">{service.name}</p>
+                            <p className="text-white/30 text-xs font-inter">{service.duration}</p>
+                          </div>
+                          <p className="text-gold text-xs sm:text-sm font-inter font-medium whitespace-nowrap">{service.price}</p>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Step 2: Select Date & Time */}
+          {booking.step === 2 && (
+            <div>
+              <p className="text-white/60 text-sm font-inter mb-4">Choose your preferred date and time:</p>
+              
+              {/* Date Picker */}
+              <div className="mb-6">
+                <label className="text-white/60 text-xs font-inter tracking-wide uppercase mb-2 block">Select Date</label>
+                <input
+                  type="date"
+                  min={getMinDate()}
+                  value={booking.selectedDate}
+                  onChange={(e) => setBooking(prev => ({ ...prev, selectedDate: e.target.value, selectedTime: '' }))}
+                  className="w-full px-4 py-3 bg-warm-light/30 border border-white/10 rounded-lg text-white font-inter text-sm focus:outline-none focus:border-gold/50"
+                />
+              </div>
+
+              {/* Time Slots */}
+              {booking.selectedDate && (
+                <div>
+                  <label className="text-white/60 text-xs font-inter tracking-wide uppercase mb-2 block">Select Time</label>
+                  <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
+                    {generateTimeSlots().map(time => {
+                      const booked = isSlotBooked(booking.selectedDate, time);
+                      return (
+                        <button
+                          key={time}
+                          disabled={booked}
+                          onClick={() => setBooking(prev => ({ ...prev, selectedTime: time }))}
+                          className={`px-3 py-2.5 rounded-lg text-sm font-inter transition-all ${
+                            booked
+                              ? 'bg-red-500/10 border border-red-500/20 text-red-400/50 cursor-not-allowed line-through'
+                              : booking.selectedTime === time
+                              ? 'bg-gold text-warm-dark font-semibold'
+                              : 'bg-warm-light/30 border border-white/10 text-white/70 hover:border-gold/30'
+                          }`}
+                        >
+                          {time}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <p className="text-white/30 text-xs font-inter mt-3">
+                    <span className="inline-block w-3 h-3 bg-red-500/20 border border-red-500/30 rounded mr-1"></span>
+                    Booked slots are unavailable
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Step 3: Customer Details */}
+          {booking.step === 3 && (
+            <div>
+              <p className="text-white/60 text-sm font-inter mb-4">Enter your details to complete the booking:</p>
+              
+              <div className="space-y-4">
+                <div>
+                  <label className="text-white/60 text-xs font-inter tracking-wide uppercase mb-2 block">Full Name</label>
+                  <input
+                    type="text"
+                    value={booking.customerName}
+                    onChange={(e) => setBooking(prev => ({ ...prev, customerName: e.target.value }))}
+                    placeholder="Enter your name"
+                    className="w-full px-4 py-3 bg-warm-light/30 border border-white/10 rounded-lg text-white font-inter text-sm placeholder:text-white/20 focus:outline-none focus:border-gold/50"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-white/60 text-xs font-inter tracking-wide uppercase mb-2 block">Phone Number</label>
+                  <input
+                    type="tel"
+                    value={booking.customerPhone}
+                    onChange={(e) => setBooking(prev => ({ ...prev, customerPhone: e.target.value }))}
+                    placeholder="+971 XX XXX XXXX"
+                    className="w-full px-4 py-3 bg-warm-light/30 border border-white/10 rounded-lg text-white font-inter text-sm placeholder:text-white/20 focus:outline-none focus:border-gold/50"
+                  />
+                </div>
+              </div>
+
+              {/* Booking Summary */}
+              <div className="mt-6 p-4 rounded-lg bg-warm-light/20 border border-gold/10">
+                <h4 className="text-gold text-xs font-inter tracking-widest uppercase mb-3">Booking Summary</h4>
+                <div className="space-y-2 text-sm font-inter">
+                  <div className="flex justify-between">
+                    <span className="text-white/50">Services:</span>
+                    <span className="text-white/80 text-right">{booking.selectedServices.length} selected</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-white/50">Date:</span>
+                    <span className="text-white/80">{booking.selectedDate}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-white/50">Time:</span>
+                    <span className="text-white/80">{booking.selectedTime}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-white/50">Duration:</span>
+                    <span className="text-white/80">{calculateTotalDuration()}</span>
+                  </div>
+                  <div className="flex justify-between pt-2 border-t border-white/5">
+                    <span className="text-gold font-medium">Estimated Total:</span>
+                    <span className="text-gold font-semibold">{calculateTotalPrice()} AED</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Footer */}
+        <div className="p-5 sm:p-6 border-t border-white/5 flex-shrink-0">
+          <div className="flex gap-3">
+            {booking.step > 1 && (
+              <button
+                onClick={() => setBooking(prev => ({ ...prev, step: prev.step - 1 }))}
+                className="px-6 py-3 border border-white/10 text-white/70 font-medium text-sm rounded-full hover:border-gold/30 transition-all"
+              >
+                Back
+              </button>
+            )}
+            <button
+              disabled={!canProceed()}
+              onClick={() => {
+                if (booking.step < 3) {
+                  setBooking(prev => ({ ...prev, step: prev.step + 1 }));
+                } else {
+                  handleWhatsAppBooking();
+                }
+              }}
+              className="btn-primary flex-1 py-3 text-warm-dark font-bold text-sm rounded-full tracking-wider uppercase disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {booking.step === 3 ? 'Confirm & Send via WhatsApp' : 'Continue'}
+            </button>
+          </div>
         </div>
       </div>
     </div>
