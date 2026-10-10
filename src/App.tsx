@@ -118,8 +118,8 @@ const HeroSection = ({ onBookClick }: { onBookClick: () => void }) => {
     <section className="relative h-[70vh] sm:h-[75vh] md:h-[85vh] lg:h-[90vh] flex items-end overflow-hidden">
       <div className="absolute inset-0">
         <img
-          src="https://image.qwenlm.ai/generated-images/be493ebf-6975-4b34-9572-d474889ee003/_result.png"
-          alt="Dukes of Beauty - Luxury Salon Interior with Stylist"
+          src="https://i.imgur.com/pFDeBJV_d.webp?maxwidth=760&fidelity=grand"
+          alt="Dukes of Beauty - Luxury Salon Interior"
           className={`absolute inset-0 w-full h-full object-cover object-center ${loaded ? 'animate-ken-burns' : 'opacity-0'}`}
           onError={(e) => { e.currentTarget.style.display = 'none'; }}
         />
