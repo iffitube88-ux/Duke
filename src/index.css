@@ -147,13 +147,13 @@ body {
   background: rgba(200, 173, 131, 0.05);
 }
 
-/* Hero overlay - lighter for brighter images */
+/* Hero overlay - subtle cinematic gradient for text readability */
 .hero-overlay {
   background: linear-gradient(
     180deg,
-    rgba(11, 11, 13, 0.2) 0%,
-    rgba(11, 11, 13, 0.4) 50%,
-    rgba(11, 11, 13, 0.8) 100%
+    rgba(11, 11, 13, 0.1) 0%,
+    rgba(11, 11, 13, 0.25) 40%,
+    rgba(11, 11, 13, 0.6) 100%
   );
 }
 

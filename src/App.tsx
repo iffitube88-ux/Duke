@@ -115,22 +115,22 @@ const HeroSection = ({ onBookClick }: { onBookClick: () => void }) => {
   useEffect(() => { setLoaded(true); }, []);
 
   return (
-    <section className="relative min-h-[100svh] flex items-end overflow-hidden">
+    <section className="relative h-[70vh] sm:h-[75vh] md:h-[85vh] lg:h-[90vh] flex items-end overflow-hidden">
       <div className="absolute inset-0">
         <img
-          src="https://lh3.googleusercontent.com/grass-cs/AABkmLepqXC8WfGKqv2OiIwBa47A1_Vutpvq6CpuhI1YmJelex6kFpD-2_BQze6jf_vCNQ37J12SRUBsPKFCSq1zJH49Gbs-NiMLekysbDvj7-jD1yKY2RonGYrB5V60U2YZ5eo10BV7ms9cyX2v=w1920-h1080-k-no"
-          alt="Dukes of Beauty Salon Interior - Business Bay, Dubai"
-          className={`absolute inset-0 w-full h-full object-cover ${loaded ? 'animate-ken-burns' : 'opacity-0'}`}
+          src="https://image.qwenlm.ai/generated-images/be493ebf-6975-4b34-9572-d474889ee003/_result.png"
+          alt="Dukes of Beauty - Luxury Salon Interior with Stylist"
+          className={`absolute inset-0 w-full h-full object-cover object-center ${loaded ? 'animate-ken-burns' : 'opacity-0'}`}
           onError={(e) => { e.currentTarget.style.display = 'none'; }}
         />
         <div className="absolute inset-0 hero-overlay"></div>
       </div>
 
-      <div className="relative z-10 w-full container-luxury pb-20 sm:pb-32 pt-32">
+      <div className="relative z-10 w-full container-luxury pb-16 sm:pb-20 md:pb-24 lg:pb-32 pt-24 sm:pt-28 md:pt-32">
         <div className="max-w-3xl">
           {/* Location tag */}
           <div className={`transition-all duration-1000 delay-500 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <div className="flex items-center gap-3 mb-8">
+            <div className="flex items-center gap-3 mb-6 sm:mb-8">
               <span className="w-12 h-px bg-champagne"></span>
               <span className="text-champagne text-[10px] sm:text-[11px] tracking-[0.3em] uppercase font-sans">Business Bay · Dubai</span>
             </div>
@@ -143,12 +143,12 @@ const HeroSection = ({ onBookClick }: { onBookClick: () => void }) => {
           </h1>
 
           {/* Subtitle */}
-          <p className={`mt-8 sm:mt-10 text-ivory/70 text-base sm:text-lg font-sans font-light leading-relaxed max-w-lg transition-all duration-1000 delay-900 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <p className={`mt-6 sm:mt-8 md:mt-10 text-ivory/70 text-base sm:text-lg font-sans font-light leading-relaxed max-w-lg transition-all duration-1000 delay-900 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             A sanctuary of luxury where precision meets artistry. Premium hair, nails, aesthetics & wellness in the heart of Dubai.
           </p>
 
           {/* CTAs */}
-          <div className={`mt-10 sm:mt-12 flex flex-col sm:flex-row gap-4 transition-all duration-1000 delay-1000 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className={`mt-8 sm:mt-10 md:mt-12 flex flex-col sm:flex-row gap-4 transition-all duration-1000 delay-1000 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <button onClick={onBookClick} className="btn-luxury px-8 py-4 rounded-full">
               Reserve Your Visit
             </button>
@@ -158,7 +158,7 @@ const HeroSection = ({ onBookClick }: { onBookClick: () => void }) => {
           </div>
 
           {/* Small trust indicator */}
-          <div className={`mt-16 transition-all duration-1000 delay-[1200ms] ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className={`mt-12 sm:mt-14 md:mt-16 transition-all duration-1000 delay-[1200ms] ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="flex items-center gap-3">
               <div className="flex gap-0.5">
                 {[...Array(5)].map((_, i) => (
