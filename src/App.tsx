@@ -500,18 +500,76 @@ const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices }:
 
 // ==================== INSTAGRAM SECTION ====================
 const InstagramSection = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+
   // Real Instagram post IDs from @dukes_of_beauty.ae
   const instagramPosts = [
-    'DTuWqL9Cmvt',
-    'DQ8di2OER4W',
-    'DcLNnpbq-pt',
-    'Db7onQ8qser',
-    'DQhFNROig67',
-    'DO5dCuQivVf',
+    { id: 'DTuWqL9Cmvt', type: 'image' as const },
+    { id: 'DQ8di2OER4W', type: 'image' as const },
+    { id: 'DcLNnpbq-pt', type: 'image' as const },
+    { id: 'Db7onQ8qser', type: 'video' as const },
+    { id: 'DQhFNROig67', type: 'image' as const },
+    { id: 'DO5dCuQivVf', type: 'video' as const },
   ];
 
+  const totalSlides = instagramPosts.length;
+  const minSlide = 0;
+  const maxSlide = totalSlides - 1;
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev >= maxSlide ? minSlide : prev + 1));
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev <= minSlide ? maxSlide : prev - 1));
+  };
+
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index);
+  };
+
+  // Touch handlers for swipe
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStart - touchEnd > 75) {
+      nextSlide();
+    }
+    if (touchStart - touchEnd < -75) {
+      prevSlide();
+    }
+  };
+
+  // Keyboard navigation
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowLeft') {
+      prevSlide();
+    } else if (e.key === 'ArrowRight') {
+      nextSlide();
+    }
+  };
+
+  // Calculate visible slides based on screen size
+  const getVisibleSlides = () => {
+    if (typeof window === 'undefined') return 1;
+    if (window.innerWidth >= 1024) return 3; // Desktop
+    if (window.innerWidth >= 640) return 2; // Tablet
+    return 1; // Mobile
+  };
+
+  const visibleSlides = getVisibleSlides();
+  const slideWidth = 100 / visibleSlides;
+
   return (
-    <section id="instagram" className="section-spacing relative">
+    <section id="instagram" className="section-spacing relative overflow-hidden">
       <div className="container-luxury">
         <Reveal>
           <div className="text-center mb-12 sm:mb-16">
@@ -529,29 +587,117 @@ const InstagramSection = () => {
           </div>
         </Reveal>
 
-        {/* Instagram Posts Grid with Real Embeds */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12">
-          {instagramPosts.map((postId, index) => (
-            <Reveal key={postId} delay={index * 100}>
-              <div className="aspect-square bg-charcoal/30 border border-champagne/10 rounded-lg overflow-hidden">
-                <iframe
-                  src={`https://www.instagram.com/p/${postId}/embed`}
-                  width="100%"
-                  height="100%"
-                  frameBorder="0"
-                  scrolling="no"
-                  allowFullScreen
-                  title={`Instagram post ${postId}`}
-                  className="w-full h-full"
-                  style={{ border: 'none', overflow: 'hidden' }}
-                />
-              </div>
-            </Reveal>
-          ))}
+        {/* Carousel Container */}
+        <div className="relative max-w-7xl mx-auto">
+          {/* Navigation Arrows */}
+          <button
+            onClick={prevSlide}
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 sm:-translate-x-6 z-20 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-charcoal/80 border border-champagne/20 flex items-center justify-center hover:bg-charcoal hover:border-champagne/40 transition-all group"
+            aria-label="Previous slide"
+          >
+            <svg className="w-6 h-6 text-champagne group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+
+          <button
+            onClick={nextSlide}
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 sm:translate-x-6 z-20 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-charcoal/80 border border-champagne/20 flex items-center justify-center hover:bg-charcoal hover:border-champagne/40 transition-all group"
+            aria-label="Next slide"
+          >
+            <svg className="w-6 h-6 text-champagne group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+
+          {/* Carousel Track */}
+          <div
+            className="overflow-hidden rounded-xl"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            onKeyDown={handleKeyDown}
+            tabIndex={0}
+          >
+            <div
+              className="flex transition-transform duration-500 ease-out"
+              style={{ transform: `translateX(-${currentSlide * slideWidth}%)` }}
+            >
+              {instagramPosts.map((post, index) => (
+                <div
+                  key={post.id}
+                  className="flex-shrink-0 px-2 sm:px-3"
+                  style={{ width: `${slideWidth}%` }}
+                >
+                  <div className="aspect-square bg-charcoal/30 border border-champagne/10 rounded-lg overflow-hidden group hover:border-champagne/30 transition-all">
+                    <a
+                      href={`https://www.instagram.com/p/${post.id}/`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="relative w-full h-full block"
+                    >
+                      <iframe
+                        src={`https://www.instagram.com/p/${post.id}/embed`}
+                        width="100%"
+                        height="100%"
+                        frameBorder="0"
+                        scrolling="no"
+                        allowFullScreen
+                        title={`Instagram post ${post.id}`}
+                        className="w-full h-full"
+                        style={{ border: 'none', overflow: 'hidden' }}
+                        loading="lazy"
+                      />
+                      
+                      {/* Overlay with Instagram icon */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                        <div className="flex items-center gap-2 text-white">
+                          <i className="fab fa-instagram text-xl"></i>
+                          <span className="text-sm font-sans">View on Instagram</span>
+                        </div>
+                      </div>
+
+                      {/* Video indicator */}
+                      {post.type === 'video' && (
+                        <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/60 flex items-center justify-center">
+                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z"/>
+                          </svg>
+                        </div>
+                      )}
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Pagination Dots */}
+          <div className="flex items-center justify-center gap-2 mt-8">
+            {Array.from({ length: Math.ceil(totalSlides / visibleSlides) }).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index * visibleSlides)}
+                className={`transition-all ${
+                  Math.floor(currentSlide / visibleSlides) === index
+                    ? 'w-8 h-2 bg-champagne'
+                    : 'w-2 h-2 bg-champagne/30 hover:bg-champagne/50'
+                } rounded-full`}
+                aria-label={`Go to slide group ${index + 1}`}
+              />
+            ))}
+          </div>
+
+          {/* Slide Counter */}
+          <div className="text-center mt-4">
+            <span className="text-ivory/40 text-sm font-sans">
+              {String(currentSlide + 1).padStart(2, '0')} / {String(totalSlides).padStart(2, '0')}
+            </span>
+          </div>
         </div>
 
         <Reveal>
-          <div className="text-center">
+          <div className="text-center mt-12">
             <a
               href="https://www.instagram.com/dukes_of_beauty.ae/"
               target="_blank"
