@@ -131,21 +131,7 @@ const HeroSection = ({ onBookClick }: { onBookClick: () => void }) => {
   );
 };
 
-// ==================== FIRST TIME OFFER ====================
-const FirstTimeOffer = () => (
-  <section className="py-12 bg-gradient-to-r from-gray-900 to-gray-800 text-white">
-    <div className="max-w-4xl mx-auto px-5 sm:px-6 text-center">
-      <Reveal>
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 mb-4">
-          <span className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></span>
-          <span className="text-sm font-medium">New Client Special</span>
-        </div>
-        <h2 className="text-2xl sm:text-3xl font-light">20% OFF Your First 3 Visits</h2>
-        <p className="mt-3 text-white/70">Plus a complimentary Kevin Murphy treatment</p>
-      </Reveal>
-    </div>
-  </section>
-);
+
 
 // ==================== FEATURES ====================
 const features = [
@@ -754,7 +740,6 @@ export default function App() {
     <div className="min-h-screen bg-white text-gray-900">
       <Navigation onBookClick={handleBookClick} />
       <HeroSection onBookClick={handleBookClick} />
-      <FirstTimeOffer />
       <FeaturesSection />
       <ServicesSection onBookClick={handleBookClick} selectedServices={selectedServices} setSelectedServices={setSelectedServices} />
       <ReviewsSection />
