@@ -329,7 +329,7 @@ const services = [
     description: 'Signature synchronized manicures & pedicures. Maximum luxury, minimum time — flawless results without sacrificing relaxation.',
     image: 'https://image.qwenlm.ai/generated-images/23ff6fff-096a-40e1-9a7d-10d42ff01cd2/_result.png',
     services: [
-      { name: 'Manicure DeLuxe', duration: '2h', price: 'from 250 AED' },
+      { name: 'Manicure DeLuxe', duration: '2h' },
       { name: 'Princess Manicure', duration: '40min' },
       { name: 'Nail Extension', duration: '2h 30min' },
       { name: 'Nail Refill', duration: '2h' },
@@ -370,7 +370,7 @@ const services = [
       { name: 'Eyelash Lamination', duration: '1h' },
       { name: 'Brow Shape', duration: '30min' },
       { name: 'Brow Lamination', duration: '1h' },
-      { name: 'Full Brows Package', duration: '1h', price: '250 AED' },
+      { name: 'Full Brows Package', duration: '1h' },
       { name: 'Full Lashes Package', duration: '1h' },
     ],
   },
@@ -381,7 +381,7 @@ const services = [
     description: 'Exclusive manual full-body relaxation therapies designed to melt away stress and restore your inner balance completely.',
     image: 'https://image.qwenlm.ai/generated-images/00426011-4886-4b46-9be7-b96b3b81b878/_result.png',
     services: [
-      { name: 'Relaxing Full Body (60min)', duration: '1h', price: '250 AED' },
+      { name: 'Relaxing Full Body (60min)', duration: '1h' },
       { name: 'Relaxing Full Body (90min)', duration: '1h 30min' },
       { name: 'Deep Tissue (60min)', duration: '1h' },
       { name: 'Deep Tissue (90min)', duration: '1h 30min' },
