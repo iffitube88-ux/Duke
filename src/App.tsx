@@ -984,6 +984,19 @@ const Footer = () => {
 
           <p className="text-ivory/20 text-xs font-sans">© {currentYear} Dukes of Beauty. All rights reserved.</p>
         </div>
+        <div className="mt-8 pt-8 border-t border-champagne/5 text-center">
+          <p className="text-ivory/30 text-xs font-sans">
+            Build by{' '}
+            <a 
+              href="https://iffimedia.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-champagne hover:text-champagne-light transition-colors underline underline-offset-2"
+            >
+              iffimedia.com
+            </a>
+          </p>
+        </div>
       </div>
     </footer>
   );
