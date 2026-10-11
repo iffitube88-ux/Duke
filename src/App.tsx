@@ -855,35 +855,37 @@ const ReviewsSection = () => {
   return (
     <section id="reviews" className="py-16 sm:py-20 relative">
       <div className="site-container">
-        <div className="max-w-3xl mx-auto text-center">
+        <div className="max-w-3xl mx-auto">
           <Reveal>
-            {/* Eyebrow */}
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <span className="w-12 h-px bg-champagne/30"></span>
-              <span className="text-champagne text-[11px] tracking-[0.3em] uppercase font-sans">Reviews</span>
-              <span className="w-12 h-px bg-champagne/30"></span>
+            <div className="flex flex-col items-center text-center">
+              {/* Eyebrow */}
+              <div className="flex items-center justify-center gap-3 mb-6">
+                <span className="w-12 h-px bg-champagne/30"></span>
+                <span className="text-champagne text-[11px] tracking-[0.3em] uppercase font-sans">Reviews</span>
+                <span className="w-12 h-px bg-champagne/30"></span>
+              </div>
+
+              {/* Heading */}
+              <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-light text-ivory leading-tight mb-6">
+                Client <span className="italic text-champagne">Reviews</span>
+              </h2>
+
+              {/* Description */}
+              <p className="text-ivory/60 text-base sm:text-lg font-sans font-light leading-relaxed mb-10 max-w-2xl">
+                Read authentic reviews from our clients on Google Maps.
+              </p>
+
+              {/* Google Button - Explicitly Centered */}
+              <a
+                href="https://www.google.com/maps/place/?q=place_id:ChIJQw1xKtxpXz4R5ZcIoAWMGdE"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-luxury inline-flex items-center gap-3 mx-auto"
+              >
+                <i className="fab fa-google text-lg"></i>
+                View Reviews on Google
+              </a>
             </div>
-
-            {/* Heading */}
-            <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-light text-ivory leading-tight mb-6">
-              Client <span className="italic text-champagne">Reviews</span>
-            </h2>
-
-            {/* Description */}
-            <p className="text-ivory/60 text-base sm:text-lg font-sans font-light leading-relaxed mb-10 max-w-2xl mx-auto">
-              Read authentic reviews from our clients on Google Maps.
-            </p>
-
-            {/* Google Button */}
-            <a
-              href="https://www.google.com/maps/place/?q=place_id:ChIJQw1xKtxpXz4R5ZcIoAWMGdE"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-luxury inline-flex items-center gap-3"
-            >
-              <i className="fab fa-google text-lg"></i>
-              View Reviews on Google
-            </a>
           </Reveal>
         </div>
       </div>
