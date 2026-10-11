@@ -595,54 +595,6 @@ body {
   padding-block: clamp(64px, 8vw, 120px);
 }
 
-/* Fluid Typography */
-.section-eyebrow {
-  font-size: clamp(0.625rem, 1.5vw, 0.6875rem);
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-}
-
-.section-title {
-  font-size: clamp(2.5rem, 5vw, 5rem);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-}
-
-.section-description {
-  font-size: clamp(1rem, 2vw, 1.125rem);
-  line-height: 1.6;
-  max-width: 600px;
-}
-
-/* Section Header Component Styles */
-.section-header {
-  text-align: center;
-  margin-bottom: clamp(48px, 6vw, 80px);
-}
-
-.section-header-eyebrow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 24px;
-}
-
-.section-header-line {
-  width: 48px;
-  height: 1px;
-  background: currentColor;
-  opacity: 0.3;
-}
-
-.section-header-title {
-  margin-bottom: 24px;
-}
-
-.section-header-description {
-  margin-inline: auto;
-}
-
 /* Legacy compatibility - will be removed after migration */
 .container-luxury {
   width: min(100% - 40px, 1200px);

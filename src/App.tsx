@@ -33,17 +33,17 @@ interface SectionHeaderProps {
 }
 
 const SectionHeader = ({ eyebrow, title, description }: SectionHeaderProps) => (
-  <div className="section-header">
-    <div className="section-header-eyebrow text-champagne">
-      <span className="section-header-line"></span>
-      <span className="section-eyebrow font-sans">{eyebrow}</span>
-      <span className="section-header-line"></span>
+  <div className="flex flex-col items-center text-center w-full max-w-[820px] mx-auto mb-16 sm:mb-20">
+    <div className="flex items-center justify-center gap-3 mb-5">
+      <span className="w-12 h-px bg-champagne/30"></span>
+      <span className="text-champagne text-[11px] tracking-[0.3em] uppercase font-sans">{eyebrow}</span>
+      <span className="w-12 h-px bg-champagne/30"></span>
     </div>
-    <h2 className="section-title section-header-title font-serif font-light text-ivory">
+    <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-light text-ivory leading-tight w-full max-w-[760px] text-balance">
       {title}
     </h2>
     {description && (
-      <p className="section-description section-header-description text-ivory/60 font-sans font-light">
+      <p className="text-ivory/60 text-base sm:text-lg font-sans font-light leading-relaxed mt-6 w-full max-w-[680px]">
         {description}
       </p>
     )}
@@ -213,11 +213,9 @@ const AboutSection = () => (
         <SectionHeader
           eyebrow="About"
           title={<>Where Luxury<br />Meets <span className="italic text-champagne">Expertise</span></>}
+          description="Dukes of Beauty is more than a salon — it is a destination for those who appreciate the finest things. Located in the prestigious Business Bay, our atelier combines world-class techniques with premium products from K18, Tokio Inkarami, Nashi, and Kevin Murphy."
         />
-        <div className="max-w-[820px] mx-auto space-y-6 text-center">
-          <p className="text-ivory/70 text-base sm:text-lg font-sans leading-relaxed">
-            Dukes of Beauty is more than a salon — it is a destination for those who appreciate the finest things. Located in the prestigious Business Bay, our atelier combines world-class techniques with premium products from K18, Tokio Inkarami, Nashi, and Kevin Murphy.
-          </p>
+        <div className="max-w-[680px] mx-auto text-center">
           <p className="text-ivory/70 text-base sm:text-lg font-sans leading-relaxed">
             From synchronized 4-hand and 6-hand treatments to advanced HydraFacial Syndeo protocols, every service is designed to deliver an unparalleled experience.
           </p>
