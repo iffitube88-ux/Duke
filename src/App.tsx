@@ -553,6 +553,11 @@ const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices }:
                 <p className="text-champagne text-xl font-sans font-semibold ml-13">
                   Estimated total: {calculateTotal()} AED
                 </p>
+                {calculateTotal() === 0 && (
+                  <p className="text-ivory/50 text-sm font-sans mt-1 ml-13">
+                    * Final price may vary
+                  </p>
+                )}
               </div>
               <button onClick={onBookClick} className="btn-luxury w-full sm:w-auto px-10">
                 Continue Booking
@@ -874,7 +879,7 @@ const GallerySection = () => {
               className="btn-outline inline-flex items-center gap-3 px-8 py-4 rounded-full text-sm"
             >
               <i className="fab fa-google"></i>
-              View All 244 Photos on Google Maps
+              View More Photos on Google Maps
             </a>
           </div>
         </Reveal>
@@ -885,10 +890,14 @@ const GallerySection = () => {
         <div
           className="fixed inset-0 z-[200] bg-black/95 flex items-center justify-center p-4 animate-fade-in"
           onClick={() => setLightboxImage(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Image lightbox"
         >
           <button
-            className="absolute top-4 right-4 text-white/60 hover:text-white p-2"
+            className="absolute top-4 right-4 text-white/60 hover:text-white p-2 z-10"
             onClick={() => setLightboxImage(null)}
+            aria-label="Close lightbox"
           >
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
               <line x1="6" y1="6" x2="18" y2="18" /><line x1="18" y1="6" x2="6" y2="18" />
@@ -896,7 +905,7 @@ const GallerySection = () => {
           </button>
           <img
             src={lightboxImage.replace(/=w\d+-h\d+/, '=w1200-h900')}
-            alt="Salon photo"
+            alt="Salon photo enlarged view"
             className="max-w-full max-h-[90vh] object-contain rounded-lg"
             onClick={(e) => e.stopPropagation()}
           />
