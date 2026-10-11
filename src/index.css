@@ -241,28 +241,98 @@ body {
   }
 }
 
-/* Layout system */
-.container-luxury {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 20px;
-  padding-right: 20px;
+/* ============================================
+   GLOBAL RESPONSIVE LAYOUT SYSTEM
+   ============================================ */
+
+/* Unified Site Container - All sections use this */
+.site-container {
+  width: min(100% - 40px, 1200px);
+  margin-inline: auto;
   box-sizing: border-box;
-  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .site-container {
+    width: min(100% - 64px, 1200px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .site-container {
+    width: min(100% - 96px, 1200px);
+  }
+}
+
+/* Fluid Section Spacing */
+.section-fluid {
+  padding-block: clamp(64px, 8vw, 120px);
+}
+
+/* Fluid Typography */
+.section-eyebrow {
+  font-size: clamp(0.625rem, 1.5vw, 0.6875rem);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.section-title {
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.section-description {
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  line-height: 1.6;
+  max-width: 600px;
+}
+
+/* Section Header Component Styles */
+.section-header {
+  text-align: center;
+  margin-bottom: clamp(48px, 6vw, 80px);
+}
+
+.section-header-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.section-header-line {
+  width: 48px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.3;
+}
+
+.section-header-title {
+  margin-bottom: 24px;
+}
+
+.section-header-description {
+  margin-inline: auto;
+}
+
+/* Legacy compatibility - will be removed after migration */
+.container-luxury {
+  width: min(100% - 40px, 1200px);
+  margin-inline: auto;
+  box-sizing: border-box;
 }
 
 @media (min-width: 640px) {
   .container-luxury {
-    padding-left: 32px;
-    padding-right: 32px;
+    width: min(100% - 64px, 1200px);
   }
 }
 
 @media (min-width: 1024px) {
   .container-luxury {
-    padding-left: 48px;
-    padding-right: 48px;
+    width: min(100% - 96px, 1200px);
   }
 }
 

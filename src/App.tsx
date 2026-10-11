@@ -25,6 +25,31 @@ const Reveal = ({ children, className = '', delay = 0 }: { children: ReactNode; 
   );
 };
 
+// ==================== REUSABLE SECTION HEADER ====================
+interface SectionHeaderProps {
+  eyebrow: string;
+  title: ReactNode;
+  description?: string;
+}
+
+const SectionHeader = ({ eyebrow, title, description }: SectionHeaderProps) => (
+  <div className="section-header">
+    <div className="section-header-eyebrow text-champagne">
+      <span className="section-header-line"></span>
+      <span className="section-eyebrow font-sans">{eyebrow}</span>
+      <span className="section-header-line"></span>
+    </div>
+    <h2 className="section-title section-header-title font-serif font-light text-ivory">
+      {title}
+    </h2>
+    {description && (
+      <p className="section-description section-header-description text-ivory/60 font-sans font-light">
+        {description}
+      </p>
+    )}
+  </div>
+);
+
 // ==================== LOGO ====================
 const Logo = ({ size = 'md', inverted = false }: { size?: 'sm' | 'md' | 'lg'; inverted?: boolean }) => {
   const sizes = { sm: 'h-8', md: 'h-10', lg: 'h-14' };
@@ -182,26 +207,20 @@ const HeroSection = ({ onBookClick }: { onBookClick: () => void }) => {
 
 // ==================== ABOUT SECTION ====================
 const AboutSection = () => (
-  <section className="py-24 sm:py-32 md:py-40 relative">
-    <div className="container-luxury">
+  <section className="section-fluid relative">
+    <div className="site-container">
       <Reveal>
-        <div className="text-center max-w-[820px] mx-auto">
-          <div className="flex items-center justify-center gap-3 mb-8">
-            <span className="w-12 h-px bg-champagne"></span>
-            <span className="text-champagne text-[11px] tracking-[0.3em] uppercase font-sans">About</span>
-            <span className="w-12 h-px bg-champagne"></span>
-          </div>
-          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-light text-ivory leading-tight mb-10">
-            Where Luxury<br />Meets <span className="italic text-champagne">Expertise</span>
-          </h2>
-          <div className="space-y-6">
-            <p className="text-ivory/70 text-base sm:text-lg font-sans leading-relaxed">
-              Dukes of Beauty is more than a salon — it is a destination for those who appreciate the finest things. Located in the prestigious Business Bay, our atelier combines world-class techniques with premium products from K18, Tokio Inkarami, Nashi, and Kevin Murphy.
-            </p>
-            <p className="text-ivory/70 text-base sm:text-lg font-sans leading-relaxed">
-              From synchronized 4-hand and 6-hand treatments to advanced HydraFacial Syndeo protocols, every service is designed to deliver an unparalleled experience.
-            </p>
-          </div>
+        <SectionHeader
+          eyebrow="About"
+          title={<>Where Luxury<br />Meets <span className="italic text-champagne">Expertise</span></>}
+        />
+        <div className="max-w-[820px] mx-auto space-y-6 text-center">
+          <p className="text-ivory/70 text-base sm:text-lg font-sans leading-relaxed">
+            Dukes of Beauty is more than a salon — it is a destination for those who appreciate the finest things. Located in the prestigious Business Bay, our atelier combines world-class techniques with premium products from K18, Tokio Inkarami, Nashi, and Kevin Murphy.
+          </p>
+          <p className="text-ivory/70 text-base sm:text-lg font-sans leading-relaxed">
+            From synchronized 4-hand and 6-hand treatments to advanced HydraFacial Syndeo protocols, every service is designed to deliver an unparalleled experience.
+          </p>
         </div>
       </Reveal>
     </div>
@@ -382,22 +401,14 @@ const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices }:
   };
 
   return (
-    <section id="services" className="section-spacing relative">
-      <div className="container-luxury">
+    <section id="services" className="section-fluid relative">
+      <div className="site-container">
         <Reveal>
-          <div className="text-center mb-16 sm:mb-20">
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <span className="w-12 h-px bg-champagne"></span>
-              <span className="text-champagne text-[11px] tracking-[0.3em] uppercase font-sans">Treatment Menu</span>
-              <span className="w-12 h-px bg-champagne"></span>
-            </div>
-            <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-light text-ivory leading-tight">
-              Our <span className="italic text-champagne">Services</span>
-            </h2>
-            <p className="mt-6 text-ivory/60 text-base sm:text-lg font-sans max-w-2xl mx-auto leading-relaxed">
-              Discover our comprehensive range of premium beauty treatments. All prices in AED.
-            </p>
-          </div>
+          <SectionHeader
+            eyebrow="Treatment Menu"
+            title={<>Our <span className="italic text-champagne">Services</span></>}
+            description="Discover our comprehensive range of premium beauty treatments. All prices in AED."
+          />
         </Reveal>
 
         <Reveal>
@@ -569,22 +580,14 @@ const InstagramSection = () => {
   const slideWidth = 100 / visibleSlides;
 
   return (
-    <section id="instagram" className="section-spacing relative overflow-hidden">
-      <div className="container-luxury">
+    <section id="instagram" className="section-fluid relative overflow-hidden">
+      <div className="site-container">
         <Reveal>
-          <div className="text-center mb-12 sm:mb-16">
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <span className="w-12 h-px bg-champagne"></span>
-              <span className="text-champagne text-[11px] tracking-[0.3em] uppercase font-sans">Instagram</span>
-              <span className="w-12 h-px bg-champagne"></span>
-            </div>
-            <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-light text-ivory leading-tight">
-              Follow Our <span className="italic text-champagne">Beauty Journey</span>
-            </h2>
-            <p className="mt-6 text-ivory/60 text-base sm:text-lg font-sans max-w-2xl mx-auto leading-relaxed">
-              Real transformations and daily inspiration from @dukes_of_beauty.ae
-            </p>
-          </div>
+          <SectionHeader
+            eyebrow="Instagram"
+            title={<>Follow Our <span className="italic text-champagne">Beauty Journey</span></>}
+            description="Real transformations and daily inspiration from @dukes_of_beauty.ae"
+          />
         </Reveal>
 
         {/* Carousel Container */}
@@ -763,22 +766,14 @@ const GallerySection = () => {
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
 
   return (
-    <section id="gallery" className="section-spacing relative">
-      <div className="container-luxury">
+    <section id="gallery" className="section-fluid relative">
+      <div className="site-container">
         <Reveal>
-          <div className="text-center mb-12">
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <span className="w-12 h-px bg-champagne"></span>
-              <span className="text-champagne text-[11px] tracking-[0.3em] uppercase font-sans">Gallery</span>
-              <span className="w-12 h-px bg-champagne"></span>
-            </div>
-            <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-light text-ivory leading-tight">
-              Our <span className="italic text-champagne">Salon</span>
-            </h2>
-            <p className="mt-6 text-ivory/60 text-base sm:text-lg font-sans max-w-2xl mx-auto">
-              Real photographs from our salon and client experiences.
-            </p>
-          </div>
+          <SectionHeader
+            eyebrow="Gallery"
+            title={<>Our <span className="italic text-champagne">Salon</span></>}
+            description="Real photographs from our salon and client experiences."
+          />
         </Reveal>
 
         {/* Photo Grid */}
@@ -849,26 +844,18 @@ const GallerySection = () => {
 // ==================== REVIEWS ====================
 const ReviewsSection = () => {
   return (
-    <section id="reviews" className="section-spacing relative">
-      <div className="container-luxury">
+    <section id="reviews" className="section-fluid relative">
+      <div className="site-container">
         <Reveal>
-          <div className="text-center mb-12">
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <span className="w-12 h-px bg-champagne"></span>
-              <span className="text-champagne text-[11px] tracking-[0.3em] uppercase font-sans">Reviews</span>
-              <span className="w-12 h-px bg-champagne"></span>
-            </div>
-            <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-light text-ivory leading-tight">
-              Client <span className="italic text-champagne">Reviews</span>
-            </h2>
-            <p className="mt-6 text-ivory/60 text-base sm:text-lg font-sans max-w-2xl mx-auto leading-relaxed">
-              Read authentic reviews from our clients on Google Maps.
-            </p>
-          </div>
+          <SectionHeader
+            eyebrow="Reviews"
+            title={<>Client <span className="italic text-champagne">Reviews</span></>}
+            description="Read authentic reviews from our clients on Google Maps."
+          />
         </Reveal>
 
         <Reveal delay={200}>
-          <div className="mt-12 max-w-2xl mx-auto text-center">
+          <div className="max-w-2xl mx-auto text-center">
             <a
               href="https://www.google.com/maps/place/?q=place_id:ChIJQw1xKtxpXz4R5ZcIoAWMGdE"
               target="_blank"
@@ -890,19 +877,13 @@ const ReviewsSection = () => {
 
 // ==================== CONTACT ====================
 const ContactSection = () => (
-  <section id="contact" className="section-spacing relative">
-    <div className="container-luxury">
+  <section id="contact" className="section-fluid relative">
+    <div className="site-container">
       <Reveal>
-        <div className="text-center mb-16">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <span className="w-12 h-px bg-champagne"></span>
-            <span className="text-champagne text-[11px] tracking-[0.3em] uppercase font-sans">Contact</span>
-            <span className="w-12 h-px bg-champagne"></span>
-          </div>
-          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-light text-ivory leading-tight">
-            Visit <span className="italic text-champagne">Us</span>
-          </h2>
-        </div>
+        <SectionHeader
+          eyebrow="Contact"
+          title={<>Visit <span className="italic text-champagne">Us</span></>}
+        />
       </Reveal>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
@@ -966,7 +947,7 @@ const Footer = () => {
   
   return (
     <footer className="border-t border-champagne/10 py-12 sm:py-16">
-      <div className="container-luxury">
+      <div className="site-container">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <Logo size="md" />
           
