@@ -851,21 +851,30 @@ const GallerySection = () => {
 };
 
 // ==================== REVIEWS ====================
-// ==================== REVIEWS ====================
 const ReviewsSection = () => {
   return (
-    <section id="reviews" className="section-fluid relative">
+    <section id="reviews" className="py-16 sm:py-20 relative">
       <div className="site-container">
-        <Reveal>
-          <SectionHeader
-            eyebrow="Reviews"
-            title={<>Client <span className="italic text-champagne">Reviews</span></>}
-            description="Read authentic reviews from our clients on Google Maps."
-          />
-        </Reveal>
+        <div className="max-w-3xl mx-auto text-center">
+          <Reveal>
+            {/* Eyebrow */}
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <span className="w-12 h-px bg-champagne/30"></span>
+              <span className="text-champagne text-[11px] tracking-[0.3em] uppercase font-sans">Reviews</span>
+              <span className="w-12 h-px bg-champagne/30"></span>
+            </div>
 
-        <Reveal delay={200}>
-          <div className="max-w-2xl mx-auto text-center">
+            {/* Heading */}
+            <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-light text-ivory leading-tight mb-6">
+              Client <span className="italic text-champagne">Reviews</span>
+            </h2>
+
+            {/* Description */}
+            <p className="text-ivory/60 text-base sm:text-lg font-sans font-light leading-relaxed mb-10 max-w-2xl mx-auto">
+              Read authentic reviews from our clients on Google Maps.
+            </p>
+
+            {/* Google Button */}
             <a
               href="https://www.google.com/maps/place/?q=place_id:ChIJQw1xKtxpXz4R5ZcIoAWMGdE"
               target="_blank"
@@ -875,11 +884,8 @@ const ReviewsSection = () => {
               <i className="fab fa-google text-lg"></i>
               View Reviews on Google
             </a>
-            <p className="mt-6 text-ivory/40 text-sm font-sans">
-              All reviews are verified and hosted on Google Maps
-            </p>
-          </div>
-        </Reveal>
+          </Reveal>
+        </div>
       </div>
     </section>
   );
