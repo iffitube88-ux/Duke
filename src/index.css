@@ -242,6 +242,332 @@ body {
 }
 
 /* ============================================
+   PRINT STYLES - PDF EXPORT FIX
+   ============================================ */
+
+@media print {
+  /* Page Setup */
+  @page {
+    size: A4;
+    margin: 10mm;
+  }
+
+  /* Force Background Colors */
+  html,
+  body {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  /* Hide Website-Only UI Elements */
+  nav,
+  .whatsapp-badge,
+  .booking-modal,
+  .carousel-controls,
+  .carousel-dots,
+  .mobile-menu,
+  button,
+  .btn-luxury,
+  .btn-outline,
+  .btn-ghost,
+  input[type="checkbox"],
+  .custom-checkbox,
+  .search-field,
+  .category-tab,
+  iframe {
+    display: none !important;
+  }
+
+  /* Remove All Viewport Heights */
+  * {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+
+  /* Remove Fixed/Sticky Positioning */
+  * {
+    position: static !important;
+  }
+
+  /* Force Lazy Content to be Visible */
+  .animate-fade-in,
+  .animate-fade-in-up,
+  .animate-fade-in-down,
+  .animate-scale-in,
+  .animate-slide-up {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* Container Width for Print */
+  .site-container,
+  .container-luxury {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Section Spacing for Print */
+  .section-fluid {
+    padding-block: 20mm !important;
+  }
+
+  /* Page Breaks */
+  section {
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+
+  /* Prevent Splitting Cards */
+  .service-row,
+  .glass-row,
+  .review-card,
+  .gallery-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Hero Section - Clean Print Version */
+  .hero-section {
+    page-break-after: always;
+    break-after: page;
+  }
+
+  .hero-section .hero-content {
+    position: relative !important;
+    padding: 20mm !important;
+  }
+
+  .hero-section .hero-image {
+    position: relative !important;
+    height: 80mm !important;
+    margin-bottom: 10mm !important;
+  }
+
+  .hero-section .hero-overlay {
+    display: none !important;
+  }
+
+  /* Services Section - Compact Print */
+  .service-row {
+    padding: 3mm 5mm !important;
+    margin-bottom: 2mm !important;
+    border: 1px solid rgba(200, 173, 131, 0.2) !important;
+  }
+
+  .service-row .service-name {
+    font-size: 11pt !important;
+  }
+
+  .service-row .service-price {
+    font-size: 10pt !important;
+  }
+
+  .service-row .service-duration {
+    font-size: 9pt !important;
+  }
+
+  /* Hide Interactive Elements in Service Rows */
+  .service-row input[type="checkbox"],
+  .service-row .custom-checkbox {
+    display: none !important;
+  }
+
+  /* Instagram Section - Hide Embeds */
+  #instagram {
+    page-break-before: always;
+    break-before: page;
+  }
+
+  #instagram .instagram-carousel {
+    display: none !important;
+  }
+
+  #instagram .instagram-fallback {
+    display: block !important;
+    text-align: center;
+    padding: 20mm !important;
+  }
+
+  /* Gallery Section */
+  .gallery-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 5mm !important;
+  }
+
+  .gallery-card {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Reviews Section */
+  .review-card {
+    padding: 5mm !important;
+    margin-bottom: 5mm !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Contact Section */
+  .contact-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 5mm !important;
+  }
+
+  /* Footer - Natural Flow */
+  footer {
+    page-break-before: auto;
+    break-before: auto;
+    margin-top: 10mm !important;
+    padding: 5mm !important;
+  }
+
+  /* Remove Decorative Elements */
+  .section-header-line,
+  .gold-line,
+  .section-divider {
+    display: none !important;
+  }
+
+  /* Typography Adjustments for Print */
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* Links - Show URL for Important Links */
+  a[href^="http"]:after {
+    content: " (" attr(href) ")";
+    font-size: 8pt;
+    color: #666;
+  }
+
+  /* Don't show URL for internal links */
+  a[href^="#"]:after,
+  a[href^="mailto:"]:after,
+  a[href^="tel:"]:after {
+    content: "";
+  }
+
+  /* Remove Animations */
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* Ensure Text is Selectable */
+  * {
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    -ms-user-select: text !important;
+    user-select: text !important;
+  }
+
+  /* Remove Shadows and Effects */
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  /* Simplify Backgrounds for Print */
+  .glass-row,
+  .service-row-selected,
+  .category-tab-active {
+    background: rgba(200, 173, 131, 0.05) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Ensure Proper Contrast */
+  body {
+    color: #000 !important;
+    background: #fff !important;
+  }
+
+  .text-ivory,
+  .text-ivory\/90,
+  .text-ivory\/80,
+  .text-ivory\/70,
+  .text-ivory\/60,
+  .text-ivory\/50,
+  .text-ivory\/40 {
+    color: #000 !important;
+  }
+
+  .text-champagne {
+    color: #8B7355 !important;
+  }
+
+  /* Page Break Before Major Sections */
+  #services,
+  #gallery,
+  #reviews,
+  #contact {
+    page-break-before: always;
+    break-before: page;
+  }
+
+  /* Remove Excessive Margins */
+  .section-header {
+    margin-bottom: 10mm !important;
+  }
+
+  /* Compact Service List */
+  .service-list {
+    gap: 2mm !important;
+  }
+
+  /* Hide Scroll Indicators */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  /* Ensure Images Print */
+  img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Remove Floating Elements */
+  .fixed,
+  .sticky {
+    position: static !important;
+  }
+
+  /* Print Logo Properly */
+  .logo img {
+    max-width: 50mm !important;
+    height: auto !important;
+  }
+
+  /* Hide elements in screen mode that are print-only */
+  .instagram-fallback {
+    display: block !important;
+  }
+}
+
+/* Show Instagram fallback only in print */
+@media screen {
+  .instagram-fallback {
+    display: none !important;
+  }
+}
+
+/* ============================================
    GLOBAL RESPONSIVE LAYOUT SYSTEM
    ============================================ */
 

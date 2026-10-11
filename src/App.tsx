@@ -141,18 +141,18 @@ const HeroSection = ({ onBookClick }: { onBookClick: () => void }) => {
   useEffect(() => { setLoaded(true); }, []);
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-end overflow-hidden">
-      <div className="absolute inset-0">
+    <section className="hero-section relative min-h-screen flex flex-col justify-end overflow-hidden">
+      <div className="hero-image absolute inset-0">
         <img
           src="https://i.imgur.com/pFDeBJV_d.webp?maxwidth=760&fidelity=grand"
           alt="Dukes of Beauty - Luxury Salon Interior"
           className={`absolute inset-0 w-full h-full object-cover object-center ${loaded ? 'animate-ken-burns' : 'opacity-0'}`}
           onError={(e) => { e.currentTarget.style.display = 'none'; }}
         />
-        <div className="absolute inset-0 hero-overlay"></div>
+        <div className="hero-overlay absolute inset-0"></div>
       </div>
 
-      <div className="relative z-10 w-full px-5 pb-12 pt-32 sm:px-8 sm:pb-16 sm:pt-40 md:px-12 md:pb-20 lg:px-20">
+      <div className="hero-content relative z-10 w-full px-5 pb-12 pt-32 sm:px-8 sm:pb-16 sm:pt-40 md:px-12 md:pb-20 lg:px-20">
         <div className="max-w-[640px]">
           {/* Location tag */}
           <div className={`transition-all duration-1000 delay-500 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
@@ -712,6 +712,16 @@ const InstagramSection = () => {
             </a>
           </div>
         </Reveal>
+
+        {/* Print Fallback - Only visible in print */}
+        <div className="instagram-fallback hidden print:block">
+          <div className="text-center py-8 border border-champagne/20 rounded-lg">
+            <i className="fab fa-instagram text-4xl text-champagne mb-4"></i>
+            <h3 className="text-xl font-serif text-ivory mb-2">Follow Us on Instagram</h3>
+            <p className="text-ivory/70 mb-4">View our latest transformations and daily inspiration</p>
+            <p className="text-champagne font-medium">@dukes_of_beauty.ae</p>
+          </div>
+        </div>
       </div>
     </section>
   );
