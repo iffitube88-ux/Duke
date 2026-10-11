@@ -141,7 +141,7 @@ const HeroSection = ({ onBookClick }: { onBookClick: () => void }) => {
   useEffect(() => { setLoaded(true); }, []);
 
   return (
-    <section className="hero-section relative min-h-screen flex flex-col justify-end overflow-hidden">
+    <section className="hero-section relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="hero-image absolute inset-0">
         <img
           src="https://i.imgur.com/pFDeBJV_d.webp?maxwidth=760&fidelity=grand"
@@ -152,51 +152,51 @@ const HeroSection = ({ onBookClick }: { onBookClick: () => void }) => {
         <div className="hero-overlay absolute inset-0"></div>
       </div>
 
-      <div className="hero-content relative z-10 w-full px-5 pb-12 pt-32 sm:px-8 sm:pb-16 sm:pt-40 md:px-12 md:pb-20 lg:px-20">
-        <div className="max-w-[640px]">
+      <div className="hero-content relative z-10 w-full px-5 sm:px-8 md:px-12 lg:px-20 py-20">
+        <div className="max-w-4xl mx-auto text-center">
           {/* Location tag */}
           <div className={`transition-all duration-1000 delay-500 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <div className="flex items-center gap-3 mb-6">
-              <span className="w-12 h-px bg-champagne"></span>
-              <span className="text-champagne text-[11px] tracking-[0.3em] uppercase font-sans">Business Bay · Dubai</span>
+            <div className="inline-flex items-center gap-3 mb-8 px-5 py-2.5 rounded-full bg-black/20 backdrop-blur-sm border border-champagne/20">
+              <span className="w-2 h-2 bg-champagne rounded-full animate-pulse"></span>
+              <span className="text-champagne text-xs tracking-[0.2em] uppercase font-sans font-medium">Business Bay · Dubai</span>
             </div>
           </div>
 
           {/* Main headline */}
-          <h1 className={`hero-title font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-ivory leading-[1.05] tracking-tight mb-6 transition-all duration-1000 delay-700 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+          <h1 className={`hero-title font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light text-ivory leading-[1.05] tracking-tight mb-8 transition-all duration-1000 delay-700 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
             The Art of<br />
             <span className="animate-shimmer italic">Beauty</span>
           </h1>
 
           {/* Subtitle */}
-          <p className={`mb-8 text-ivory/80 text-base sm:text-lg font-sans font-light leading-relaxed max-w-[500px] transition-all duration-1000 delay-900 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <p className={`mb-10 text-ivory/80 text-lg sm:text-xl md:text-2xl font-sans font-light leading-relaxed max-w-2xl mx-auto transition-all duration-1000 delay-900 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             A sanctuary of luxury where precision meets artistry. Premium hair, nails, aesthetics & wellness in the heart of Dubai.
           </p>
 
           {/* CTAs */}
-          <div className={`mb-8 flex flex-col sm:flex-row gap-3 sm:gap-4 max-w-md transition-all duration-1000 delay-1000 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <button onClick={onBookClick} className="btn-luxury w-full sm:w-auto">
+          <div className={`mb-10 flex flex-col sm:flex-row gap-4 justify-center items-center transition-all duration-1000 delay-1000 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <button onClick={onBookClick} className="btn-luxury w-full sm:w-auto px-10">
               Reserve Your Visit
             </button>
-            <a href="#services" className="btn-outline w-full sm:w-auto text-center">
+            <a href="#services" className="btn-outline w-full sm:w-auto px-10 text-center">
               View Services
             </a>
           </div>
 
-          {/* Small trust indicator */}
+          {/* Trust indicator */}
           <div className={`transition-all duration-1000 delay-[1200ms] ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <a 
               href="https://www.google.com/maps/place/?q=place_id:ChIJQw1xKtxpXz4R5ZcIoAWMGdE"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+              className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-black/20 backdrop-blur-sm border border-champagne/20 hover:border-champagne/40 transition-all group"
             >
-              <div className="flex gap-0.5">
+              <div className="flex gap-1">
                 {[...Array(5)].map((_, i) => (
-                  <svg key={i} className="w-3.5 h-3.5 text-champagne fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                  <svg key={i} className="w-4 h-4 text-champagne fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
                 ))}
               </div>
-              <span className="text-ivory/60 text-xs font-sans tracking-wide">View Google Reviews</span>
+              <span className="text-ivory/80 text-sm font-sans font-medium group-hover:text-champagne transition-colors">View Google Reviews</span>
             </a>
           </div>
         </div>
@@ -213,10 +213,36 @@ const AboutSection = () => (
         <SectionHeader
           eyebrow="About"
           title={<>Where Luxury<br />Meets <span className="italic text-champagne">Expertise</span></>}
-          description="Dukes of Beauty is more than a salon — it is a destination for those who appreciate the finest things. Located in the prestigious Business Bay, our atelier combines world-class techniques with premium products from K18, Tokio Inkarami, Nashi, and Kevin Murphy."
         />
-        <div className="max-w-[680px] mx-auto text-center">
-          <p className="text-ivory/70 text-base sm:text-lg font-sans leading-relaxed">
+        
+        <div className="max-w-3xl mx-auto space-y-8">
+          <p className="text-ivory/70 text-lg sm:text-xl font-sans leading-relaxed text-center">
+            Dukes of Beauty is more than a salon — it is a destination for those who appreciate the finest things. Located in the prestigious Business Bay, our atelier combines world-class techniques with premium products from K18, Tokio Inkarami, Nashi, and Kevin Murphy.
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8">
+            <div className="text-center p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-champagne/10">
+              <div className="text-4xl font-serif text-champagne mb-2">4.9</div>
+              <div className="flex justify-center gap-1 mb-2">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} className="w-4 h-4 text-champagne fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                ))}
+              </div>
+              <p className="text-ivory/60 text-sm font-sans">Google Rating</p>
+            </div>
+            
+            <div className="text-center p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-champagne/10">
+              <div className="text-4xl font-serif text-champagne mb-2">111+</div>
+              <p className="text-ivory/60 text-sm font-sans">Premium Services</p>
+            </div>
+            
+            <div className="text-center p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-champagne/10">
+              <div className="text-4xl font-serif text-champagne mb-2">7</div>
+              <p className="text-ivory/60 text-sm font-sans">Expert Categories</p>
+            </div>
+          </div>
+          
+          <p className="text-ivory/70 text-lg sm:text-xl font-sans leading-relaxed text-center pt-4">
             From synchronized 4-hand and 6-hand treatments to advanced HydraFacial Syndeo protocols, every service is designed to deliver an unparalleled experience.
           </p>
         </div>
@@ -434,53 +460,74 @@ const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices }:
         {/* Services Catalog */}
         <Reveal>
           <div className="mb-8">
-            <div className="mb-10 pb-6 border-b border-champagne/10">
-              <h3 className="font-serif text-3xl sm:text-4xl text-ivory flex items-center gap-3">
-                <span className="text-3xl sm:text-4xl">{activeCategory.icon}</span>
-                {activeCategory.title}
-              </h3>
-              <p className="text-ivory/50 text-sm font-sans mt-3">{activeCategory.services.length} treatments available</p>
+            {/* Category Header */}
+            <div className="mb-10 pb-8 border-b border-champagne/20">
+              <div className="flex items-center gap-4 mb-3">
+                <span className="text-4xl">{activeCategory.icon}</span>
+                <h3 className="font-serif text-3xl sm:text-4xl text-ivory">
+                  {activeCategory.title}
+                </h3>
+              </div>
+              <p className="text-ivory/50 text-sm font-sans">
+                {activeCategory.services.length} treatments available
+              </p>
             </div>
 
-            {/* Service list with glass effect */}
-            <div className="space-y-3">
+            {/* Service list with improved design */}
+            <div className="space-y-4">
               {activeCategory.services.map((service, i) => {
                 const isSelected = selectedServices.includes(service.name);
                 return (
                   <div
                     key={i}
                     onClick={() => toggleService(service.name)}
-                    className={`service-row rounded-xl cursor-pointer flex items-center gap-4 ${
-                      isSelected ? 'service-row-selected' : ''
+                    className={`group relative rounded-2xl cursor-pointer transition-all duration-300 ${
+                      isSelected 
+                        ? 'service-row-selected' 
+                        : 'service-row hover:border-champagne/30'
                     }`}
                   >
-                    {/* Left: Service info */}
-                    <div className="flex-1 min-w-0">
-                      <h4 className={`font-serif text-lg sm:text-xl transition-colors leading-snug ${
-                        isSelected ? 'text-champagne' : 'text-ivory/90 group-hover:text-ivory'
-                      }`}>
-                        {service.name}
-                      </h4>
-                      <p className="text-ivory/50 text-sm font-sans mt-1">
-                        {service.duration}
-                      </p>
-                    </div>
-
-                    {/* Right: Price + Checkbox */}
-                    <div className="flex items-center gap-4 flex-shrink-0">
-                      <p className={`font-sans text-base sm:text-lg font-semibold whitespace-nowrap ${
-                        isSelected ? 'text-champagne' : 'text-ivory/80'
-                      }`}>
-                        {service.price}
-                      </p>
-                      <div className={`custom-checkbox ${isSelected ? 'custom-checkbox-checked' : ''}`}>
-                        {isSelected && (
-                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C8AD83" strokeWidth="3">
-                            <polyline points="20 6 9 17 4 12"></polyline>
+                    <div className="flex items-center justify-between gap-6 p-6">
+                      {/* Left: Service info */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-3 mb-2">
+                          <h4 className={`font-serif text-xl sm:text-2xl transition-colors leading-snug ${
+                            isSelected ? 'text-champagne' : 'text-ivory/90'
+                          }`}>
+                            {service.name}
+                          </h4>
+                        </div>
+                        <div className="flex items-center gap-2 text-ivory/50">
+                          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                           </svg>
-                        )}
+                          <span className="text-sm font-sans">{service.duration}</span>
+                        </div>
+                      </div>
+
+                      {/* Right: Price + Checkbox */}
+                      <div className="flex items-center gap-6 flex-shrink-0">
+                        <div className="text-right">
+                          <p className={`font-sans text-lg sm:text-xl font-semibold whitespace-nowrap transition-colors ${
+                            isSelected ? 'text-champagne' : 'text-ivory/80'
+                          }`}>
+                            {service.price}
+                          </p>
+                        </div>
+                        <div className={`custom-checkbox transition-all ${isSelected ? 'custom-checkbox-checked scale-110' : 'group-hover:border-champagne/50'}`}>
+                          {isSelected && (
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C8AD83" strokeWidth="3">
+                              <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                          )}
+                        </div>
                       </div>
                     </div>
+                    
+                    {/* Selected indicator bar */}
+                    {isSelected && (
+                      <div className="absolute left-0 top-0 bottom-0 w-1 bg-champagne rounded-l-2xl"></div>
+                    )}
                   </div>
                 );
               })}
@@ -490,13 +537,24 @@ const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices }:
 
         {/* Floating Booking Bar */}
         {selectedServices.length > 0 && (
-          <div className="sticky bottom-6 mt-8 booking-modal rounded-2xl p-6 z-40">
-            <div className="flex items-center justify-between gap-4">
-              <div>
-                <p className="text-ivory text-lg font-sans font-medium">{selectedServices.length} service{selectedServices.length > 1 ? 's' : ''} selected</p>
-                <p className="text-champagne text-base font-sans font-semibold mt-1">Estimated total: {calculateTotal()} AED</p>
+          <div className="sticky bottom-6 mt-12 booking-modal rounded-2xl p-6 sm:p-8 z-40 shadow-2xl">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+              <div className="flex-1">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-10 h-10 rounded-full bg-champagne/20 flex items-center justify-center">
+                    <svg className="w-5 h-5 text-champagne" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <p className="text-ivory text-lg font-sans font-medium">
+                    {selectedServices.length} service{selectedServices.length > 1 ? 's' : ''} selected
+                  </p>
+                </div>
+                <p className="text-champagne text-xl font-sans font-semibold ml-13">
+                  Estimated total: {calculateTotal()} AED
+                </p>
               </div>
-              <button onClick={onBookClick} className="btn-luxury">
+              <button onClick={onBookClick} className="btn-luxury w-full sm:w-auto px-10">
                 Continue Booking
               </button>
             </div>

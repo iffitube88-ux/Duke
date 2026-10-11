@@ -148,46 +148,49 @@ body {
   font-weight: 600;
   font-size: 15px;
   letter-spacing: 0.05em;
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   min-height: 52px;
-  padding: 0 28px;
+  padding: 0 32px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
+  box-shadow: 0 4px 16px rgba(200, 173, 131, 0.2);
 }
 
 .btn-luxury:hover {
   background-position: right center;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 40px rgba(200, 173, 131, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(200, 173, 131, 0.4);
 }
 
 .btn-luxury:active {
-  transform: translateY(0);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(200, 173, 131, 0.3);
 }
 
 .btn-luxury:disabled {
   opacity: 0.5;
   cursor: not-allowed;
   transform: none;
+  box-shadow: none;
 }
 
 .btn-luxury-sm {
   min-height: 48px;
-  padding: 0 24px;
+  padding: 0 28px;
   font-size: 14px;
 }
 
 .btn-outline {
-  border: 1px solid rgba(200, 173, 131, 0.3);
+  border: 2px solid rgba(200, 173, 131, 0.3);
   color: #C8AD83;
   font-weight: 500;
   font-size: 15px;
   letter-spacing: 0.05em;
-  transition: all 0.4s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   min-height: 52px;
-  padding: 0 28px;
+  padding: 0 32px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -197,11 +200,14 @@ body {
 
 .btn-outline:hover {
   border-color: #C8AD83;
-  background: rgba(200, 173, 131, 0.08);
+  background: rgba(200, 173, 131, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(200, 173, 131, 0.15);
 }
 
 .btn-outline:active {
-  background: rgba(200, 173, 131, 0.12);
+  background: rgba(200, 173, 131, 0.15);
+  transform: translateY(0);
 }
 
 .btn-ghost {
@@ -220,16 +226,19 @@ body {
 
 .btn-ghost:hover {
   background: rgba(244, 239, 231, 0.08);
+  transform: translateY(-1px);
 }
 
 /* Hero overlay - improved contrast for text readability */
 .hero-overlay {
-  background: linear-gradient(
-    180deg,
-    rgba(11, 11, 13, 0.3) 0%,
-    rgba(11, 11, 13, 0.5) 50%,
-    rgba(11, 11, 13, 0.85) 100%
-  );
+  background: 
+    radial-gradient(ellipse at center, rgba(11, 11, 13, 0.2) 0%, rgba(11, 11, 13, 0.6) 100%),
+    linear-gradient(
+      180deg,
+      rgba(11, 11, 13, 0.1) 0%,
+      rgba(11, 11, 13, 0.4) 40%,
+      rgba(11, 11, 13, 0.8) 100%
+    );
 }
 
 /* Button constraints for mobile */
@@ -637,26 +646,31 @@ body {
 
 /* Service Row - Liquid Glass */
 .service-row {
-  background: rgba(36, 33, 37, 0.3);
+  background: rgba(36, 33, 37, 0.4);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(200, 173, 131, 0.1);
-  min-height: 72px;
-  padding: 16px 20px;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .service-row:hover {
-  background: rgba(36, 33, 37, 0.4);
-  border-color: rgba(200, 173, 131, 0.2);
+  background: rgba(36, 33, 37, 0.5);
+  border-color: rgba(200, 173, 131, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
 .service-row-selected {
-  background: rgba(200, 173, 131, 0.1);
+  background: rgba(200, 173, 131, 0.12);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(200, 173, 131, 0.3);
-  box-shadow: 0 4px 12px rgba(200, 173, 131, 0.1);
+  border: 1px solid rgba(200, 173, 131, 0.4);
+  box-shadow: 0 4px 20px rgba(200, 173, 131, 0.15);
+}
+
+.service-row-selected:hover {
+  background: rgba(200, 173, 131, 0.15);
+  border-color: rgba(200, 173, 131, 0.5);
 }
 
 /* Category Tab - Liquid Glass */
@@ -702,28 +716,35 @@ body {
 
 /* Custom Checkbox */
 .custom-checkbox {
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
-  min-height: 44px;
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 12px;
   border: 2px solid rgba(200, 173, 131, 0.3);
   background: rgba(36, 33, 37, 0.5);
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
 }
 
 .custom-checkbox:hover {
-  border-color: rgba(200, 173, 131, 0.5);
-  background: rgba(36, 33, 37, 0.6);
+  border-color: rgba(200, 173, 131, 0.6);
+  background: rgba(36, 33, 37, 0.7);
+  transform: scale(1.05);
 }
 
 .custom-checkbox-checked {
-  background: rgba(200, 173, 131, 0.2);
-  border-color: rgba(200, 173, 131, 0.6);
+  background: rgba(200, 173, 131, 0.25);
+  border-color: rgba(200, 173, 131, 0.7);
+  box-shadow: 0 0 20px rgba(200, 173, 131, 0.2);
+}
+
+.custom-checkbox-checked:hover {
+  background: rgba(200, 173, 131, 0.3);
+  border-color: rgba(200, 173, 131, 0.8);
 }
 
 /* Section spacing - consistent scale */
