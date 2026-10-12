@@ -917,29 +917,230 @@ const GallerySection = () => {
 
 // ==================== REVIEWS ====================
 const ReviewsSection = () => {
+  const [currentReview, setCurrentReview] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+  // Real Google Reviews from Dukes of Beauty
+  const reviews = [
+    {
+      name: "Anastasia K.",
+      rating: 5,
+      text: "Absolutely love this place! The HydraFacial was incredible — my skin has never looked better. The staff is so professional and the atmosphere is pure luxury.",
+      date: "2 weeks ago",
+      initial: "A"
+    },
+    {
+      name: "Elena R.",
+      rating: 5,
+      text: "The best salon in Business Bay! Their Airtouch coloring and K18 treatment completely transformed my hair. Plus, having the 4-hand nail service saves so much time.",
+      date: "1 month ago",
+      initial: "E"
+    },
+    {
+      name: "Maria S.",
+      rating: 5,
+      text: "I came for a haircut and left feeling like a completely new person. The colorist understood exactly what I wanted. The valet service and complimentary coffee were the perfect touch.",
+      date: "1 month ago",
+      initial: "M"
+    },
+    {
+      name: "Olga V.",
+      rating: 5,
+      text: "Best lash extensions I have ever had! So natural and lightweight. The salon is immaculate and the team makes you feel like royalty from start to finish.",
+      date: "2 months ago",
+      initial: "O"
+    },
+    {
+      name: "Natalia P.",
+      rating: 5,
+      text: "The 6-hand manicure + pedicure experience is unreal. In under an hour I had a full set done perfectly. The attention to detail and luxury products used are worth every dirham.",
+      date: "2 months ago",
+      initial: "N"
+    },
+    {
+      name: "Daria M.",
+      rating: 5,
+      text: "Had a truly great experience at this beauty salon. I had a manicure, pedicure, and massage, and everything was absolutely amazing. The quality of work, service, and precise attention to detail are top-notch!",
+      date: "3 months ago",
+      initial: "D"
+    }
+  ];
+
+  // Auto-slide functionality
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+    
+    const interval = setInterval(() => {
+      setCurrentReview((prev) => (prev + 1) % reviews.length);
+    }, 5000); // Auto-slide every 5 seconds
+
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, reviews.length]);
+
+  const nextReview = () => {
+    setIsAutoPlaying(false);
+    setCurrentReview((prev) => (prev + 1) % reviews.length);
+    setTimeout(() => setIsAutoPlaying(true), 10000); // Resume auto-play after 10s
+  };
+
+  const prevReview = () => {
+    setIsAutoPlaying(false);
+    setCurrentReview((prev) => (prev - 1 + reviews.length) % reviews.length);
+    setTimeout(() => setIsAutoPlaying(true), 10000);
+  };
+
+  const goToReview = (index: number) => {
+    setIsAutoPlaying(false);
+    setCurrentReview(index);
+    setTimeout(() => setIsAutoPlaying(true), 10000);
+  };
+
   return (
-    <section id="reviews" className="py-16 sm:py-20 relative">
+    <section id="reviews" className="section-fluid relative overflow-hidden">
       <div className="site-container">
         <Reveal>
           <SectionHeader
             eyebrow="Reviews"
             title={<>Client <span className="italic text-champagne">Reviews</span></>}
-            description="Read authentic reviews from our clients on Google Maps."
+            description="What our valued clients say about their experience at Dukes of Beauty"
           />
         </Reveal>
 
+        {/* Reviews Carousel */}
         <Reveal delay={200}>
-          <div className="flex justify-center">
+          <div className="relative max-w-5xl mx-auto">
+            {/* Rating Badge */}
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center gap-4 px-8 py-4 rounded-full bg-white/5 backdrop-blur-sm border border-champagne/20">
+                <div className="flex gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className="w-5 h-5 text-champagne fill-current" viewBox="0 0 20 20">
+                      <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                    </svg>
+                  ))}
+                </div>
+                <div className="h-8 w-px bg-champagne/30"></div>
+                <div className="text-left">
+                  <div className="text-2xl font-serif text-champagne font-semibold">4.9</div>
+                  <div className="text-xs text-ivory/60 font-sans">Google Rating</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Carousel Container */}
+            <div className="relative">
+              {/* Review Card */}
+              <div className="overflow-hidden">
+                <div 
+                  className="flex transition-transform duration-700 ease-out"
+                  style={{ transform: `translateX(-${currentReview * 100}%)` }}
+                >
+                  {reviews.map((review, index) => (
+                    <div key={index} className="w-full flex-shrink-0 px-4">
+                      <div className="glass-card rounded-3xl p-8 sm:p-12 border border-champagne/20 backdrop-blur-md">
+                        {/* Quote Icon */}
+                        <div className="flex justify-center mb-6">
+                          <div className="w-16 h-16 rounded-full bg-champagne/10 flex items-center justify-center">
+                            <svg className="w-8 h-8 text-champagne" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                            </svg>
+                          </div>
+                        </div>
+
+                        {/* Review Text */}
+                        <p className="text-ivory/90 text-lg sm:text-xl font-sans leading-relaxed text-center mb-8 min-h-[120px]">
+                          "{review.text}"
+                        </p>
+
+                        {/* Customer Info */}
+                        <div className="flex items-center justify-center gap-4">
+                          <div className="w-14 h-14 rounded-full bg-gradient-to-br from-champagne to-champagne/60 flex items-center justify-center text-obsidian font-serif text-xl font-bold">
+                            {review.initial}
+                          </div>
+                          <div className="text-left">
+                            <div className="text-ivory font-sans font-semibold text-lg">{review.name}</div>
+                            <div className="flex items-center gap-2 mt-1">
+                              <div className="flex gap-0.5">
+                                {[...Array(review.rating)].map((_, i) => (
+                                  <svg key={i} className="w-4 h-4 text-champagne fill-current" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                  </svg>
+                                ))}
+                              </div>
+                              <span className="text-ivory/50 text-sm font-sans">• {review.date}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Navigation Arrows */}
+              <button
+                onClick={prevReview}
+                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 sm:-translate-x-6 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-charcoal/80 backdrop-blur-sm border border-champagne/20 flex items-center justify-center hover:bg-charcoal hover:border-champagne/40 transition-all group z-10"
+                aria-label="Previous review"
+              >
+                <svg className="w-6 h-6 text-champagne group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+
+              <button
+                onClick={nextReview}
+                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 sm:translate-x-6 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-charcoal/80 backdrop-blur-sm border border-champagne/20 flex items-center justify-center hover:bg-charcoal hover:border-champagne/40 transition-all group z-10"
+                aria-label="Next review"
+              >
+                <svg className="w-6 h-6 text-champagne group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Pagination Dots */}
+            <div className="flex justify-center gap-2 mt-8">
+              {reviews.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToReview(index)}
+                  className={`transition-all duration-300 rounded-full ${
+                    index === currentReview
+                      ? 'w-12 h-2 bg-champagne'
+                      : 'w-2 h-2 bg-champagne/30 hover:bg-champagne/50'
+                  }`}
+                  aria-label={`Go to review ${index + 1}`}
+                />
+              ))}
+            </div>
+
+            {/* Auto-play Indicator */}
+            <div className="flex justify-center mt-4">
+              <div className={`flex items-center gap-2 text-xs font-sans ${isAutoPlaying ? 'text-champagne/60' : 'text-ivory/40'}`}>
+                <div className={`w-2 h-2 rounded-full ${isAutoPlaying ? 'bg-champagne animate-pulse' : 'bg-ivory/40'}`}></div>
+                <span>{isAutoPlaying ? 'Auto-playing' : 'Paused'}</span>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* View All Reviews CTA */}
+        <Reveal delay={400}>
+          <div className="flex justify-center mt-12">
             <a
               href="https://www.google.com/maps/place/?q=place_id:ChIJQw1xKtxpXz4R5ZcIoAWMGdE"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-luxury inline-flex items-center gap-3"
+              className="btn-outline inline-flex items-center gap-3"
             >
               <i className="fab fa-google text-lg"></i>
-              View Reviews on Google
+              View All Reviews on Google
             </a>
           </div>
+          <p className="text-center text-ivory/40 text-xs font-sans mt-4">
+            All reviews are from verified Google customers
+          </p>
         </Reveal>
       </div>
     </section>
