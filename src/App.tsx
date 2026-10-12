@@ -461,8 +461,8 @@ const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices }:
         <Reveal>
           <div className="mb-8">
             {/* Category Header */}
-            <div className="mb-10 pb-8 border-b border-champagne/20">
-              <div className="flex items-center gap-4 mb-3">
+            <div className="mb-10 pb-8 border-b border-champagne/20 text-center">
+              <div className="flex items-center justify-center gap-4 mb-3">
                 <span className="text-4xl">{activeCategory.icon}</span>
                 <h3 className="font-serif text-3xl sm:text-4xl text-ivory">
                   {activeCategory.title}
@@ -2001,7 +2001,7 @@ export default function App() {
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
 
   return (
-    <div className="min-h-screen bg-obsidian text-ivory">
+    <div className="min-h-screen bg-obsidian text-ivory w-full overflow-x-hidden">
       <Navigation onBookClick={() => setBookingOpen(true)} />
       <HeroSection onBookClick={() => setBookingOpen(true)} />
       <div className="section-divider"></div>
