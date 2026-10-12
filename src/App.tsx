@@ -81,7 +81,7 @@ const Navigation = ({ onBookClick }: { onBookClick: () => void }) => {
   return (
     <>
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'glass border-b border-champagne/10' : 'bg-transparent'}`}>
-        <div className="max-w-7xl mx-auto px-5 sm:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
             <a href="#" className="flex-shrink-0"><Logo size="sm" /></a>
             
@@ -152,7 +152,7 @@ const HeroSection = ({ onBookClick }: { onBookClick: () => void }) => {
         <div className="hero-overlay absolute inset-0"></div>
       </div>
 
-      <div className="hero-content relative z-10 w-full px-5 sm:px-8 md:px-12 lg:px-20 py-20">
+      <div className="hero-content relative z-10 w-full px-4 sm:px-6 lg:px-8 pt-24 pb-20 sm:pt-32 sm:pb-24 md:pt-40 md:pb-32">
         <div className="max-w-4xl mx-auto text-center">
           {/* Location tag */}
           <div className={`transition-all duration-1000 delay-500 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
@@ -438,19 +438,19 @@ const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices }:
         <Reveal>
           {/* Category Navigation - Liquid Glass */}
           <div className="mb-12 sm:mb-16">
-            <div className="flex overflow-x-auto gap-3 pb-3 scrollbar-hide">
+            <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
               {serviceCategories.map(cat => (
                 <button
                   key={cat.id}
                   onClick={() => setActiveTab(cat.id)}
-                  className={`category-tab flex-shrink-0 rounded-xl font-sans transition-all whitespace-nowrap ${
+                  className={`category-tab rounded-xl font-sans transition-all ${
                     activeTab === cat.id
                       ? 'category-tab-active text-champagne font-medium'
                       : 'text-ivory/70 hover:text-ivory/90'
                   }`}
                 >
                   <span className="mr-2 text-lg">{cat.icon}</span>
-                  <span className="text-[15px]">{cat.title}</span>
+                  <span className="text-sm sm:text-base">{cat.title}</span>
                 </button>
               ))}
             </div>
