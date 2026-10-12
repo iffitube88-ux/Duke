@@ -474,7 +474,7 @@ const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices }:
             </div>
 
             {/* Service list with improved design */}
-            <div className="space-y-4">
+            <div className="space-y-5 sm:space-y-6">
               {activeCategory.services.map((service, i) => {
                 const isSelected = selectedServices.includes(service.name);
                 return (
@@ -487,7 +487,7 @@ const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices }:
                         : 'service-row hover:border-champagne/30'
                     }`}
                   >
-                    <div className="flex items-center justify-between gap-6 p-6">
+                    <div className="flex items-center justify-between gap-4 sm:gap-6 p-5 sm:p-6">
                       {/* Left: Service info */}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-3 mb-2">
@@ -506,7 +506,7 @@ const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices }:
                       </div>
 
                       {/* Right: Price + Checkbox */}
-                      <div className="flex items-center gap-6 flex-shrink-0">
+                      <div className="flex items-center gap-4 sm:gap-6 flex-shrink-0">
                         <div className="text-right">
                           <p className={`font-sans text-lg sm:text-xl font-semibold whitespace-nowrap transition-colors ${
                             isSelected ? 'text-champagne' : 'text-ivory/80'
@@ -514,9 +514,9 @@ const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices }:
                             {service.price}
                           </p>
                         </div>
-                        <div className={`custom-checkbox transition-all ${isSelected ? 'custom-checkbox-checked scale-110' : 'group-hover:border-champagne/50'}`}>
+                        <div className={`custom-checkbox transition-all ${isSelected ? 'custom-checkbox-checked scale-110' : 'group-hover:border-champagne/50'}`} style={{ minWidth: '52px', minHeight: '52px' }}>
                           {isSelected && (
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C8AD83" strokeWidth="3">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C8AD83" strokeWidth="3">
                               <polyline points="20 6 9 17 4 12"></polyline>
                             </svg>
                           )}
