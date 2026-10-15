@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type PointerEvent } from 'react';
 import { ArrowDown, ArrowRight, ArrowUpRight, Check, ChevronLeft, ChevronRight, Instagram, MapPin, Menu, MessageCircle, Phone, Plus, Search, X } from 'lucide-react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import Booking from './Booking';
@@ -46,7 +46,7 @@ function Header({ onBook }: { onBook: () => void }) {
 
 function Hero({ onBook }: { onBook: () => void }) {
   const ref=useRef<HTMLDivElement>(null);
-  const move=(event:React.PointerEvent<HTMLDivElement>)=>{
+  const move=(event:PointerEvent<HTMLDivElement>)=>{
     if(!ref.current||event.pointerType==='touch'||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
     const b=ref.current.getBoundingClientRect(), x=(event.clientX-b.left)/b.width-.5, y=(event.clientY-b.top)/b.height-.5;
     ref.current.style.setProperty('--rx',String(-y*4)+'deg');
