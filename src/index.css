@@ -88,9 +88,9 @@ h2 em,h1 em { font-family:var(--serif); font-weight:400; }
 .orbit-two { width:68%;height:68%;left:17%;top:18%;border-style:dashed;border-color:rgba(183,240,199,.12); }
 .hero-frame { position:absolute;overflow:hidden; border:7px solid rgba(239,255,240,.82);border-radius:8px; box-shadow:20px 35px 45px rgba(0,19,16,.4),inset 0 0 0 1px #fff6;transform-style:preserve-3d; transition:transform .55s cubic-bezier(.18,.8,.17,1);background:#8aada1;will-change:transform; }
 .hero-frame img { width:100%;height:100%;object-fit:cover;display:block; }
-.hero-frame-back { z-index:1;width:48%;height:46%;left:5%;top:6%;transform:translate3d(calc(var(--move-x,0px) * -.5),calc(var(--move-y,0px) * -.5),-35px) rotateY(16deg) rotateZ(-10deg);animation:frameBob 7s ease-in-out infinite alternate; }
+.hero-frame-back { z-index:1;width:48%;height:46%;left:5%;top:6%;transform:translate3d(var(--move-x,0px),var(--move-y,0px),-35px) rotateY(16deg) rotateZ(-10deg);animation:frameBob 7s ease-in-out infinite alternate; }
 .hero-frame-main { z-index:3;width:59%;height:69%;left:24%;top:16%;transform:translate3d(var(--move-x,0px),var(--move-y,0px),70px) rotateY(-12deg) rotateZ(4deg); }
-.hero-frame-front { z-index:4;width:38%;height:37%;right:0;bottom:8%;transform:translate3d(calc(var(--move-x,0px) * 1.3),calc(var(--move-y,0px) * 1.3),120px) rotateY(-8deg) rotateZ(-9deg); }
+.hero-frame-front { z-index:4;width:38%;height:37%;right:0;bottom:8%;transform:translate3d(var(--move-x,0px),var(--move-y,0px),120px) rotateY(-8deg) rotateZ(-9deg); }
 .hero-frame-main img { object-position:center center; }
 .hero-frame-front img { object-position:center; }
 .hero-image-number { position:absolute;bottom:12px;left:13px;border-radius:40px;background:#0b302bb0;backdrop-filter:blur(10px);color:#e1f9e7;font-size:9px;letter-spacing:.16em;padding:9px 13px; }
@@ -501,3 +501,7 @@ h2 em,h1 em { font-family:var(--serif); font-weight:400; }
   .service-item-action b{font-size:10px}
   .booking-top .overline{font-size:8px}
 }
+
+/* Preserve the editorial 3D angle after the scroll-reveal finishes. */
+.interlude-photo.reveal.in-view{transform:rotate(9deg)}
+.interlude-photo.reveal.in-view:hover{transform:perspective(1100px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) rotateZ(9deg)}
