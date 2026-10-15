@@ -194,16 +194,16 @@ const serviceCategories: ServiceCategory[] = [
   {
     id: 'hair', icon: '✂️', title: 'Hair',
     services: [
-      { name: 'Haircut', duration: '1h 30min', price: 'from 400 AED' },
+      { name: 'Haircut', duration: '1h 30min', price: 'from 360 AED' },
       { name: 'Haircut + Styling', duration: '1h', price: 'from 500 AED' },
       { name: 'Princess Hair Cut', duration: '1h', price: '250 AED' },
       { name: 'Trimming', duration: '1h', price: '200 AED' },
       { name: 'Fringe Trim', duration: '1h', price: '120 AED' },
       { name: 'Blow-Dry Classic', duration: '1h', price: 'from 180 AED' },
       { name: 'Evening Styling', duration: '1h', price: 'from 500 AED' },
-      { name: 'Express Styling', duration: '1h', price: '300–500 AED' },
-      { name: 'Wave Hair', duration: '1h', price: '250–450 AED' },
-      { name: 'Roots Color', duration: '1h', price: '420 AED' },
+      { name: 'Express Styling', duration: '1h', price: 'from 300 AED' },
+      { name: 'Wave Hair', duration: '1h', price: 'from 250 AED' },
+      { name: 'Roots Color', duration: '1h', price: 'from 350 AED' },
       { name: 'Full Color', duration: '2h', price: 'from 720 AED' },
       { name: 'Balayage / Sombre', duration: '2h 30min', price: '750–1,000 AED' },
       { name: 'Ombre', duration: '2h 30min', price: '900–1,500 AED' },
@@ -226,7 +226,7 @@ const serviceCategories: ServiceCategory[] = [
       { name: 'Princess Manicure', duration: '40min', price: '90 AED' },
       { name: 'Gelish Manicure', duration: '2h', price: '260 AED' },
       { name: 'Japanese Manicure', duration: '1h 15min', price: '200 AED' },
-      { name: 'Spa Sultan de Saba Manicure', duration: '1h 30min', price: '100 AED' },
+      { name: 'Spa Sultan de Saba Manicure', duration: '1h 30min', price: '180 AED' },
       { name: 'Spa Manicure Candle', duration: '30min', price: '170 AED' },
       { name: 'Nail Extension', duration: '2h 30min', price: '450 AED' },
       { name: 'Nail Extension Extra Long', duration: '3h 30min', price: '620 AED' },
@@ -238,7 +238,7 @@ const serviceCategories: ServiceCategory[] = [
       { name: 'Princess Pedicure', duration: '1h', price: '90 AED' },
       { name: 'Gelish Pedicure', duration: '2h', price: '290 AED' },
       { name: 'Express Pedicure', duration: '1h', price: '80 AED' },
-      { name: 'Spa Sultan de Saba Pedicure', duration: '30min', price: '100 AED' },
+      { name: 'Spa Sultan de Saba Pedicure', duration: '30min', price: '190 AED' },
       { name: 'Spa Pedicure Candle', duration: '30min', price: '180 AED' },
       { name: 'Candle SPA', duration: '15min', price: '50 AED' },
     ],
@@ -278,7 +278,7 @@ const serviceCategories: ServiceCategory[] = [
       { name: 'Body Back', duration: '1h', price: '800–1,000 AED' },
       { name: 'Keravive 1 Vial + Spray', duration: '45min', price: '1,500 AED' },
       { name: 'Keravive 2 Vials + Spray', duration: '45min', price: '2,000 AED' },
-      { name: 'HF Package (6 sessions)', duration: '1h', price: '4,900 AED' },
+      { name: 'HF Package (10 sessions)', duration: '1h', price: '4,900 AED' },
       { name: 'HF Hair Keravive Package (6 sessions)', duration: '1h', price: '7,200 AED' },
     ],
   },
@@ -306,22 +306,22 @@ const serviceCategories: ServiceCategory[] = [
   {
     id: 'massage', icon: '💆', title: 'Massage',
     services: [
-      { name: 'Relaxing Full Body (60min)', duration: '1h', price: 'Contact us' },
-      { name: 'Relaxing Full Body (90min)', duration: '1h 30min', price: 'Contact us' },
-      { name: 'Relaxing Full Body (120min)', duration: '2h', price: 'Contact us' },
-      { name: 'Deep Tissue (45min)', duration: '45min', price: 'Contact us' },
-      { name: 'Deep Tissue (60min)', duration: '1h', price: 'Contact us' },
-      { name: 'Deep Tissue (90min)', duration: '1h 30min', price: 'Contact us' },
-      { name: 'Hot Stone (60min)', duration: '1h', price: 'Contact us' },
-      { name: 'Hot Stone (90min)', duration: '1h 30min', price: 'Contact us' },
-      { name: 'Hot Stone (120min)', duration: '2h', price: 'Contact us' },
+      { name: 'Relaxing Full Body (60min)', duration: '1h', price: '600 AED' },
+      { name: 'Relaxing Full Body (90min)', duration: '1h 30min', price: '800 AED' },
+      { name: 'Relaxing Full Body (120min)', duration: '2h', price: '1,100 AED' },
+      { name: 'Deep Tissue (45min)', duration: '45min', price: '550 AED' },
+      { name: 'Deep Tissue (60min)', duration: '1h', price: '650 AED' },
+      { name: 'Deep Tissue (90min)', duration: '1h 30min', price: '850 AED' },
+      { name: 'Hot Stone (60min)', duration: '1h', price: '700 AED' },
+      { name: 'Hot Stone (90min)', duration: '1h 30min', price: '850 AED' },
+      { name: 'Hot Stone (120min)', duration: '2h', price: '1,200 AED' },
       { name: 'Swedish Massage (30–60min)', duration: '30–60min', price: 'Contact us' },
       { name: 'Sports Massage (30–60min)', duration: '30–60min', price: 'Contact us' },
       { name: 'Lymphatic Massage (35–60min)', duration: '35–60min', price: 'Contact us' },
       { name: 'Stretching Massage', duration: '30–60min', price: 'Contact us' },
-      { name: 'Back Massage (30–60min)', duration: '30–60min', price: 'Contact us' },
-      { name: 'Head Massage (30–60min)', duration: '30–60min', price: 'Contact us' },
-      { name: 'Reflexology (30–60min)', duration: '30–60min', price: 'Contact us' },
+      { name: 'Back Massage (30–60min)', duration: '30–60min', price: 'from 400 AED' },
+      { name: 'Head Massage (30–60min)', duration: '30–60min', price: 'from 350 AED' },
+      { name: 'Reflexology (30–60min)', duration: '30–60min', price: 'from 400 AED' },
       { name: 'Buccal Face Massage', duration: '30min', price: 'Contact us' },
       { name: 'Postnatal Massage', duration: '1h', price: 'Contact us' },
     ],
@@ -330,14 +330,47 @@ const serviceCategories: ServiceCategory[] = [
     id: 'body', icon: '🧴', title: 'Body Treatments',
     services: [
       { name: 'Neck & Shoulders', duration: '1h', price: '250 AED' },
-      { name: 'Full Body Classic', duration: '1h', price: '500 AED' },
+      { name: 'Full Body Classic', duration: '1h', price: '420 AED' },
       { name: 'Relax', duration: '1h', price: '375 AED' },
-      { name: 'Dermadrop', duration: '1h', price: '600–700 AED' },
-      { name: 'Heleo 4', duration: '1h', price: '650–750 AED' },
-      { name: 'Beautylizer', duration: '1h', price: '620–720 AED' },
+      { name: 'Dermadrop', duration: '1h', price: 'from 600 AED' },
+      { name: 'Heleo 4', duration: '1h', price: 'from 650 AED' },
+      { name: 'Beautylizer', duration: '1h', price: 'from 620 AED' },
     ],
   },
 ];
+
+// Prices are taken from the salon's published menu; never estimate an invented
+// maximum for a 'from' price and never convert 'contact us' into AED 0.
+type PriceSummary = { min: number; max: number; hasVariable: boolean; hasUnpriced: boolean; display: string };
+const getPriceSummary = (names: string[]): PriceSummary => {
+  const all = serviceCategories.flatMap(category => category.services);
+  let min = 0, max = 0, hasVariable = false, hasUnpriced = false, hasStartingPrice = false;
+  names.forEach(name => {
+    const service = all.find(item => item.name === name);
+    if (!service) return;
+    const range = service.price.match(/([\d,]+)\s*[–-]\s*([\d,]+)\s*AED/i);
+    if (range) {
+      min += Number(range[1].replace(/,/g, ''));
+      max += Number(range[2].replace(/,/g, ''));
+      hasVariable = true;
+      return;
+    }
+    const amount = service.price.match(/([\d,]+)\s*AED/i);
+    if (!amount) { hasUnpriced = true; return; }
+    const value = Number(amount[1].replace(/,/g, ''));
+    min += value; max += value;
+    if (/from/i.test(service.price)) { hasVariable = true; hasStartingPrice = true; }
+  });
+  const fmt = (num: number) => num.toLocaleString('en-AE');
+  const display = hasUnpriced
+    ? (min ? 'From AED ' + fmt(min) + ' + other prices on request' : 'Price on request')
+    : hasStartingPrice
+      ? 'From AED ' + fmt(min)
+      : max !== min
+        ? 'AED ' + fmt(min) + '–' + fmt(max)
+        : 'AED ' + fmt(min);
+  return { min, max, hasVariable, hasUnpriced, display };
+};
 
 const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices, initialCategory }: { onBookClick: () => void; selectedServices: string[]; setSelectedServices: React.Dispatch<React.SetStateAction<string[]>>; initialCategory: string }) => {
   const [activeTab, setActiveTab] = useState(initialCategory);
@@ -348,17 +381,7 @@ const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices, i
     setSelectedServices(prev => prev.includes(serviceName) ? prev.filter(s => s !== serviceName) : [...prev, serviceName]);
   };
 
-  const calculateTotal = () => {
-    let total = 0;
-    selectedServices.forEach(serviceName => {
-      const service = serviceCategories.flatMap(cat => cat.services).find(s => s.name === serviceName);
-      if (service) {
-        const priceMatch = service.price.match(/(\d+)/);
-        if (priceMatch) total += parseInt(priceMatch[1]);
-      }
-    });
-    return total;
-  };
+  const calculateTotal = () => getPriceSummary(selectedServices);
 
   return (
     <section id="services" className="section-fluid relative">
@@ -487,11 +510,11 @@ const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices, i
                   </p>
                 </div>
                 <p className="text-champagne text-xl font-sans font-semibold ml-13">
-                  Estimated total: {calculateTotal()} AED
+                  Estimated total: {calculateTotal().display}
                 </p>
-                {calculateTotal() === 0 && (
+                {(calculateTotal().hasVariable || calculateTotal().hasUnpriced) && (
                   <p className="text-ivory/50 text-sm font-sans mt-1 ml-13">
-                    * Final price may vary
+                    * Final price and availability confirmed by the salon
                   </p>
                 )}
               </div>
@@ -1200,23 +1223,6 @@ const Calendar = ({ selectedDate, onDateSelect, minDate }: { selectedDate: strin
 
 // ==================== BOOKING SYSTEM ====================
 type BookingState = { step: number; selectedServices: string[]; selectedDate: string; selectedTime: string; customerName: string; customerPhone: string; };
-type BookedSlot = { date: string; time: string; customerName: string; timestamp: number; };
-
-const getBookedSlots = (): BookedSlot[] => {
-  try { const stored = localStorage.getItem('dukes_booked_slots'); return stored ? JSON.parse(stored) : []; } catch { return []; }
-};
-
-const saveBookedSlot = (slot: BookedSlot) => {
-  const slots = getBookedSlots();
-  slots.push(slot);
-  localStorage.setItem('dukes_booked_slots', JSON.stringify(slots));
-};
-
-const isSlotBooked = (date: string, time: string): boolean => {
-  const slots = getBookedSlots();
-  return slots.some(slot => slot.date === date && slot.time === time);
-};
-
 const BookingModal = ({ isOpen, onClose, preSelectedServices = [] }: { isOpen: boolean; onClose: () => void; preSelectedServices?: string[] }) => {
   const [booking, setBooking] = useState<BookingState>({ step: 1, selectedServices: [], selectedDate: '', selectedTime: '', customerName: '', customerPhone: '' });
   const [showCalendar, setShowCalendar] = useState(false);
@@ -1255,7 +1261,7 @@ const BookingModal = ({ isOpen, onClose, preSelectedServices = [] }: { isOpen: b
     return slots;
   };
 
-  const getMinDate = () => new Date().toISOString().split('T')[0];
+  const getMinDate = () => new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Dubai', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
 
   const calculateTotalDuration = () => {
     let totalMinutes = 0;
@@ -1277,42 +1283,7 @@ const BookingModal = ({ isOpen, onClose, preSelectedServices = [] }: { isOpen: b
     return hours > 0 ? `${hours}h ${mins > 0 ? mins + 'min' : ''}` : `${mins}min`;
   };
 
-  const calculateTotalPrice = () => {
-    let minTotal = 0;
-    let maxTotal = 0;
-    let hasVariable = false;
-    
-    booking.selectedServices.forEach(serviceName => {
-      const service = allServices.find(s => s.name === serviceName);
-      if (service) {
-        // Check if price has a range (e.g., "900–1,500 AED")
-        const rangeMatch = service.price.match(/([\d,]+)[–-]([\d,]+)\s*AED/i);
-        if (rangeMatch) {
-          hasVariable = true;
-          const min = parseInt(rangeMatch[1].replace(/,/g, ''));
-          const max = parseInt(rangeMatch[2].replace(/,/g, ''));
-          minTotal += min;
-          maxTotal += max;
-        } else {
-          // Single price or "from X AED"
-          const priceMatch = service.price.match(/([\d,]+)\s*AED/i);
-          if (priceMatch) {
-            const price = parseInt(priceMatch[1].replace(/,/g, ''));
-            if (service.price.toLowerCase().includes('from')) {
-              hasVariable = true;
-              minTotal += price;
-              maxTotal += price * 1.5; // Estimate max as 1.5x for "from" prices
-            } else {
-              minTotal += price;
-              maxTotal += price;
-            }
-          }
-        }
-      }
-    });
-    
-    return { min: minTotal, max: maxTotal, hasVariable };
-  };
+  const calculateTotalPrice = () => getPriceSummary(booking.selectedServices);
 
   const formatWhatsAppDate = (dateStr: string): string => {
     if (!dateStr) return '';
@@ -1368,21 +1339,15 @@ const BookingModal = ({ isOpen, onClose, preSelectedServices = [] }: { isOpen: b
     const formattedTime = formatWhatsAppTime(booking.selectedTime);
     const totalDuration = calculateTotalDuration();
     const priceInfo = calculateTotalPrice();
-    const totalPriceText = priceInfo.min === priceInfo.max 
-      ? `${priceInfo.min} AED`
-      : `${priceInfo.min}–${priceInfo.max} AED`;
-
-    // Check if any service has variable pricing
-    const hasVariablePricing = priceInfo.hasVariable;
+    const totalPriceText = priceInfo.display;
+    const hasVariablePricing = priceInfo.hasVariable || priceInfo.hasUnpriced;
 
     // Build service breakdown
     const serviceLines = booking.selectedServices.map(serviceName => {
       const service = allServices.find(s => s.name === serviceName);
       if (!service) return '';
       const emoji = getServiceEmoji(service.category);
-      const priceText = service.price.toLowerCase().includes('from') 
-        ? `From ${service.price}` 
-        : service.price;
+      const priceText = service.price;
       return `${emoji} ${service.name} — ${priceText}`;
     }).filter(line => line).join('\n');
 
@@ -1404,7 +1369,7 @@ const BookingModal = ({ isOpen, onClose, preSelectedServices = [] }: { isOpen: b
 ${serviceLines}
 
 ━━━━━━━━━━━━━━━━━━
-💰 *ESTIMATED TOTAL: AED ${totalPriceText}*
+💰 *ESTIMATED TOTAL: ${totalPriceText}*
 ${hasVariablePricing ? '\n⚠️ _Final price subject to salon confirmation_' : ''}
 
 📍 Dukes of Beauty
@@ -1416,7 +1381,6 @@ Business Bay, Dubai
 
     const encodedMessage = encodeURIComponent(message);
     const whatsappURL = `https://wa.me/971528167306?text=${encodedMessage}`;
-    saveBookedSlot({ date: booking.selectedDate, time: booking.selectedTime, customerName: booking.customerName, timestamp: Date.now() });
     window.open(whatsappURL, '_blank');
     onClose();
   };
@@ -1570,7 +1534,7 @@ Business Bay, Dubai
                       {booking.selectedServices.length} service{booking.selectedServices.length > 1 ? 's' : ''} selected
                     </p>
                     <p className="text-champagne text-lg font-sans font-bold">
-                      {calculateTotalPrice().min} AED{calculateTotalPrice().hasVariable ? '+' : ''}
+                      {calculateTotalPrice().display}
                     </p>
                   </div>
                   <div className="flex flex-wrap gap-2">
@@ -1593,7 +1557,7 @@ Business Bay, Dubai
 
           {booking.step === 2 && (
             <div>
-              <p className="text-ivory/70 text-base font-sans mb-6">Choose your preferred date & time:</p>
+              <p className="text-ivory/70 text-base font-sans mb-6">Choose a preferred date & time. This is not live availability; the salon will confirm on WhatsApp.</p>
               
               {/* Date Selection */}
               <div className="mb-8">
@@ -1630,17 +1594,13 @@ Business Bay, Dubai
                   <label className="text-champagne text-sm font-sans tracking-wide uppercase mb-4 block">Time</label>
                   <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
                     {generateTimeSlots().map(time => {
-                      const booked = isSlotBooked(booking.selectedDate, time);
                       const displayTime = formatDisplayTime(time);
                       return (
                         <button
                           key={time}
-                          disabled={booked}
                           onClick={() => setBooking(prev => ({ ...prev, selectedTime: time }))}
                           className={`px-4 py-4 rounded-xl text-base font-sans transition-all min-h-[56px] ${
-                            booked
-                              ? 'bg-red-500/10 border border-red-500/20 text-red-400/50 cursor-not-allowed line-through'
-                              : booking.selectedTime === time
+                            booking.selectedTime === time
                               ? 'bg-champagne text-obsidian font-semibold shadow-lg shadow-champagne/20'
                               : 'bg-obsidian/60 border border-champagne/10 text-ivory/80 hover:border-champagne/30 hover:bg-obsidian/80'
                           }`}
@@ -1651,8 +1611,8 @@ Business Bay, Dubai
                     })}
                   </div>
                   <p className="text-ivory/40 text-sm font-sans mt-5 flex items-center gap-2">
-                    <span className="inline-block w-3 h-3 bg-red-500/20 border border-red-500/30 rounded"></span>
-                    Unavailable time slots
+                    <i className="fab fa-whatsapp text-champagne"></i>
+                    All times shown are requests only. The salon confirms availability on WhatsApp.
                   </p>
                 </div>
               )}
@@ -1708,12 +1668,10 @@ Business Bay, Dubai
                   <div className="flex justify-between pt-4 border-t border-champagne/20">
                     <span className="text-champagne font-semibold">Estimated Total:</span>
                     <span className="text-champagne font-bold text-lg">
-                      {calculateTotalPrice().min === calculateTotalPrice().max 
-                        ? `${calculateTotalPrice().min} AED`
-                        : `${calculateTotalPrice().min}–${calculateTotalPrice().max} AED`}
+                      {calculateTotalPrice().display}
                     </span>
                   </div>
-                  {calculateTotalPrice().hasVariable && (
+                  {(calculateTotalPrice().hasVariable || calculateTotalPrice().hasUnpriced) && (
                     <p className="text-ivory/50 text-sm font-sans mt-3 italic">
                       * Final price subject to salon confirmation
                     </p>
@@ -1722,7 +1680,7 @@ Business Bay, Dubai
               </div>
 
               <p className="text-ivory/50 text-sm font-sans mt-6 text-center">
-                Your booking request will be sent via WhatsApp for confirmation
+                This sends a request to WhatsApp; your appointment is not confirmed until the salon replies.
               </p>
             </div>
           )}
@@ -1750,7 +1708,7 @@ Business Bay, Dubai
               }}
               className="btn-luxury flex-1"
             >
-              {booking.step === 3 ? 'Confirm & Send via WhatsApp' : 'Continue'}
+              {booking.step === 3 ? 'Send Request on WhatsApp' : 'Continue'}
             </button>
           </div>
         </div>
