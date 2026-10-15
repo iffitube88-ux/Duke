@@ -21,3 +21,31 @@ export const brand = {
     "https://lh3.googleusercontent.com/grass-cs/AABkmLd0HqNDBhLoZ2BuWfMIuLeWhL-0c7rAwjioX3aT6uoaY9Fy63IVhWvsEL63PVnfK5jTWh3f1bFBeFXQsahPcH5XIuc-dWFYJu4pwx-huHr-e2UwhjCDosS_wMmbK1MISrgaJ8u35NyK6k81=w300-h450-p-k-no"
   ]
 } as const;
+
+
+/**
+ * Real, openly licensed editorial treatment photographs.
+ * These depict the treatment types, NOT clients, team members, or
+ * treatments performed by Dukes of Beauty.
+ * The actual salon's own photos remain in brand.photos.
+ */
+export const treatmentEditorial = {
+  hair: {
+    src: 'https://images.unsplash.com/photo-1701976333339-1d41dad8138b?auto=format&fit=crop&w=1400&q=85',
+    photographer: 'Zoe Applbaum',
+    source: 'https://unsplash.com/photos/j0143fogXSg',
+    alt: 'Illustrative photograph of a stylist curling a client’s hair',
+  },
+  facials: {
+    src: 'https://images.unsplash.com/photo-1761718210089-ba3bb5ccb54f?auto=format&fit=crop&w=1400&q=85',
+    photographer: 'Kimia Kazemi',
+    source: 'https://unsplash.com/photos/RbIcMsh0NSk',
+    alt: 'Illustrative photograph of a professional applying a facial treatment mask',
+  },
+  lashes: {
+    src: 'https://images.unsplash.com/photo-1772235616130-b80e12f0ab7a?auto=format&fit=crop&w=1400&q=85',
+    photographer: 'Cipriano Bala',
+    source: 'https://unsplash.com/photos/qcJsidFMtNo',
+    alt: 'Illustrative photograph of a lash technician applying eyelash extensions',
+  },
+} as const;

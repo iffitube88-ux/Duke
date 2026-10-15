@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState, type Dispatch, type 
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, Check, ChevronLeft, ChevronRight, Clock3, Instagram, MapPin, Menu, MessageCircle, Phone, Plus, Search, X } from 'lucide-react';
 import Booking from './Booking';
-import { brand } from './brand';
+import { brand, treatmentEditorial } from './brand';
 import { catalog, getEstimate, getSelected } from './catalog';
 import { serviceCategories } from './salonData';
 
@@ -132,10 +132,10 @@ function SalonStory({ onBook }: { onBook: Book }) {
 }
 
 const featureCategories = [
-  { id:'hair', title:'Hair & styling', subtitle:'CUT · COLOUR · TREATMENT', image:brand.hero, num:'01'},
-  { id:'nails', title:'Nails & beauty', subtitle:'MANICURE · PEDICURE · ART', image:brand.photos[3], num:'02'},
-  { id:'facials', title:'Skin & facials', subtitle:'HYDRAFACIAL · SKIN CARE', image:brand.photos[0], num:'03'},
-  { id:'lashes', title:'Lashes & brows', subtitle:'EXTENSIONS · SHAPING', image:brand.photos[0], num:'04'},
+  { id:'hair', title:'Hair & styling', subtitle:'CUT · COLOUR · TREATMENT', image:treatmentEditorial.hair.src, alt:treatmentEditorial.hair.alt, illustrative:true, num:'01'},
+  { id:'nails', title:'Nails & beauty', subtitle:'MANICURE · PEDICURE · ART', image:brand.photos[3], alt:'Nail swatches from the Dukes of Beauty photo collection', illustrative:false, num:'02'},
+  { id:'facials', title:'Skin & facials', subtitle:'HYDRAFACIAL · SKIN CARE', image:treatmentEditorial.facials.src, alt:treatmentEditorial.facials.alt, illustrative:true, num:'03'},
+  { id:'lashes', title:'Lashes & brows', subtitle:'EXTENSIONS · SHAPING', image:treatmentEditorial.lashes.src, alt:treatmentEditorial.lashes.alt, illustrative:true, num:'04'},
 ];
 
 function Spotlight({ onCategory }: { onCategory: (id: string) => void }) {
@@ -145,15 +145,27 @@ function Spotlight({ onCategory }: { onCategory: (id: string) => void }) {
     event.currentTarget.style.setProperty('--tilt-x',(-y*4).toFixed(2)+'deg');
     event.currentTarget.style.setProperty('--tilt-y',(x*4).toFixed(2)+'deg');
   };
-  const reset=(event:PointerEvent<HTMLButtonElement>)=>{event.currentTarget.style.setProperty('--tilt-x','0deg');event.currentTarget.style.setProperty('--tilt-y','0deg');};
+  const reset=(event:PointerEvent<HTMLButtonElement>)=>{
+    event.currentTarget.style.setProperty('--tilt-x','0deg');
+    event.currentTarget.style.setProperty('--tilt-y','0deg');
+  };
   return <section className="section-space spotlight" id="discover">
     <div className="wrap">
-      <div className="editorial-heading" data-reveal><div><span className="eyebrow gold-label">02 — THE TREATMENT COLLECTION</span><h2>Find your <em>ritual.</em></h2></div><p>Explore a little something for yourself. Browse the salon's treatments and choose what you'd love to experience.</p></div>
+      <div className="editorial-heading" data-reveal><div><span className="eyebrow gold-label">02 — THE TREATMENT COLLECTION</span><h2>Find your <em>ritual.</em></h2></div><p>Explore our treatments and choose what you’d love to experience.</p></div>
       <div className="spotlight-grid">{featureCategories.map(item => <button className="spotlight-card" type="button" key={item.id} onPointerMove={tilt} onPointerLeave={reset} onClick={() => onCategory(item.id)}>
-        <span className="spotlight-image"><img src={item.image} alt={'Dukes of Beauty salon photo for ' + item.title} loading="lazy"/><span className="spotlight-arrow"><ArrowUpRight size={21}/></span><span className="spotlight-number">{item.num}/04</span></span>
+        <span className="spotlight-image">
+          <img src={item.image} alt={item.alt} loading="lazy" decoding="async" onError={event=>{event.currentTarget.style.display='none';event.currentTarget.parentElement?.classList.add('image-unavailable');}}/>
+          <span className="spotlight-arrow"><ArrowUpRight size={21}/></span>
+          <span className="spotlight-number">{item.num}/04</span>
+          {item.illustrative && <span className="spotlight-illustrative">Illustrative photo</span>}
+        </span>
         <span className="spotlight-text"><strong>{item.title}</strong><small>{item.subtitle}</small></span>
       </button>)}</div>
-      <div className="spotlight-end"><span>FIND THE SERVICE THAT FEELS LIKE YOU</span><a href="#menu" className="gold-underline-link">View all treatments <ArrowUpRight size={18}/></a></div>
+      <div className="spotlight-end">
+        <span>FIND THE SERVICE THAT FEELS LIKE YOU</span>
+        <a href="#menu" className="gold-underline-link">View all treatments <ArrowUpRight size={18}/></a>
+      </div>
+      <p className="spotlight-photo-credit">Treatment photography for Hair, Skin and Lashes is illustrative—not Dukes of Beauty client work. Photos: <a target="_blank" rel="noopener noreferrer" href={treatmentEditorial.hair.source}>Zoe Applbaum</a>, <a target="_blank" rel="noopener noreferrer" href={treatmentEditorial.facials.source}>Kimia Kazemi</a> and <a target="_blank" rel="noopener noreferrer" href={treatmentEditorial.lashes.source}>Cipriano Bala</a>. Actual salon photography appears in the gallery.</p>
     </div>
   </section>;
 }
