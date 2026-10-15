@@ -1,37 +1,35 @@
-# Dukes of Beauty — Luxury Salon Website
+# Dukes of Beauty — Immersive 3D Website
 
-Official client website redesign for **Dukes of Beauty**, Business Bay, Dubai.
+Complete rebuild of the salon's existing site, using a fresh **deep emerald + warm ivory** editorial design with real customer-facing service information.
 
-## Experience
+## Live site
+https://duke-seven.vercel.app/
 
-- Elegant black, champagne-gold, and ivory editorial design, optimised for desktop and mobile.
-- Photo-led hero, salon introduction, image-led service categories, complete price menu, gallery, Instagram section, and contact information.
-- **WhatsApp-only appointment requests:** customer selects service(s), preferred date/time, name and phone; a prefilled message opens WhatsApp. No appointment is confirmed until the salon replies.
-- No fake review quotations, invented ratings, fabricated availability, or automatic reservation of time slots.
-- Prices from the current salon website where available. Contact the salon to reconfirm details and final charges.
+## Project contents
 
-## Booking
+- `src/App.tsx` — full React website, 3D perspective image scene and pointer-responsive treatment cards; modern navigation; full services and prices; gallery with lightbox; salon contact and directions; no fake reviews.
+- `src/Booking.tsx` — polished WhatsApp-only appointment request panel. Captures real treatments, preferred Dubai date/time, name and phone and opens `wa.me/971528167306` with a formatted request. The salon manually confirms availability and price.
+- `src/salonData.ts` — preserved catalog of **111 treatments** across seven categories with their listed prices and durations.
+- `src/catalog.ts` — item IDs, filtering, Dubai-local date utilities and estimates without invented price ceilings.
+- `src/brand.ts` — existing real salon photography, logo, Instagram link, Google Maps listing and contact details.
+- `src/index.css` — wholly new responsive theme, CSS perspective-based 3D motion and reduced-motion support.
 
-- WhatsApp: [wa.me/971528167306](https://wa.me/971528167306)
-- Phone: +971 52 816 7306
-- Business Bay, 15 Northside 1 Retail, Dubai
-- Instagram: [@dukes_of_beauty.ae](https://www.instagram.com/dukes_of_beauty.ae/)
-- Published price menu: https://dukesofbeauty.ae/price/
-
-**Important:** The time picker does not query real availability. Selecting a time creates a request, **not a confirmed booking**. For a price marked "from", no invented upper price estimate is shown. The previous client-side `localStorage` blocked-slot logic was removed.
-
-## Technology
-
-React 18 · TypeScript · Vite · Tailwind CSS 4 · Font Awesome
-
-```sh
+## Build
+```bash
 npm install
 npm run typecheck
 npm run build
 ```
 
-## Brand credit
+## Customer integrity
 
-Built by [www.iffimedia.com](https://www.iffimedia.com).
+- Do not show fake testimonials, fabricated ratings, fake appointments, blocked slots or live availability.
+- Do not pretend a WhatsApp request is a confirmed booking.
+- Never generate an arbitrary maximum for `from` prices.
+- Only use genuine salon photographs and business information. Existing image URLs should be periodically checked for continued availability.
+- Salon phone/WhatsApp: **+971 52 816 7306**.
+- Full published menu: https://dukesofbeauty.ae/price/
+- Address: Business Bay, 15 Northside 1 Retail, Dubai, UAE.
+- Instagram: https://www.instagram.com/dukes_of_beauty.ae/
 
-All on-site assets and business details must be verified before publication. Never replace genuine salon photographs or reviews with invented customer stories or AI images.
+Built by https://www.iffimedia.com.
