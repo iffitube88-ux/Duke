@@ -117,7 +117,7 @@ function SalonStory({ onBook }: { onBook: Book }) {
   return <section className="section-space salon-story" id="atelier"><div className="wrap story-layout">
     <div className="story-photos" data-reveal>
       <div className="story-image-large"><img src={brand.photos[0]} alt="Inside the Dukes of Beauty salon" loading="lazy"/></div>
-      <div className="story-image-small"><img src={brand.photos[5]} alt="Dukes of Beauty nail colour swatches" loading="lazy"/></div>
+      <div className="story-image-small"><img src={brand.photos[3]} alt="Dukes of Beauty nail colour swatches" loading="lazy"/></div>
       <div className="story-stamp"><span>THE SALON</span><strong>DB.</strong></div>
     </div>
     <div className="story-content" data-reveal>
@@ -133,9 +133,9 @@ function SalonStory({ onBook }: { onBook: Book }) {
 
 const featureCategories = [
   { id:'hair', title:'Hair & styling', subtitle:'CUT · COLOUR · TREATMENT', image:brand.hero, num:'01'},
-  { id:'nails', title:'Nails & beauty', subtitle:'MANICURE · PEDICURE · ART', image:brand.photos[4], num:'02'},
-  { id:'facials', title:'Skin & facials', subtitle:'HYDRAFACIAL · SKIN CARE', image:brand.photos[4], num:'03'},
-  { id:'lashes', title:'Lashes & brows', subtitle:'EXTENSIONS · SHAPING', image:brand.photos[6], num:'04'},
+  { id:'nails', title:'Nails & beauty', subtitle:'MANICURE · PEDICURE · ART', image:brand.photos[3], num:'02'},
+  { id:'facials', title:'Skin & facials', subtitle:'HYDRAFACIAL · SKIN CARE', image:brand.photos[0], num:'03'},
+  { id:'lashes', title:'Lashes & brows', subtitle:'EXTENSIONS · SHAPING', image:brand.photos[0], num:'04'},
 ];
 
 function Spotlight({ onCategory }: { onCategory: (id: string) => void }) {
@@ -202,20 +202,21 @@ function Services({ category, onCategory, selected, setSelected, onBook }: {
 }
 
 function PhotoInterlude({ onBook }: { onBook:Book }) {
-  return <section className="photo-interlude"><img src={brand.photos[4]} alt="Dukes of Beauty salon treatment room" loading="lazy"/><div className="photo-interlude-shade"/>
+  return <section className="photo-interlude"><img src={brand.photos[0]} alt="Dukes of Beauty salon interior" loading="lazy"/><div className="photo-interlude-shade"/>
     <div className="wrap interlude-content" data-reveal><span className="eyebrow">A MOMENT JUST FOR YOU</span><h2>Your time <em>to glow.</em></h2><p>Choose your treatments and send your preferred visit details directly to the Dukes of Beauty team.</p><button className="gold-button" onClick={onBook}>Request your moment <ArrowUpRight size={18}/></button></div>
     <span className="interlude-side-label">DUKES OF BEAUTY / DUBAI</span>
   </section>;
 }
 
-// Only photographs already attributed to the actual Dukes of Beauty location.
-// Excludes a computer keyboard, car snapshots and low-value unrelated images.
+// A curated set of genuine salon images. Replaces car interiors/keyboard photos.
+// Use a salon interior or treatment image when a category-specific photograph
+// is not available, rather than presenting unrelated objects as salon work.
 const galleryPhotos = [
-  { src: brand.photos[0], fallback: brand.photoFallbacks[0], alt: 'Interior of Dukes of Beauty salon in Business Bay' },
-  { src: brand.photos[4], fallback: brand.photoFallbacks[4], alt: 'Nail treatment at Dukes of Beauty' },
-  { src: brand.photos[2], fallback: brand.photoFallbacks[2], alt: 'Pedicure photo from Dukes of Beauty' },
-  { src: brand.photos[5], fallback: brand.photoFallbacks[5], alt: 'Nail colour selections at Dukes of Beauty' },
-  { src: brand.photos[6], fallback: brand.photoFallbacks[6], alt: 'Beauty and nail detail photographed at Dukes of Beauty' },
+  { src: brand.photos[0], fallback: brand.photoFallbacks[0], alt: 'Dukes of Beauty salon interior in Business Bay' },
+  { src: brand.photos[3], fallback: brand.photoFallbacks[3], alt: 'Manicure details photographed at Dukes of Beauty' },
+  { src: brand.photos[1], fallback: brand.photoFallbacks[1], alt: 'Pedicure at Dukes of Beauty' },
+  { src: brand.photos[2], fallback: brand.photoFallbacks[2], alt: 'Nail colour swatches photographed at Dukes of Beauty' },
+  { src: brand.hero, fallback: brand.hero, alt: 'Another view of the Dukes of Beauty salon' },
 ];
 
 function Gallery() {
