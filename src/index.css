@@ -502,3 +502,43 @@ h2 em,h1 em{font-weight:300;color:var(--gold);font-style:italic}
  .hero-frame{transform:none!important}
  .spotlight-card:hover{transform:none}
 }
+
+
+/* Brand balance: rich obsidian hero + gold, editorial ivory prices and gallery.
+   Inspired by the original salon palette, not a replica of its layout. */
+.services-section{background:#f6f2ec;color:#28211d}
+.services-section .editorial-heading h2,.gallery-section .editorial-heading h2{color:#241d1b}
+.services-section .editorial-heading h2 em,.gallery-section .editorial-heading h2 em{color:#a17a50}
+.services-section .editorial-heading>p,.gallery-section .editorial-heading>p{color:#766960}
+.services-section .gold-label,.gallery-section .gold-label{color:#a17a50}
+.services-section .menu-panel{background:#fffdf9;border:1px solid #d2c2aa;box-shadow:0 24px 75px #3c28120e}
+.services-section .menu-toolbar{border-bottom:1px solid #e5dacf}
+.services-section .menu-toolbar>.eyebrow{color:#85613a}
+.services-section .menu-toolbar>.eyebrow small{color:#8f8070}
+.services-section .menu-search{background:#f7f2eb;border-color:#decdb9;color:#846344}
+.services-section .menu-search input{color:#2b211d}
+.services-section .menu-search input::placeholder{color:#99887c}
+.services-section .category-tabs{border-bottom-color:#e9dfd1}
+.services-section .category-tabs button{color:#6d5c50;border-color:#e3d5c4;background:#faf7f1}
+.services-section .category-tabs button.active{background:#231b1a;border-color:#231b1a;color:#f6e9d1}
+.services-section .category-tabs button:not(.active):hover{background:#e9ddcf}
+.services-section .menu-section-title h3{color:#27201e}
+.services-section .menu-section-title span{color:#917b63}
+.services-section .menu-item{color:#352820;border-bottom-color:#e9e0d7}
+.services-section .menu-item:hover,.services-section .menu-item.is-selected{background:#f5eee5}
+.services-section .menu-item-label strong{color:#2c2622}
+.services-section .menu-item-label small{color:#8a7768}
+.services-section .menu-item-right b{color:#84643d}
+.services-section .menu-item-right i{color:#8a643d;border-color:#b8a17c}
+.services-section .menu-item.is-selected .menu-item-right i{background:#b49768;color:#1e1712}
+.services-section .menu-bottom>span{color:#897b6d}
+.services-section .view-more{color:#826039}
+.services-section .menu-book{background:#29201c;color:#f4e6d1}
+.services-section .menu-book:hover{background:#745537}
+.services-section .menu-empty{color:#736356}
+
+.gallery-section{background:#eee7dd;color:#2b2320}
+.gallery-section .gallery-tile{border-color:#d0bfaa;background:#b7aa9b}
+.gallery-section .gallery-footer>span{color:#8c755c}
+.gallery-section .gallery-footer a{color:#7c5834}
+.gallery-section .gallery-tile span{background:#f6efdeeb;border:1px solid #c8aa7d;color:#32241b}
