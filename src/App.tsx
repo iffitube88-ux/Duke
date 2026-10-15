@@ -104,7 +104,7 @@ function Hero({ onBook }: { onBook: Book }) {
         <span className="hero-photo-label"><span>DUKES</span><small>BUSINESS BAY · DUBAI</small></span>
       </div>
     </div>
-    <div className="hero-bottom wrap"><a href="#atelier">SCROLL TO EXPLORE <ArrowDown size={17}/></a><span>DUKES OF BEAUTY — EST. DUBAI</span></div>
+    <div className="hero-bottom wrap"><a href="#atelier">SCROLL TO EXPLORE <ArrowDown size={17}/></a><span>DUKES OF BEAUTY — BUSINESS BAY, DUBAI</span></div>
   </section>;
 }
 
