@@ -213,7 +213,7 @@ const AboutSection = () => (
         
         <div className="max-w-3xl mx-auto space-y-8">
           <p className="text-ivory/70 text-lg sm:text-xl font-sans leading-relaxed text-center">
-            Dukes of Beauty is more than a salon — it is a destination for those who appreciate the finest things. Located in the prestigious Business Bay, our atelier combines world-class techniques with premium products from K18, Tokio Inkarami, Nashi, and Kevin Murphy.
+            Dukes of Beauty is a beauty salon in Business Bay, Dubai, offering hair, nail, lash, skincare and wellness treatments. Explore the treatment menu and request your preferred appointment directly through WhatsApp.
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8">
@@ -234,7 +234,7 @@ const AboutSection = () => (
           </div>
           
           <p className="text-ivory/70 text-lg sm:text-xl font-sans leading-relaxed text-center pt-4">
-            From synchronized 4-hand and 6-hand treatments to advanced HydraFacial Syndeo protocols, every service is designed to deliver an unparalleled experience.
+            From hairstyling and nail care to HydraFacial and body treatments, explore services and listed prices before requesting your visit.
           </p>
         </div>
       </Reveal>
