@@ -947,3 +947,198 @@ input:focus, button:focus {
   perspective: 1000px;
   overflow: hidden;
 }
+
+
+/* Dukes of Beauty - editorial black / champagne / ivory redesign.
+   Genuine salon photography and the existing WhatsApp booking flow are retained. */
+.dukes-hero {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  background: #080707;
+  min-height: min(850px, 100svh);
+  min-height: max(650px, min(850px, 100svh));
+  overflow: hidden;
+  isolation: isolate;
+}
+.dukes-hero-image {
+  position: absolute;
+  z-index: -2;
+  inset: 0 0 0 39%;
+  overflow: hidden;
+}
+.dukes-hero-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  animation: kenBurns 22s ease-out forwards;
+}
+.dukes-hero-shade {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(90deg,#0b0a09 0%,#0b0a09 27%,rgba(11,10,9,.93) 41%,rgba(11,10,9,.38) 65%,rgba(11,10,9,.09) 100%),
+              linear-gradient(0deg,rgba(11,10,9,.55),transparent 35%);
+}
+.dukes-hero-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(100px,.65fr);
+  align-items: center;
+  padding-top: 135px;
+  padding-bottom: 115px;
+  gap: 32px;
+}
+.dukes-hero-copy { max-width: 690px; }
+.dukes-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #e0caa5;
+  text-transform: uppercase;
+  letter-spacing: .29em;
+  font-size: 11px;
+  font-weight: 500;
+  margin-bottom: 28px;
+}
+.dukes-eyebrow span { display: inline-block; width: 38px; height: 1px; background: #c8ad83; }
+.dukes-hero h1 {
+  font-family: 'Cormorant Garamond',serif;
+  font-size: clamp(68px,7.4vw,122px);
+  font-weight: 400;
+  line-height: .88;
+  letter-spacing: -.048em;
+  color: #fff9f0;
+  text-wrap: balance;
+  margin-bottom: 36px;
+}
+.dukes-hero h1 em { font-weight: 300; color: #dcc39a; }
+.dukes-hero-subtitle {
+  max-width: 435px;
+  font-size: clamp(15px,1.6vw,18px);
+  font-weight: 300;
+  line-height: 1.85;
+  color: #f5eee5c9;
+  margin-bottom: 32px;
+}
+.dukes-hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 25px; }
+.dukes-hero-actions .btn-luxury { gap: 13px; }
+.dukes-hero-link { font-size: 13px; color: #eee7db; padding: 14px 0; border-bottom: 1px solid #ba9d78; transition: color .2s; }
+.dukes-hero-link:hover { color: #e6c48e; }
+.dukes-booking-note { margin-top: 23px; display: flex; align-items: center; gap: 9px; font-size: 12px; color: #e8dfd2b5; }
+.dukes-booking-note i { color: #8bcaa2; font-size: 15px; }
+.dukes-hero-side-note { display: flex; flex-direction: column; align-self: end; justify-self: end; gap: 8px; color: #f5eee6; font-size: 10px; font-weight: 500; letter-spacing: .23em; text-align: right; text-shadow: 0 2px 12px #000; }
+.dukes-scroll-cue { position: absolute; left: 50%; transform: translateX(-50%); bottom: 24px; font-size: 10px; letter-spacing: .22em; color: #f6ebdcaa; display: flex; align-items: center; gap: 18px; }
+.dukes-scroll-cue span { font-size: 17px; color: #e3bd80; }
+
+.dukes-editorial {
+  color: #24201c;
+  background: #f7f3ed;
+  padding: clamp(70px,9vw,132px) 0;
+}
+.dukes-editorial-grid {
+  display: grid;
+  grid-template-columns: 1.06fr 1.13fr .62fr;
+  align-items: center;
+  gap: clamp(24px,3.8vw,65px);
+}
+.dukes-editorial-photo { min-height: 430px; align-self: stretch; }
+.dukes-editorial-photo img { width: 100%; height: 100%; min-height: 430px; object-fit: cover; border-radius: 5px; filter: saturate(.83); }
+.dukes-section-kicker { font-size: 11px; font-weight: 600; letter-spacing: .28em; color: #b09060; margin-bottom: 21px; }
+.dukes-editorial-copy h2,.dukes-signature-heading h2,.dukes-booking-feature h2,.dukes-reviews h2 {
+  font-family: 'Cormorant Garamond',serif;
+  font-size: clamp(50px,5vw,79px);
+  font-weight: 500;
+  line-height: .98;
+  letter-spacing: -.035em;
+}
+.dukes-editorial-copy h2 em,.dukes-signature-heading h2 em,.dukes-booking-feature h2 em,.dukes-reviews h2 em { color: #b18d55; font-weight: 400; }
+.dukes-gold-rule { width: 60px; height: 1px; background: #b9996c; margin: 27px 0; }
+.dukes-editorial-copy p:not(.dukes-section-kicker) { font-size: 15px; line-height: 1.95; color: #706961; margin: 0 0 14px; }
+.dukes-text-link { display: inline-flex; align-items: center; justify-content: space-between; gap: 30px; padding: 13px 0; border-bottom: 1px solid #ae936c; font-size: 11px; letter-spacing: .16em; font-weight: 700; color: #866943; margin-top: 12px; }
+.dukes-text-link:hover { color: #15110e; }
+.dukes-editorial-detail { position: relative; width: 100%; align-self: center; }
+.dukes-editorial-detail img { width: 100%; height: 290px; object-fit: cover; border-radius: 5px; }
+.dukes-editorial-detail span { display: block; color: #8b7964; letter-spacing: .16em; font-size: 9px; padding-top: 17px; }
+
+.dukes-signatures { background: #f7f3ed; color: #211d19; padding: 4px 0 clamp(75px,9vw,145px); }
+.dukes-signature-heading { display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 24px; margin-bottom: 38px; }
+.dukes-signature-heading h2 { font-size: clamp(58px,6vw,86px); }
+.dukes-signature-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 18px; }
+.dukes-signature-card { display: block; text-align: left; background: white; border: 1px solid #e9e0d3; border-radius: 6px; overflow: hidden; box-shadow: 0 9px 32px #6d554710; transition: transform .3s ease,box-shadow .3s ease; color: #211c17; min-width: 0; }
+.dukes-signature-card:hover { transform: translateY(-7px); box-shadow: 0 20px 45px #6d55472b; }
+.dukes-signature-image { display: block; aspect-ratio: 4/4.3; overflow: hidden; background: #d6cab8; }
+.dukes-signature-image img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .45s ease; }
+.dukes-signature-card:hover img { transform: scale(1.06); }
+.dukes-signature-label { position: relative; padding: 18px 17px 22px; display: flex; flex-direction: column; gap: 4px; }
+.dukes-signature-number { font-size: 10px; color: #aa8859; letter-spacing: .14em; margin-bottom: 1px; }
+.dukes-signature-label strong { font-family: 'Cormorant Garamond',serif; font-size: clamp(25px,2.3vw,34px); line-height: 1.1; font-weight: 600; }
+.dukes-signature-label small { font-size: 11px; color: #877d71; padding-right: 15px; line-height: 1.4; }
+.dukes-signature-arrow { position: absolute; right: 17px; top: 22px; color: #987340; }
+
+.dukes-booking-feature { padding: clamp(65px,7vw,100px) 0; background: linear-gradient(90deg,#100f0e,#241c16 60%,#120f0c); color: #faf4eb; border-top: 1px solid #c8ad8340; border-bottom: 1px solid #c8ad8340; }
+.dukes-booking-feature-inner { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(40px,7vw,130px); }
+.dukes-booking-feature h2 { color: #f8ecdd; max-width: 600px; }
+.dukes-booking-feature h2 em { color: #d8bb87; }
+.dukes-booking-feature-inner > div:first-child > p:last-child { max-width: 520px; color: #dacdbcb8; font-size: 15px; line-height: 1.8; margin-top: 21px; }
+.dukes-booking-feature-action { padding: 26px 32px 30px; background: #f9f5eb0c; border: 1px solid #d5b78e50; border-radius: 8px; display: flex; flex-direction: column; align-items: stretch; gap: 18px; }
+.dukes-booking-feature-steps { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 10px; }
+.dukes-booking-feature-steps span { text-align: center; padding: 14px 7px; background: #f8f4ee10; border: 1px solid #ecd7b025; border-radius: 6px; font-size: 11px; color: #f0e3d3; display: flex; align-items: center; flex-direction: column; gap: 11px; line-height: 1.45; }
+.dukes-booking-feature-steps i { font-size: 20px; color: #d6b885; }
+.dukes-booking-feature-action .btn-luxury { width: 100%; border-radius: 5px; gap: 12px; }
+.dukes-booking-feature-action small { text-align: center; font-size: 11px; color: #e6d4baad; line-height: 1.6; }
+
+.dukes-reviews { background: #f7f3ed; color: #27211d; padding: clamp(65px,7vw,110px) 0; }
+.dukes-reviews-inner { display: grid; grid-template-columns: auto 1fr auto; gap: clamp(20px,4vw,65px); align-items: center; }
+.dukes-reviews-symbol { width: 74px; height: 74px; display: grid; place-items: center; border: 1px solid #c7b18f; border-radius: 50%; color: #ae8b59; font-size: 26px; }
+.dukes-reviews h2 { font-size: clamp(42px,4vw,65px); }
+.dukes-reviews p:not(.dukes-section-kicker) { max-width: 600px; color: #716a61; font-size: 15px; margin-top: 15px; line-height: 1.75; }
+.dukes-reviews .btn-outline { color: #775932; border-color: #baa17e; font-size: 12px; letter-spacing: 0; white-space: nowrap; gap: 10px; }
+.dukes-reviews .btn-outline:hover { background: #e7dccb; }
+
+@media (max-width: 1023px) {
+  .dukes-editorial-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
+  .dukes-editorial-detail { display: none; }
+  .dukes-signature-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .dukes-booking-feature-inner { gap: 36px; }
+  .dukes-reviews-inner { grid-template-columns: auto 1fr; }
+  .dukes-reviews-inner .btn-outline { grid-column: 2; justify-self: start; }
+}
+@media (max-width: 699px) {
+  .dukes-hero { min-height: 715px; }
+  .dukes-hero-image { inset: 0; }
+  .dukes-hero-image img { object-position: 65% center; }
+  .dukes-hero-shade { background: linear-gradient(0deg,#0b0a09 5%,rgba(11,10,9,.92) 26%,rgba(11,10,9,.58) 65%,rgba(11,10,9,.45) 100%); }
+  .dukes-hero-inner { display: flex; flex-direction: column; justify-content: end; align-items: stretch; padding-top: 180px; padding-bottom: 100px; gap: 15px; }
+  .dukes-hero h1 { font-size: clamp(61px,13.5vw,85px); margin-bottom: 22px; }
+  .dukes-eyebrow { font-size: 10px; letter-spacing: .18em; margin-bottom: 21px; }
+  .dukes-hero-subtitle { font-size: 15px; max-width: 390px; margin-bottom: 21px; }
+  .dukes-hero-actions { align-items: stretch; gap: 8px; }
+  .dukes-hero-actions .btn-luxury { width: 100%; max-width: unset; border-radius: 5px; }
+  .dukes-hero-link { width: 100%; text-align: center; border: none; }
+  .dukes-booking-note { font-size: 11px; margin-top: 11px; }
+  .dukes-hero-side-note { display: none; }
+  .dukes-editorial { padding: 75px 0 62px; }
+  .dukes-editorial-grid { display: flex; flex-direction: column; align-items: stretch; gap: 30px; }
+  .dukes-editorial-photo { height: 290px; min-height: 0; }
+  .dukes-editorial-photo img { height: 290px; min-height: 0; }
+  .dukes-editorial-copy h2,.dukes-signature-heading h2,.dukes-booking-feature h2 { font-size: clamp(50px,12vw,70px); }
+  .dukes-signatures { padding: 15px 0 80px; }
+  .dukes-signature-grid { gap: 11px; }
+  .dukes-signature-heading { margin-bottom: 27px; }
+  .dukes-signature-heading .dukes-text-link { margin-top: 0; }
+  .dukes-signature-image { aspect-ratio: 4/5; }
+  .dukes-signature-label { padding: 12px 10px 20px; }
+  .dukes-signature-label strong { font-size: clamp(22px,6vw,30px); }
+  .dukes-signature-label small { font-size: 10px; }
+  .dukes-signature-arrow { top: 10px; right: 10px; }
+  .dukes-booking-feature-inner { display: flex; flex-direction: column; align-items: stretch; gap: 29px; }
+  .dukes-booking-feature-action { padding: 18px; gap: 15px; }
+  .dukes-booking-feature-steps span { font-size: 10px; }
+  .dukes-reviews-inner { display: flex; flex-direction: column; align-items: flex-start; gap: 23px; }
+  .dukes-reviews .btn-outline { width: 100%; max-width: unset; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dukes-hero-image img,.dukes-signature-image img { animation: none; transition: none; }
+}

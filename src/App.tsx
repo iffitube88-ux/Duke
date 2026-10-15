@@ -80,12 +80,13 @@ const Navigation = ({ onBookClick }: { onBookClick: () => void }) => {
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'glass border-b border-champagne/10' : 'bg-transparent'}`}>
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'glass border-b border-champagne/10 shadow-lg' : 'bg-[#0B0B0D]/95 border-b border-champagne/10'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
             <a href="#" className="flex-shrink-0"><Logo size="sm" /></a>
             
             <div className="hidden md:flex items-center gap-8">
+              <a href="#about" className="text-[11px] text-ivory/60 hover:text-champagne transition-colors tracking-[0.2em] uppercase">About</a>
               <a href="#services" className="text-[11px] text-ivory/60 hover:text-champagne transition-colors tracking-[0.2em] uppercase">Services</a>
               <a href="#gallery" className="text-[11px] text-ivory/60 hover:text-champagne transition-colors tracking-[0.2em] uppercase">Gallery</a>
               <a href="#reviews" className="text-[11px] text-ivory/60 hover:text-champagne transition-colors tracking-[0.2em] uppercase">Reviews</a>
@@ -118,6 +119,7 @@ const Navigation = ({ onBookClick }: { onBookClick: () => void }) => {
               </button>
             </div>
             <div className="flex-1 flex flex-col items-center justify-center gap-8 px-8">
+              <a href="#about" onClick={() => setMobileOpen(false)} className="text-2xl font-serif text-ivory/80 hover:text-champagne transition-colors">About</a>
               <a href="#services" onClick={() => setMobileOpen(false)} className="text-2xl font-serif text-ivory/80 hover:text-champagne transition-colors">Services</a>
               <a href="#gallery" onClick={() => setMobileOpen(false)} className="text-2xl font-serif text-ivory/80 hover:text-champagne transition-colors">Gallery</a>
               <a href="#reviews" onClick={() => setMobileOpen(false)} className="text-2xl font-serif text-ivory/80 hover:text-champagne transition-colors">Reviews</a>
@@ -135,118 +137,51 @@ const Navigation = ({ onBookClick }: { onBookClick: () => void }) => {
   );
 };
 
-// ==================== HERO ====================
-const HeroSection = ({ onBookClick }: { onBookClick: () => void }) => {
-  const [loaded, setLoaded] = useState(false);
-  useEffect(() => { setLoaded(true); }, []);
-
-  return (
-    <section className="hero-section relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="hero-image absolute inset-0">
-        <img
-          src="https://i.imgur.com/pFDeBJV_d.webp?maxwidth=760&fidelity=grand"
-          alt="Dukes of Beauty - Luxury Salon Interior"
-          className={`absolute inset-0 w-full h-full object-cover object-center ${loaded ? 'animate-ken-burns' : 'opacity-0'}`}
-          onError={(e) => { e.currentTarget.style.display = 'none'; }}
-        />
-        <div className="hero-overlay absolute inset-0"></div>
-      </div>
-
-      <div className="hero-content relative z-10 w-full px-4 sm:px-6 lg:px-8 pt-24 pb-20 sm:pt-32 sm:pb-24 md:pt-40 md:pb-32">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Location tag */}
-          <div className={`transition-all duration-1000 delay-500 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <div className="inline-flex items-center gap-3 mb-8 px-5 py-2.5 rounded-full bg-black/20 backdrop-blur-sm border border-champagne/20">
-              <span className="w-2 h-2 bg-champagne rounded-full animate-pulse"></span>
-              <span className="text-champagne text-xs tracking-[0.2em] uppercase font-sans font-medium">Business Bay · Dubai</span>
-            </div>
-          </div>
-
-          {/* Main headline */}
-          <h1 className={`hero-title font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light text-ivory leading-[1.05] tracking-tight mb-8 transition-all duration-1000 delay-700 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
-            The Art of<br />
-            <span className="animate-shimmer italic">Beauty</span>
-          </h1>
-
-          {/* Subtitle */}
-          <p className={`mb-10 text-ivory/80 text-lg sm:text-xl md:text-2xl font-sans font-light leading-relaxed max-w-2xl mx-auto transition-all duration-1000 delay-900 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            A sanctuary of luxury where precision meets artistry. Premium hair, nails, aesthetics & wellness in the heart of Dubai.
-          </p>
-
-          {/* CTAs */}
-          <div className={`mb-10 flex flex-col sm:flex-row gap-4 justify-center items-center transition-all duration-1000 delay-1000 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <button onClick={onBookClick} className="btn-luxury w-full sm:w-auto px-10">
-              Reserve Your Visit
-            </button>
-            <a href="#services" className="btn-outline w-full sm:w-auto px-10 text-center">
-              View Services
-            </a>
-          </div>
-
-          {/* Trust indicator */}
-          <div className={`transition-all duration-1000 delay-[1200ms] ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <a 
-              href="https://www.google.com/maps/place/?q=place_id:ChIJQw1xKtxpXz4R5ZcIoAWMGdE"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-black/20 backdrop-blur-sm border border-champagne/20 hover:border-champagne/40 transition-all group"
-            >
-              <div className="flex gap-1">
-                {[...Array(5)].map((_, i) => (
-                  <svg key={i} className="w-4 h-4 text-champagne fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
-                ))}
-              </div>
-              <span className="text-ivory/80 text-sm font-sans font-medium group-hover:text-champagne transition-colors">View Google Reviews</span>
-            </a>
-          </div>
+// ==================== EDITORIAL HERO (REAL DUKES OF BEAUTY PHOTOS) ====================
+const HeroSection = ({ onBookClick }: { onBookClick: () => void }) => (
+  <section id="home" className="dukes-hero">
+    <div className="dukes-hero-image">
+      <img src="https://i.imgur.com/pFDeBJV_d.webp?maxwidth=760&fidelity=grand" alt="Interior at Dukes of Beauty, Business Bay" fetchPriority="high" />
+    </div>
+    <div className="dukes-hero-shade" />
+    <div className="site-container dukes-hero-inner">
+      <div className="dukes-hero-copy">
+        <p className="dukes-eyebrow"><span /> Beauty · Care · Confidence</p>
+        <h1>Look Good.<br /><em>Feel Amazing.</em></h1>
+        <p className="dukes-hero-subtitle">Hair, nails, advanced facials and personalised beauty treatments in Business Bay, Dubai.</p>
+        <div className="dukes-hero-actions">
+          <button className="btn-luxury" onClick={onBookClick}><i className="far fa-calendar-alt" /> Request Appointment <span aria-hidden="true">↗</span></button>
+          <a href="#services" className="dukes-hero-link">Explore our treatments <span aria-hidden="true">↗</span></a>
         </div>
+        <p className="dukes-booking-note"><i className="fab fa-whatsapp" /> Requests are sent directly to the salon on WhatsApp.</p>
       </div>
-    </section>
-  );
-};
+      <div className="dukes-hero-side-note" aria-hidden="true"><span>DUKES OF BEAUTY</span><span>BUSINESS BAY — DUBAI</span></div>
+    </div>
+    <a className="dukes-scroll-cue" href="#about" aria-label="Scroll to learn about the salon">SCROLL TO DISCOVER <span>↓</span></a>
+  </section>
+);
 
-// ==================== ABOUT SECTION ====================
+// ==================== EDITORIAL ABOUT ====================
 const AboutSection = () => (
-  <section className="section-fluid relative">
+  <section id="about" className="dukes-editorial">
     <div className="site-container">
-      <Reveal>
-        <SectionHeader
-          eyebrow="About"
-          title={<>Where Luxury<br />Meets <span className="italic text-champagne">Expertise</span></>}
-        />
-        
-        <div className="max-w-3xl mx-auto space-y-8">
-          <p className="text-ivory/70 text-lg sm:text-xl font-sans leading-relaxed text-center">
-            Dukes of Beauty is more than a salon — it is a destination for those who appreciate the finest things. Located in the prestigious Business Bay, our atelier combines world-class techniques with premium products from K18, Tokio Inkarami, Nashi, and Kevin Murphy.
-          </p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8">
-            <div className="text-center p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-champagne/10">
-              <div className="text-4xl font-serif text-champagne mb-2">4.9</div>
-              <div className="flex justify-center gap-1 mb-2">
-                {[...Array(5)].map((_, i) => (
-                  <svg key={i} className="w-4 h-4 text-champagne fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
-                ))}
-              </div>
-              <p className="text-ivory/60 text-sm font-sans">Google Rating</p>
-            </div>
-            
-            <div className="text-center p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-champagne/10">
-              <div className="text-4xl font-serif text-champagne mb-2">111+</div>
-              <p className="text-ivory/60 text-sm font-sans">Premium Services</p>
-            </div>
-            
-            <div className="text-center p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-champagne/10">
-              <div className="text-4xl font-serif text-champagne mb-2">7</div>
-              <p className="text-ivory/60 text-sm font-sans">Expert Categories</p>
-            </div>
-          </div>
-          
-          <p className="text-ivory/70 text-lg sm:text-xl font-sans leading-relaxed text-center pt-4">
-            From synchronized 4-hand and 6-hand treatments to advanced HydraFacial Syndeo protocols, every service is designed to deliver an unparalleled experience.
-          </p>
-        </div>
-      </Reveal>
+      <div className="dukes-editorial-grid">
+        <Reveal className="dukes-editorial-photo">
+          <img src="https://lh3.googleusercontent.com/grass-cs/AABkmLepqXC8WfGKqv2OiIwBa47A1_Vutpvq6CpuhI1YmJelex6kFpD-2_BQze6jf_vCNQ37J12SRUBsPKFCSq1zJH49Gbs-NiMLekysbDvj7-jD1yKY2RonGYrB5V60U2YZ5eo10BV7ms9cyX2v=w408-h272-k-no" alt="Dukes of Beauty salon interior" loading="lazy" />
+        </Reveal>
+        <Reveal className="dukes-editorial-copy" delay={100}>
+          <p className="dukes-section-kicker">WELCOME TO DUKES OF BEAUTY</p>
+          <h2>A little time,<br /><em>just for you.</em></h2>
+          <div className="dukes-gold-rule" />
+          <p>In the heart of Business Bay, discover thoughtful beauty care across hair styling, nail treatments, lashes, facials and wellness.</p>
+          <p>Find the service that suits you, select a preferred date and time, and let the Dukes of Beauty team confirm the details personally.</p>
+          <a href="#services" className="dukes-text-link">DISCOVER OUR SERVICES <span aria-hidden="true">↗</span></a>
+        </Reveal>
+        <Reveal className="dukes-editorial-detail" delay={200}>
+          <img src="https://lh3.googleusercontent.com/grass-cs/AABkmLe1lghQhDEox6l1AiBB6bQCE5edZLx74Y-uYMjvRLdQlXLZDy78GAjENWWNGjHXomqRFacbee8Gq7SfIi6FceJuEG0ka417s3QawyhHy5EqVknbU8qqjgVzyT_FlrB6fdXc-ZZibMkgvA4=w300-h225-p-k-no" alt="Nail treatment photograph from Dukes of Beauty" loading="lazy" />
+          <span>PERSONAL CARE · DUBAI</span>
+        </Reveal>
+      </div>
     </div>
   </section>
 );
@@ -259,16 +194,16 @@ const serviceCategories: ServiceCategory[] = [
   {
     id: 'hair', icon: '✂️', title: 'Hair',
     services: [
-      { name: 'Haircut', duration: '1h 30min', price: 'from 400 AED' },
+      { name: 'Haircut', duration: '1h 30min', price: 'from 360 AED' },
       { name: 'Haircut + Styling', duration: '1h', price: 'from 500 AED' },
       { name: 'Princess Hair Cut', duration: '1h', price: '250 AED' },
       { name: 'Trimming', duration: '1h', price: '200 AED' },
       { name: 'Fringe Trim', duration: '1h', price: '120 AED' },
       { name: 'Blow-Dry Classic', duration: '1h', price: 'from 180 AED' },
       { name: 'Evening Styling', duration: '1h', price: 'from 500 AED' },
-      { name: 'Express Styling', duration: '1h', price: '300–500 AED' },
-      { name: 'Wave Hair', duration: '1h', price: '250–450 AED' },
-      { name: 'Roots Color', duration: '1h', price: '420 AED' },
+      { name: 'Express Styling', duration: '1h', price: 'from 300 AED' },
+      { name: 'Wave Hair', duration: '1h', price: 'from 250 AED' },
+      { name: 'Roots Color', duration: '1h', price: 'from 350 AED' },
       { name: 'Full Color', duration: '2h', price: 'from 720 AED' },
       { name: 'Balayage / Sombre', duration: '2h 30min', price: '750–1,000 AED' },
       { name: 'Ombre', duration: '2h 30min', price: '900–1,500 AED' },
@@ -291,7 +226,7 @@ const serviceCategories: ServiceCategory[] = [
       { name: 'Princess Manicure', duration: '40min', price: '90 AED' },
       { name: 'Gelish Manicure', duration: '2h', price: '260 AED' },
       { name: 'Japanese Manicure', duration: '1h 15min', price: '200 AED' },
-      { name: 'Spa Sultan de Saba Manicure', duration: '1h 30min', price: '100 AED' },
+      { name: 'Spa Sultan de Saba Manicure', duration: '1h 30min', price: '180 AED' },
       { name: 'Spa Manicure Candle', duration: '30min', price: '170 AED' },
       { name: 'Nail Extension', duration: '2h 30min', price: '450 AED' },
       { name: 'Nail Extension Extra Long', duration: '3h 30min', price: '620 AED' },
@@ -303,7 +238,7 @@ const serviceCategories: ServiceCategory[] = [
       { name: 'Princess Pedicure', duration: '1h', price: '90 AED' },
       { name: 'Gelish Pedicure', duration: '2h', price: '290 AED' },
       { name: 'Express Pedicure', duration: '1h', price: '80 AED' },
-      { name: 'Spa Sultan de Saba Pedicure', duration: '30min', price: '100 AED' },
+      { name: 'Spa Sultan de Saba Pedicure', duration: '30min', price: '190 AED' },
       { name: 'Spa Pedicure Candle', duration: '30min', price: '180 AED' },
       { name: 'Candle SPA', duration: '15min', price: '50 AED' },
     ],
@@ -343,7 +278,7 @@ const serviceCategories: ServiceCategory[] = [
       { name: 'Body Back', duration: '1h', price: '800–1,000 AED' },
       { name: 'Keravive 1 Vial + Spray', duration: '45min', price: '1,500 AED' },
       { name: 'Keravive 2 Vials + Spray', duration: '45min', price: '2,000 AED' },
-      { name: 'HF Package (6 sessions)', duration: '1h', price: '4,900 AED' },
+      { name: 'HF Package (10 sessions)', duration: '1h', price: '4,900 AED' },
       { name: 'HF Hair Keravive Package (6 sessions)', duration: '1h', price: '7,200 AED' },
     ],
   },
@@ -371,22 +306,22 @@ const serviceCategories: ServiceCategory[] = [
   {
     id: 'massage', icon: '💆', title: 'Massage',
     services: [
-      { name: 'Relaxing Full Body (60min)', duration: '1h', price: 'Contact us' },
-      { name: 'Relaxing Full Body (90min)', duration: '1h 30min', price: 'Contact us' },
-      { name: 'Relaxing Full Body (120min)', duration: '2h', price: 'Contact us' },
-      { name: 'Deep Tissue (45min)', duration: '45min', price: 'Contact us' },
-      { name: 'Deep Tissue (60min)', duration: '1h', price: 'Contact us' },
-      { name: 'Deep Tissue (90min)', duration: '1h 30min', price: 'Contact us' },
-      { name: 'Hot Stone (60min)', duration: '1h', price: 'Contact us' },
-      { name: 'Hot Stone (90min)', duration: '1h 30min', price: 'Contact us' },
-      { name: 'Hot Stone (120min)', duration: '2h', price: 'Contact us' },
+      { name: 'Relaxing Full Body (60min)', duration: '1h', price: '600 AED' },
+      { name: 'Relaxing Full Body (90min)', duration: '1h 30min', price: '800 AED' },
+      { name: 'Relaxing Full Body (120min)', duration: '2h', price: '1,100 AED' },
+      { name: 'Deep Tissue (45min)', duration: '45min', price: '550 AED' },
+      { name: 'Deep Tissue (60min)', duration: '1h', price: '650 AED' },
+      { name: 'Deep Tissue (90min)', duration: '1h 30min', price: '850 AED' },
+      { name: 'Hot Stone (60min)', duration: '1h', price: '700 AED' },
+      { name: 'Hot Stone (90min)', duration: '1h 30min', price: '850 AED' },
+      { name: 'Hot Stone (120min)', duration: '2h', price: '1,200 AED' },
       { name: 'Swedish Massage (30–60min)', duration: '30–60min', price: 'Contact us' },
       { name: 'Sports Massage (30–60min)', duration: '30–60min', price: 'Contact us' },
       { name: 'Lymphatic Massage (35–60min)', duration: '35–60min', price: 'Contact us' },
       { name: 'Stretching Massage', duration: '30–60min', price: 'Contact us' },
-      { name: 'Back Massage (30–60min)', duration: '30–60min', price: 'Contact us' },
-      { name: 'Head Massage (30–60min)', duration: '30–60min', price: 'Contact us' },
-      { name: 'Reflexology (30–60min)', duration: '30–60min', price: 'Contact us' },
+      { name: 'Back Massage (30–60min)', duration: '30–60min', price: 'from 400 AED' },
+      { name: 'Head Massage (30–60min)', duration: '30–60min', price: 'from 350 AED' },
+      { name: 'Reflexology (30–60min)', duration: '30–60min', price: 'from 400 AED' },
       { name: 'Buccal Face Massage', duration: '30min', price: 'Contact us' },
       { name: 'Postnatal Massage', duration: '1h', price: 'Contact us' },
     ],
@@ -395,34 +330,58 @@ const serviceCategories: ServiceCategory[] = [
     id: 'body', icon: '🧴', title: 'Body Treatments',
     services: [
       { name: 'Neck & Shoulders', duration: '1h', price: '250 AED' },
-      { name: 'Full Body Classic', duration: '1h', price: '500 AED' },
+      { name: 'Full Body Classic', duration: '1h', price: '420 AED' },
       { name: 'Relax', duration: '1h', price: '375 AED' },
-      { name: 'Dermadrop', duration: '1h', price: '600–700 AED' },
-      { name: 'Heleo 4', duration: '1h', price: '650–750 AED' },
-      { name: 'Beautylizer', duration: '1h', price: '620–720 AED' },
+      { name: 'Dermadrop', duration: '1h', price: 'from 600 AED' },
+      { name: 'Heleo 4', duration: '1h', price: 'from 650 AED' },
+      { name: 'Beautylizer', duration: '1h', price: 'from 620 AED' },
     ],
   },
 ];
 
-const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices }: { onBookClick: () => void; selectedServices: string[]; setSelectedServices: React.Dispatch<React.SetStateAction<string[]>> }) => {
-  const [activeTab, setActiveTab] = useState('hair');
+// Prices are taken from the salon's published menu; never estimate an invented
+// maximum for a 'from' price and never convert 'contact us' into AED 0.
+type PriceSummary = { min: number; max: number; hasVariable: boolean; hasUnpriced: boolean; display: string };
+const getPriceSummary = (names: string[]): PriceSummary => {
+  const all = serviceCategories.flatMap(category => category.services);
+  let min = 0, max = 0, hasVariable = false, hasUnpriced = false, hasStartingPrice = false;
+  names.forEach(name => {
+    const service = all.find(item => item.name === name);
+    if (!service) return;
+    const range = service.price.match(/([\d,]+)\s*[–-]\s*([\d,]+)\s*AED/i);
+    if (range) {
+      min += Number(range[1].replace(/,/g, ''));
+      max += Number(range[2].replace(/,/g, ''));
+      hasVariable = true;
+      return;
+    }
+    const amount = service.price.match(/([\d,]+)\s*AED/i);
+    if (!amount) { hasUnpriced = true; return; }
+    const value = Number(amount[1].replace(/,/g, ''));
+    min += value; max += value;
+    if (/from/i.test(service.price)) { hasVariable = true; hasStartingPrice = true; }
+  });
+  const fmt = (num: number) => num.toLocaleString('en-AE');
+  const display = hasUnpriced
+    ? (min ? 'From AED ' + fmt(min) + ' + other prices on request' : 'Price on request')
+    : hasStartingPrice
+      ? 'From AED ' + fmt(min)
+      : max !== min
+        ? 'AED ' + fmt(min) + '–' + fmt(max)
+        : 'AED ' + fmt(min);
+  return { min, max, hasVariable, hasUnpriced, display };
+};
+
+const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices, initialCategory }: { onBookClick: () => void; selectedServices: string[]; setSelectedServices: React.Dispatch<React.SetStateAction<string[]>>; initialCategory: string }) => {
+  const [activeTab, setActiveTab] = useState(initialCategory);
+  useEffect(() => { setActiveTab(initialCategory); }, [initialCategory]);
   const activeCategory = serviceCategories.find(c => c.id === activeTab) || serviceCategories[0];
 
   const toggleService = (serviceName: string) => {
     setSelectedServices(prev => prev.includes(serviceName) ? prev.filter(s => s !== serviceName) : [...prev, serviceName]);
   };
 
-  const calculateTotal = () => {
-    let total = 0;
-    selectedServices.forEach(serviceName => {
-      const service = serviceCategories.flatMap(cat => cat.services).find(s => s.name === serviceName);
-      if (service) {
-        const priceMatch = service.price.match(/(\d+)/);
-        if (priceMatch) total += parseInt(priceMatch[1]);
-      }
-    });
-    return total;
-  };
+  const calculateTotal = () => getPriceSummary(selectedServices);
 
   return (
     <section id="services" className="section-fluid relative">
@@ -551,11 +510,11 @@ const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices }:
                   </p>
                 </div>
                 <p className="text-champagne text-xl font-sans font-semibold ml-13">
-                  Estimated total: {calculateTotal()} AED
+                  Estimated total: {calculateTotal().display}
                 </p>
-                {calculateTotal() === 0 && (
+                {(calculateTotal().hasVariable || calculateTotal().hasUnpriced) && (
                   <p className="text-ivory/50 text-sm font-sans mt-1 ml-13">
-                    * Final price may vary
+                    * Final price and availability confirmed by the salon
                   </p>
                 )}
               </div>
@@ -569,6 +528,51 @@ const ServicesSection = ({ onBookClick, selectedServices, setSelectedServices }:
     </section>
   );
 };
+
+// ==================== SIGNATURE SERVICE CATEGORIES ====================
+const signatureCategories = [
+  { id: 'hair', title: 'Hair & Styling', description: 'Cuts, colour, styling and care', photo: "https://i.imgur.com/pFDeBJV_d.webp?maxwidth=760&fidelity=grand", position: 'center' },
+  { id: 'nails', title: 'Nail Care', description: 'Manicures, pedicures and nail art', photo: "https://lh3.googleusercontent.com/grass-cs/AABkmLe1lghQhDEox6l1AiBB6bQCE5edZLx74Y-uYMjvRLdQlXLZDy78GAjENWWNGjHXomqRFacbee8Gq7SfIi6FceJuEG0ka417s3QawyhHy5EqVknbU8qqjgVzyT_FlrB6fdXc-ZZibMkgvA4=w300-h225-p-k-no", position: 'center' },
+  { id: 'facials', title: 'Skin & Facials', description: 'HydraFacial and skincare treatments', photo: "https://lh3.googleusercontent.com/grass-cs/AABkmLdUHFf6d-RfR9HUylEsHuad15y4HImeHgRiheo5YJsnwXWdl5FQ3eeBuj-a9u6OyGS-_Z9xK-t4OTYswDwYRDB7VdC7Y48ClKnfqWGqbaIUQNquBLLWEwNskAMZHWXgLFsRB_y-9IYfa68=w300-h225-p-k-no", position: 'center' },
+  { id: 'lashes', title: 'Lashes & Brows', description: 'Definition, shaping and treatments', photo: "https://lh3.googleusercontent.com/grass-cs/AABkmLeu9Q5yXY6W7k5P3Eqff3oin_YEfMAKnVHvDYyTRb_112WIUHTDPKUrR59Zzx1rEVaUjsmZNwnBPzb1GBRkUlJEDLcBz6UbZ8KTA2IghxBPy0Nz35NiarqcAK_Au8I1HOt2cvYxWWOu7dc=w300-h225-p-k-no", position: 'center' },
+];
+
+const SignatureServices = ({ onExplore }: { onExplore: (category: string) => void }) => (
+  <section className="dukes-signatures" aria-label="Featured beauty treatments">
+    <div className="site-container">
+      <div className="dukes-signature-heading">
+        <div><p className="dukes-section-kicker">TREATMENTS & EXPERIENCES</p><h2>Our <em>Services</em></h2></div>
+        <a href="#services" className="dukes-text-link">VIEW FULL PRICE MENU <span aria-hidden="true">↗</span></a>
+      </div>
+      <div className="dukes-signature-grid">
+        {signatureCategories.map((category, index) => (
+          <button key={category.id} className="dukes-signature-card" onClick={() => onExplore(category.id)} aria-label={'View ' + category.title + ' prices'}>
+            <span className="dukes-signature-image"><img src={category.photo} loading="lazy" alt={'Dukes of Beauty gallery photograph for ' + category.title} style={{objectPosition:category.position}} /></span>
+            <span className="dukes-signature-label"><span className="dukes-signature-number">0{index + 1}</span><strong>{category.title}</strong><small>{category.description}</small><span className="dukes-signature-arrow" aria-hidden="true">↗</span></span>
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+// Existing WhatsApp form is the only booking flow.
+const QuickBookingSection = ({ onBookClick }: { onBookClick: () => void }) => (
+  <section id="appointments" className="dukes-booking-feature">
+    <div className="site-container dukes-booking-feature-inner">
+      <div>
+        <p className="dukes-section-kicker">YOUR MOMENT AWAITS</p>
+        <h2>Book Your <em>Appointment</em> Today</h2>
+        <p>Choose your treatment and preferred time. The salon will confirm your request directly through WhatsApp.</p>
+      </div>
+      <div className="dukes-booking-feature-action">
+        <div className="dukes-booking-feature-steps"><span><i className="fas fa-spa" /> Select service</span><span><i className="far fa-calendar-alt" /> Choose preferred time</span><span><i className="fab fa-whatsapp" /> Request via WhatsApp</span></div>
+        <button className="btn-luxury" onClick={onBookClick}>Start Booking Request <span aria-hidden="true">↗</span></button>
+        <small>Availability and final price are confirmed by Dukes of Beauty.</small>
+      </div>
+    </div>
+  </section>
+);
 
 // ==================== INSTAGRAM SECTION ====================
 const InstagramSection = () => {
@@ -915,237 +919,20 @@ const GallerySection = () => {
   );
 };
 
-// ==================== REVIEWS ====================
-const ReviewsSection = () => {
-  const [currentReview, setCurrentReview] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-
-  // Real Google Reviews from Dukes of Beauty
-  const reviews = [
-    {
-      name: "Anastasia K.",
-      rating: 5,
-      text: "Absolutely love this place! The HydraFacial was incredible — my skin has never looked better. The staff is so professional and the atmosphere is pure luxury.",
-      date: "2 weeks ago",
-      initial: "A"
-    },
-    {
-      name: "Elena R.",
-      rating: 5,
-      text: "The best salon in Business Bay! Their Airtouch coloring and K18 treatment completely transformed my hair. Plus, having the 4-hand nail service saves so much time.",
-      date: "1 month ago",
-      initial: "E"
-    },
-    {
-      name: "Maria S.",
-      rating: 5,
-      text: "I came for a haircut and left feeling like a completely new person. The colorist understood exactly what I wanted. The valet service and complimentary coffee were the perfect touch.",
-      date: "1 month ago",
-      initial: "M"
-    },
-    {
-      name: "Olga V.",
-      rating: 5,
-      text: "Best lash extensions I have ever had! So natural and lightweight. The salon is immaculate and the team makes you feel like royalty from start to finish.",
-      date: "2 months ago",
-      initial: "O"
-    },
-    {
-      name: "Natalia P.",
-      rating: 5,
-      text: "The 6-hand manicure + pedicure experience is unreal. In under an hour I had a full set done perfectly. The attention to detail and luxury products used are worth every dirham.",
-      date: "2 months ago",
-      initial: "N"
-    },
-    {
-      name: "Daria M.",
-      rating: 5,
-      text: "Had a truly great experience at this beauty salon. I had a manicure, pedicure, and massage, and everything was absolutely amazing. The quality of work, service, and precise attention to detail are top-notch!",
-      date: "3 months ago",
-      initial: "D"
-    }
-  ];
-
-  // Auto-slide functionality
-  useEffect(() => {
-    if (!isAutoPlaying) return;
-    
-    const interval = setInterval(() => {
-      setCurrentReview((prev) => (prev + 1) % reviews.length);
-    }, 5000); // Auto-slide every 5 seconds
-
-    return () => clearInterval(interval);
-  }, [isAutoPlaying, reviews.length]);
-
-  const nextReview = () => {
-    setIsAutoPlaying(false);
-    setCurrentReview((prev) => (prev + 1) % reviews.length);
-    setTimeout(() => setIsAutoPlaying(true), 10000); // Resume auto-play after 10s
-  };
-
-  const prevReview = () => {
-    setIsAutoPlaying(false);
-    setCurrentReview((prev) => (prev - 1 + reviews.length) % reviews.length);
-    setTimeout(() => setIsAutoPlaying(true), 10000);
-  };
-
-  const goToReview = (index: number) => {
-    setIsAutoPlaying(false);
-    setCurrentReview(index);
-    setTimeout(() => setIsAutoPlaying(true), 10000);
-  };
-
-  return (
-    <section id="reviews" className="section-fluid relative overflow-hidden">
-      <div className="site-container">
-        <Reveal>
-          <SectionHeader
-            eyebrow="Reviews"
-            title={<>Client <span className="italic text-champagne">Reviews</span></>}
-            description="What our valued clients say about their experience at Dukes of Beauty"
-          />
-        </Reveal>
-
-        {/* Reviews Carousel */}
-        <Reveal delay={200}>
-          <div className="relative max-w-5xl mx-auto">
-            {/* Rating Badge */}
-            <div className="text-center mb-12">
-              <div className="inline-flex items-center gap-4 px-8 py-4 rounded-full bg-white/5 backdrop-blur-sm border border-champagne/20">
-                <div className="flex gap-1">
-                  {[...Array(5)].map((_, i) => (
-                    <svg key={i} className="w-5 h-5 text-champagne fill-current" viewBox="0 0 20 20">
-                      <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
-                    </svg>
-                  ))}
-                </div>
-                <div className="h-8 w-px bg-champagne/30"></div>
-                <div className="text-left">
-                  <div className="text-2xl font-serif text-champagne font-semibold">4.9</div>
-                  <div className="text-xs text-ivory/60 font-sans">Google Rating</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Carousel Container */}
-            <div className="relative">
-              {/* Review Card */}
-              <div className="overflow-hidden">
-                <div 
-                  className="flex transition-transform duration-700 ease-out"
-                  style={{ transform: `translateX(-${currentReview * 100}%)` }}
-                >
-                  {reviews.map((review, index) => (
-                    <div key={index} className="w-full flex-shrink-0 px-4">
-                      <div className="glass-card rounded-3xl p-8 sm:p-12 border border-champagne/20 backdrop-blur-md">
-                        {/* Quote Icon */}
-                        <div className="flex justify-center mb-6">
-                          <div className="w-16 h-16 rounded-full bg-champagne/10 flex items-center justify-center">
-                            <svg className="w-8 h-8 text-champagne" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
-                            </svg>
-                          </div>
-                        </div>
-
-                        {/* Review Text */}
-                        <p className="text-ivory/90 text-lg sm:text-xl font-sans leading-relaxed text-center mb-8 min-h-[120px]">
-                          "{review.text}"
-                        </p>
-
-                        {/* Customer Info */}
-                        <div className="flex items-center justify-center gap-4">
-                          <div className="w-14 h-14 rounded-full bg-gradient-to-br from-champagne to-champagne/60 flex items-center justify-center text-obsidian font-serif text-xl font-bold">
-                            {review.initial}
-                          </div>
-                          <div className="text-left">
-                            <div className="text-ivory font-sans font-semibold text-lg">{review.name}</div>
-                            <div className="flex items-center gap-2 mt-1">
-                              <div className="flex gap-0.5">
-                                {[...Array(review.rating)].map((_, i) => (
-                                  <svg key={i} className="w-4 h-4 text-champagne fill-current" viewBox="0 0 20 20">
-                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
-                                  </svg>
-                                ))}
-                              </div>
-                              <span className="text-ivory/50 text-sm font-sans">• {review.date}</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Navigation Arrows */}
-              <button
-                onClick={prevReview}
-                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 sm:-translate-x-6 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-charcoal/80 backdrop-blur-sm border border-champagne/20 flex items-center justify-center hover:bg-charcoal hover:border-champagne/40 transition-all group z-10"
-                aria-label="Previous review"
-              >
-                <svg className="w-6 h-6 text-champagne group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-              </button>
-
-              <button
-                onClick={nextReview}
-                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 sm:translate-x-6 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-charcoal/80 backdrop-blur-sm border border-champagne/20 flex items-center justify-center hover:bg-charcoal hover:border-champagne/40 transition-all group z-10"
-                aria-label="Next review"
-              >
-                <svg className="w-6 h-6 text-champagne group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-            </div>
-
-            {/* Pagination Dots */}
-            <div className="flex justify-center gap-2 mt-8">
-              {reviews.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => goToReview(index)}
-                  className={`transition-all duration-300 rounded-full ${
-                    index === currentReview
-                      ? 'w-12 h-2 bg-champagne'
-                      : 'w-2 h-2 bg-champagne/30 hover:bg-champagne/50'
-                  }`}
-                  aria-label={`Go to review ${index + 1}`}
-                />
-              ))}
-            </div>
-
-            {/* Auto-play Indicator */}
-            <div className="flex justify-center mt-4">
-              <div className={`flex items-center gap-2 text-xs font-sans ${isAutoPlaying ? 'text-champagne/60' : 'text-ivory/40'}`}>
-                <div className={`w-2 h-2 rounded-full ${isAutoPlaying ? 'bg-champagne animate-pulse' : 'bg-ivory/40'}`}></div>
-                <span>{isAutoPlaying ? 'Auto-playing' : 'Paused'}</span>
-              </div>
-            </div>
-          </div>
-        </Reveal>
-
-        {/* View All Reviews CTA */}
-        <Reveal delay={400}>
-          <div className="flex justify-center mt-12">
-            <a
-              href="https://www.google.com/maps/place/?q=place_id:ChIJQw1xKtxpXz4R5ZcIoAWMGdE"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-outline inline-flex items-center gap-3"
-            >
-              <i className="fab fa-google text-lg"></i>
-              View All Reviews on Google
-            </a>
-          </div>
-          <p className="text-center text-ivory/40 text-xs font-sans mt-4">
-            All reviews are from verified Google customers
-          </p>
-        </Reveal>
+// ==================== GOOGLE REVIEWS (NO UNVERIFIED QUOTES OR RATINGS) ====================
+const ReviewsSection = () => (
+  <section id="reviews" className="dukes-reviews">
+    <div className="site-container dukes-reviews-inner">
+      <div className="dukes-reviews-symbol" aria-hidden="true"><i className="fab fa-google" /></div>
+      <div>
+        <p className="dukes-section-kicker">CLIENT EXPERIENCES</p>
+        <h2>Hear it from <em>our visitors.</em></h2>
+        <p>Explore customer experiences on the salon's Google Maps listing. Reviews and ratings are displayed on Google's own platform.</p>
       </div>
-    </section>
-  );
-};
+      <a href="https://www.google.com/maps/place/?q=place_id:ChIJQw1xKtxpXz4R5ZcIoAWMGdE" target="_blank" rel="noopener noreferrer" className="btn-outline">Read Google Reviews <span aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+);
 
 // ==================== CONTACT ====================
 const ContactSection = () => (
@@ -1239,14 +1026,14 @@ const Footer = () => {
         </div>
         <div className="mt-8 pt-8 border-t border-champagne/5 text-center">
           <p className="text-ivory/30 text-xs font-sans">
-            Build by{' '}
+            Built by{' '}
             <a 
               href="https://iffimedia.com" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-champagne hover:text-champagne-light transition-colors underline underline-offset-2"
             >
-              iffimedia.com
+              www.iffimedia.com
             </a>
           </p>
         </div>
@@ -1436,23 +1223,6 @@ const Calendar = ({ selectedDate, onDateSelect, minDate }: { selectedDate: strin
 
 // ==================== BOOKING SYSTEM ====================
 type BookingState = { step: number; selectedServices: string[]; selectedDate: string; selectedTime: string; customerName: string; customerPhone: string; };
-type BookedSlot = { date: string; time: string; customerName: string; timestamp: number; };
-
-const getBookedSlots = (): BookedSlot[] => {
-  try { const stored = localStorage.getItem('dukes_booked_slots'); return stored ? JSON.parse(stored) : []; } catch { return []; }
-};
-
-const saveBookedSlot = (slot: BookedSlot) => {
-  const slots = getBookedSlots();
-  slots.push(slot);
-  localStorage.setItem('dukes_booked_slots', JSON.stringify(slots));
-};
-
-const isSlotBooked = (date: string, time: string): boolean => {
-  const slots = getBookedSlots();
-  return slots.some(slot => slot.date === date && slot.time === time);
-};
-
 const BookingModal = ({ isOpen, onClose, preSelectedServices = [] }: { isOpen: boolean; onClose: () => void; preSelectedServices?: string[] }) => {
   const [booking, setBooking] = useState<BookingState>({ step: 1, selectedServices: [], selectedDate: '', selectedTime: '', customerName: '', customerPhone: '' });
   const [showCalendar, setShowCalendar] = useState(false);
@@ -1491,7 +1261,7 @@ const BookingModal = ({ isOpen, onClose, preSelectedServices = [] }: { isOpen: b
     return slots;
   };
 
-  const getMinDate = () => new Date().toISOString().split('T')[0];
+  const getMinDate = () => new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Dubai', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
 
   const calculateTotalDuration = () => {
     let totalMinutes = 0;
@@ -1513,42 +1283,7 @@ const BookingModal = ({ isOpen, onClose, preSelectedServices = [] }: { isOpen: b
     return hours > 0 ? `${hours}h ${mins > 0 ? mins + 'min' : ''}` : `${mins}min`;
   };
 
-  const calculateTotalPrice = () => {
-    let minTotal = 0;
-    let maxTotal = 0;
-    let hasVariable = false;
-    
-    booking.selectedServices.forEach(serviceName => {
-      const service = allServices.find(s => s.name === serviceName);
-      if (service) {
-        // Check if price has a range (e.g., "900–1,500 AED")
-        const rangeMatch = service.price.match(/([\d,]+)[–-]([\d,]+)\s*AED/i);
-        if (rangeMatch) {
-          hasVariable = true;
-          const min = parseInt(rangeMatch[1].replace(/,/g, ''));
-          const max = parseInt(rangeMatch[2].replace(/,/g, ''));
-          minTotal += min;
-          maxTotal += max;
-        } else {
-          // Single price or "from X AED"
-          const priceMatch = service.price.match(/([\d,]+)\s*AED/i);
-          if (priceMatch) {
-            const price = parseInt(priceMatch[1].replace(/,/g, ''));
-            if (service.price.toLowerCase().includes('from')) {
-              hasVariable = true;
-              minTotal += price;
-              maxTotal += price * 1.5; // Estimate max as 1.5x for "from" prices
-            } else {
-              minTotal += price;
-              maxTotal += price;
-            }
-          }
-        }
-      }
-    });
-    
-    return { min: minTotal, max: maxTotal, hasVariable };
-  };
+  const calculateTotalPrice = () => getPriceSummary(booking.selectedServices);
 
   const formatWhatsAppDate = (dateStr: string): string => {
     if (!dateStr) return '';
@@ -1604,21 +1339,15 @@ const BookingModal = ({ isOpen, onClose, preSelectedServices = [] }: { isOpen: b
     const formattedTime = formatWhatsAppTime(booking.selectedTime);
     const totalDuration = calculateTotalDuration();
     const priceInfo = calculateTotalPrice();
-    const totalPriceText = priceInfo.min === priceInfo.max 
-      ? `${priceInfo.min} AED`
-      : `${priceInfo.min}–${priceInfo.max} AED`;
-
-    // Check if any service has variable pricing
-    const hasVariablePricing = priceInfo.hasVariable;
+    const totalPriceText = priceInfo.display;
+    const hasVariablePricing = priceInfo.hasVariable || priceInfo.hasUnpriced;
 
     // Build service breakdown
     const serviceLines = booking.selectedServices.map(serviceName => {
       const service = allServices.find(s => s.name === serviceName);
       if (!service) return '';
       const emoji = getServiceEmoji(service.category);
-      const priceText = service.price.toLowerCase().includes('from') 
-        ? `From ${service.price}` 
-        : service.price;
+      const priceText = service.price;
       return `${emoji} ${service.name} — ${priceText}`;
     }).filter(line => line).join('\n');
 
@@ -1640,7 +1369,7 @@ const BookingModal = ({ isOpen, onClose, preSelectedServices = [] }: { isOpen: b
 ${serviceLines}
 
 ━━━━━━━━━━━━━━━━━━
-💰 *ESTIMATED TOTAL: AED ${totalPriceText}*
+💰 *ESTIMATED TOTAL: ${totalPriceText}*
 ${hasVariablePricing ? '\n⚠️ _Final price subject to salon confirmation_' : ''}
 
 📍 Dukes of Beauty
@@ -1652,7 +1381,6 @@ Business Bay, Dubai
 
     const encodedMessage = encodeURIComponent(message);
     const whatsappURL = `https://wa.me/971528167306?text=${encodedMessage}`;
-    saveBookedSlot({ date: booking.selectedDate, time: booking.selectedTime, customerName: booking.customerName, timestamp: Date.now() });
     window.open(whatsappURL, '_blank');
     onClose();
   };
@@ -1806,7 +1534,7 @@ Business Bay, Dubai
                       {booking.selectedServices.length} service{booking.selectedServices.length > 1 ? 's' : ''} selected
                     </p>
                     <p className="text-champagne text-lg font-sans font-bold">
-                      {calculateTotalPrice().min} AED{calculateTotalPrice().hasVariable ? '+' : ''}
+                      {calculateTotalPrice().display}
                     </p>
                   </div>
                   <div className="flex flex-wrap gap-2">
@@ -1829,7 +1557,7 @@ Business Bay, Dubai
 
           {booking.step === 2 && (
             <div>
-              <p className="text-ivory/70 text-base font-sans mb-6">Choose your preferred date & time:</p>
+              <p className="text-ivory/70 text-base font-sans mb-6">Choose a preferred date & time. This is not live availability; the salon will confirm on WhatsApp.</p>
               
               {/* Date Selection */}
               <div className="mb-8">
@@ -1866,17 +1594,13 @@ Business Bay, Dubai
                   <label className="text-champagne text-sm font-sans tracking-wide uppercase mb-4 block">Time</label>
                   <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
                     {generateTimeSlots().map(time => {
-                      const booked = isSlotBooked(booking.selectedDate, time);
                       const displayTime = formatDisplayTime(time);
                       return (
                         <button
                           key={time}
-                          disabled={booked}
                           onClick={() => setBooking(prev => ({ ...prev, selectedTime: time }))}
                           className={`px-4 py-4 rounded-xl text-base font-sans transition-all min-h-[56px] ${
-                            booked
-                              ? 'bg-red-500/10 border border-red-500/20 text-red-400/50 cursor-not-allowed line-through'
-                              : booking.selectedTime === time
+                            booking.selectedTime === time
                               ? 'bg-champagne text-obsidian font-semibold shadow-lg shadow-champagne/20'
                               : 'bg-obsidian/60 border border-champagne/10 text-ivory/80 hover:border-champagne/30 hover:bg-obsidian/80'
                           }`}
@@ -1887,8 +1611,8 @@ Business Bay, Dubai
                     })}
                   </div>
                   <p className="text-ivory/40 text-sm font-sans mt-5 flex items-center gap-2">
-                    <span className="inline-block w-3 h-3 bg-red-500/20 border border-red-500/30 rounded"></span>
-                    Unavailable time slots
+                    <i className="fab fa-whatsapp text-champagne"></i>
+                    All times shown are requests only. The salon confirms availability on WhatsApp.
                   </p>
                 </div>
               )}
@@ -1944,12 +1668,10 @@ Business Bay, Dubai
                   <div className="flex justify-between pt-4 border-t border-champagne/20">
                     <span className="text-champagne font-semibold">Estimated Total:</span>
                     <span className="text-champagne font-bold text-lg">
-                      {calculateTotalPrice().min === calculateTotalPrice().max 
-                        ? `${calculateTotalPrice().min} AED`
-                        : `${calculateTotalPrice().min}–${calculateTotalPrice().max} AED`}
+                      {calculateTotalPrice().display}
                     </span>
                   </div>
-                  {calculateTotalPrice().hasVariable && (
+                  {(calculateTotalPrice().hasVariable || calculateTotalPrice().hasUnpriced) && (
                     <p className="text-ivory/50 text-sm font-sans mt-3 italic">
                       * Final price subject to salon confirmation
                     </p>
@@ -1958,7 +1680,7 @@ Business Bay, Dubai
               </div>
 
               <p className="text-ivory/50 text-sm font-sans mt-6 text-center">
-                Your booking request will be sent via WhatsApp for confirmation
+                This sends a request to WhatsApp; your appointment is not confirmed until the salon replies.
               </p>
             </div>
           )}
@@ -1986,7 +1708,7 @@ Business Bay, Dubai
               }}
               className="btn-luxury flex-1"
             >
-              {booking.step === 3 ? 'Confirm & Send via WhatsApp' : 'Continue'}
+              {booking.step === 3 ? 'Send Request on WhatsApp' : 'Continue'}
             </button>
           </div>
         </div>
@@ -1999,6 +1721,11 @@ Business Bay, Dubai
 export default function App() {
   const [bookingOpen, setBookingOpen] = useState(false);
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
+  const [featuredCategory, setFeaturedCategory] = useState('hair');
+  const exploreCategory = (category: string) => {
+    setFeaturedCategory(category);
+    requestAnimationFrame(() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+  };
 
   return (
     <div className="min-h-screen bg-obsidian text-ivory w-full overflow-x-hidden">
@@ -2006,8 +1733,9 @@ export default function App() {
       <HeroSection onBookClick={() => setBookingOpen(true)} />
       <div className="section-divider"></div>
       <AboutSection />
-      <div className="section-divider"></div>
-      <ServicesSection onBookClick={() => setBookingOpen(true)} selectedServices={selectedServices} setSelectedServices={setSelectedServices} />
+      <SignatureServices onExplore={exploreCategory} />
+      <QuickBookingSection onBookClick={() => setBookingOpen(true)} />
+      <ServicesSection onBookClick={() => setBookingOpen(true)} selectedServices={selectedServices} setSelectedServices={setSelectedServices} initialCategory={featuredCategory} />
       <div className="section-divider"></div>
       <InstagramSection />
       <div className="section-divider"></div>
