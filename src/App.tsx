@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState, type Dispatch, type PointerEvent, type SetStateAction } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type Dispatch, type PointerEvent, type SetStateAction, type SyntheticEvent } from 'react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, Check, ChevronLeft, ChevronRight, Clock3, Instagram, MapPin, Menu, MessageCircle, Phone, Plus, Search, X } from 'lucide-react';
 import Booking from './Booking';
@@ -117,7 +117,7 @@ function SalonStory({ onBook }: { onBook: Book }) {
   return <section className="section-space salon-story" id="atelier"><div className="wrap story-layout">
     <div className="story-photos" data-reveal>
       <div className="story-image-large"><img src={brand.photos[0]} alt="Inside the Dukes of Beauty salon" loading="lazy"/></div>
-      <div className="story-image-small"><img src={brand.photos[1]} alt="Dukes of Beauty nail treatment detail" loading="lazy"/></div>
+      <div className="story-image-small"><img src={brand.photos[5]} alt="Dukes of Beauty nail colour swatches" loading="lazy"/></div>
       <div className="story-stamp"><span>THE SALON</span><strong>DB.</strong></div>
     </div>
     <div className="story-content" data-reveal>
@@ -133,7 +133,7 @@ function SalonStory({ onBook }: { onBook: Book }) {
 
 const featureCategories = [
   { id:'hair', title:'Hair & styling', subtitle:'CUT · COLOUR · TREATMENT', image:brand.hero, num:'01'},
-  { id:'nails', title:'Nails & beauty', subtitle:'MANICURE · PEDICURE · ART', image:brand.photos[1], num:'02'},
+  { id:'nails', title:'Nails & beauty', subtitle:'MANICURE · PEDICURE · ART', image:brand.photos[4], num:'02'},
   { id:'facials', title:'Skin & facials', subtitle:'HYDRAFACIAL · SKIN CARE', image:brand.photos[4], num:'03'},
   { id:'lashes', title:'Lashes & brows', subtitle:'EXTENSIONS · SHAPING', image:brand.photos[6], num:'04'},
 ];
@@ -208,28 +208,42 @@ function PhotoInterlude({ onBook }: { onBook:Book }) {
   </section>;
 }
 
+// Only photographs already attributed to the actual Dukes of Beauty location.
+// Excludes a computer keyboard, car snapshots and low-value unrelated images.
+const galleryPhotos = [
+  { src: brand.photos[0], fallback: brand.photoFallbacks[0], alt: 'Interior of Dukes of Beauty salon in Business Bay' },
+  { src: brand.photos[4], fallback: brand.photoFallbacks[4], alt: 'Nail treatment at Dukes of Beauty' },
+  { src: brand.photos[2], fallback: brand.photoFallbacks[2], alt: 'Pedicure photo from Dukes of Beauty' },
+  { src: brand.photos[5], fallback: brand.photoFallbacks[5], alt: 'Nail colour selections at Dukes of Beauty' },
+  { src: brand.photos[6], fallback: brand.photoFallbacks[6], alt: 'Beauty and nail detail photographed at Dukes of Beauty' },
+];
+
 function Gallery() {
   const [open,setOpen]=useState<number|null>(null);
-  const navigate=useCallback((direction:number)=>setOpen(prev=>prev===null?null:(prev+direction+brand.photos.length)%brand.photos.length),[]);
+  const navigate=useCallback((direction:number)=>setOpen(prev=>prev===null?null:(prev+direction+galleryPhotos.length)%galleryPhotos.length),[]);
   useEffect(()=>{
     if(open===null)return;
     const key=(event:KeyboardEvent)=>{if(event.key==='Escape')setOpen(null);if(event.key==='ArrowLeft')navigate(-1);if(event.key==='ArrowRight')navigate(1);};
     document.addEventListener('keydown',key);
     return()=>document.removeEventListener('keydown',key);
   },[open,navigate]);
+  const galleryImageError = (event: SyntheticEvent<HTMLImageElement>, fallback: string) => {
+    const image = event.currentTarget;
+    if (image.src !== fallback) image.src = fallback;
+  };
   return <section id="gallery" className="section-space gallery-section"><div className="wrap">
-    <div className="editorial-heading" data-reveal><div><span className="eyebrow gold-label">04 — INSIDE DUKES</span><h2>The beauty of <em>details.</em></h2></div><p>Discover real photographs from Dukes of Beauty and its salon treatments.</p></div>
-    <div className="gallery-grid">{brand.photos.map((photo,index)=><button key={photo} className={'gallery-tile tile-'+index} onClick={()=>setOpen(index)} aria-label={'View salon photo '+(index+1)}>
-      <img src={photo} alt={'Dukes of Beauty salon gallery photo '+(index+1)} loading="lazy"/><span><Plus size={20}/></span>
+    <div className="editorial-heading" data-reveal><div><span className="eyebrow gold-label">04 — INSIDE DUKES</span><h2>The beauty of <em>details.</em></h2></div><p>Real photography from the salon, with every detail in focus.</p></div>
+    <div className="gallery-grid">{galleryPhotos.map((photo,index)=><button type="button" key={photo.src} className={'gallery-tile tile-'+index} onClick={()=>setOpen(index)} aria-label={'View salon photo '+(index+1)}>
+      <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" onError={event=>galleryImageError(event,photo.fallback)}/><span><Plus size={20}/></span>
     </button>)}</div>
-    <div className="gallery-footer"><span>DUKES OF BEAUTY · REAL SALON PHOTOGRAPHY</span><a href={brand.instagram} target="_blank" rel="noopener noreferrer">Explore our Instagram <Instagram size={17}/><ArrowUpRight size={17}/></a></div>
+    <div className="gallery-footer"><span>DUKES OF BEAUTY · GENUINE SALON PHOTOGRAPHY</span><a href={brand.instagram} target="_blank" rel="noopener noreferrer">Explore our Instagram <Instagram size={17}/><ArrowUpRight size={17}/></a></div>
   </div>
   {open!==null&&<div className="lightbox" role="dialog" aria-label="Salon photo viewer" aria-modal="true" onClick={()=>setOpen(null)}>
     <button aria-label="Close image viewer" className="lightbox-close" onClick={()=>setOpen(null)}><X size={25}/></button>
     <button aria-label="Previous image" className="lightbox-prev" onClick={event=>{event.stopPropagation();navigate(-1);}}><ChevronLeft size={26}/></button>
-    <img src={brand.photos[open]} alt={'Dukes of Beauty photo '+(open+1)} onClick={event=>event.stopPropagation()}/>
+    <img src={galleryPhotos[open].src} alt={galleryPhotos[open].alt} onClick={event=>event.stopPropagation()} onError={event=>galleryImageError(event,galleryPhotos[open].fallback)}/>
     <button aria-label="Next image" className="lightbox-next" onClick={event=>{event.stopPropagation();navigate(1);}}><ChevronRight size={26}/></button>
-    <small>{open+1} / {brand.photos.length}</small>
+    <small>{open+1} / {galleryPhotos.length}</small>
   </div>}
   </section>;
 }
