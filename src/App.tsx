@@ -78,8 +78,8 @@ function Hero({ onBook }: { onBook: Book }) {
     const rect = frame.current.getBoundingClientRect();
     const x = (event.clientX - rect.left) / rect.width - .5;
     const y = (event.clientY - rect.top) / rect.height - .5;
-    frame.current.style.setProperty('--rotate-x', (-y * 3.5).toFixed(2) + 'deg');
-    frame.current.style.setProperty('--rotate-y', (x * 4).toFixed(2) + 'deg');
+    frame.current.style.setProperty('--rotate-x', (-y * 5.8).toFixed(2) + 'deg');
+    frame.current.style.setProperty('--rotate-y', (x * 6.5).toFixed(2) + 'deg');
   };
   return <section id="top" className="hero">
     <div className="hero-image"><img src={brand.hero} alt="The Dukes of Beauty salon interior" fetchPriority="high"/></div>
@@ -142,8 +142,8 @@ function Spotlight({ onCategory }: { onCategory: (id: string) => void }) {
   const tilt = (event: PointerEvent<HTMLButtonElement>) => {
     if(event.pointerType === 'touch' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const r=event.currentTarget.getBoundingClientRect(),x=(event.clientX-r.left)/r.width-.5,y=(event.clientY-r.top)/r.height-.5;
-    event.currentTarget.style.setProperty('--tilt-x',(-y*4).toFixed(2)+'deg');
-    event.currentTarget.style.setProperty('--tilt-y',(x*4).toFixed(2)+'deg');
+    event.currentTarget.style.setProperty('--tilt-x',(-y*5.5).toFixed(2)+'deg');
+    event.currentTarget.style.setProperty('--tilt-y',(x*5.5).toFixed(2)+'deg');
   };
   const reset=(event:PointerEvent<HTMLButtonElement>)=>{
     event.currentTarget.style.setProperty('--tilt-x','0deg');
@@ -165,7 +165,7 @@ function Spotlight({ onCategory }: { onCategory: (id: string) => void }) {
         <span>FIND THE SERVICE THAT FEELS LIKE YOU</span>
         <a href="#menu" className="gold-underline-link">View all treatments <ArrowUpRight size={18}/></a>
       </div>
-      <p className="spotlight-photo-credit">Treatment photography for Hair, Skin and Lashes is illustrative—not Dukes of Beauty client work. Photos: <a target="_blank" rel="noopener noreferrer" href={treatmentEditorial.hair.source}>Zoe Applbaum</a>, <a target="_blank" rel="noopener noreferrer" href={treatmentEditorial.facials.source}>Kimia Kazemi</a> and <a target="_blank" rel="noopener noreferrer" href={treatmentEditorial.lashes.source}>Cipriano Bala</a>. Actual salon photography appears in the gallery.</p>
+
     </div>
   </section>;
 }
@@ -269,9 +269,50 @@ function Reviews() {
   </div></section>;
 }
 
+
+/** One-time scroll-triggered, per-character typing with a fully accessible title. */
+function TypedVisitHeading() {
+  const heading = useRef<HTMLHeadingElement>(null);
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    const target = heading.current;
+    if (!target) return;
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setStarted(true);
+      return;
+    }
+    const observer = new IntersectionObserver(entries => {
+      if (entries.some(entry => entry.isIntersecting)) {
+        setStarted(true);
+        observer.disconnect();
+      }
+    }, { threshold: 0.4, rootMargin: '0px 0px -25px 0px' });
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, []);
+
+  const letters = (value: string, offset: number) =>
+    Array.from(value).map((letter, index) =>
+      <span className="typing-letter" key={offset + index}
+        style={{ animationDelay: `${(offset + index) * 70}ms` }}>
+        {letter === ' ' ? '\u00A0' : letter}
+      </span>
+    );
+
+  const first = "We'd love";
+  const second = "to see ";
+  const third = "you.";
+  return <h2 ref={heading} aria-label="We'd love to see you."
+    className={'visit-typing-heading ' + (started ? 'is-typing' : '')}>
+    <span aria-hidden="true" className="visit-typing-line">{letters(first, 0)}</span>
+    <span aria-hidden="true" className="visit-typing-line">{letters(second, first.length)}<em>{letters(third, first.length + second.length)}</em></span>
+  </h2>;
+}
+
 function Visit({ onBook }:{onBook:Book}) {
   return <section id="contact" className="section-space visit-section"><div className="wrap visit-grid">
-    <div className="visit-content" data-reveal><span className="eyebrow gold-label">05 — COME FIND US</span><h2>We'd love<br/>to see <em>you.</em></h2><p>Find Dukes of Beauty in Business Bay, Dubai. Browse your treatments and request a time that works for you.</p>
+    <div className="visit-content" data-reveal><span className="eyebrow gold-label">05 — COME FIND US</span><TypedVisitHeading/><p>Find Dukes of Beauty in Business Bay, Dubai. Browse your treatments and request a time that works for you.</p>
       <div className="visit-details"><div><MapPin size={19}/><span><strong>Find the salon</strong><small>{brand.address}</small></span></div><div><Phone size={19}/><span><strong>Call or WhatsApp</strong><a href={'tel:'+brand.phone}>+971 52 816 7306</a></span></div></div>
       <div className="visit-actions"><button className="gold-button" onClick={onBook}>Request appointment <ArrowUpRight size={18}/></button><a href={brand.maps} className="gold-underline-link" target="_blank" rel="noopener noreferrer">Get directions <ArrowRight size={17}/></a></div>
     </div>
