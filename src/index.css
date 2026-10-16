@@ -1024,3 +1024,55 @@ h2 em,h1 em{font-weight:300;color:var(--gold);font-style:italic}
   .booking-dialog {animation:none;}
   .story-image-large,.story-image-small,.hero-frame,.gallery-section .gallery-tile,.visit-image {transition:none!important;}
 }
+
+
+/* Typing headline repair: use properly shaped full-font strings, not separate
+   per-letter inline-blocks that break kerning and create visual gaps. */
+.visit-typing-heading {
+  width: 100%;
+  min-height: 2.02em;
+  overflow: visible;
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+}
+.visit-typing-heading .visit-typing-line {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-height: 1em;
+  white-space: nowrap;
+  overflow: visible;
+  letter-spacing: inherit;
+}
+.visit-typing-line em {
+  font-style: italic;
+  color: var(--gold);
+}
+.visit-type-caret {
+  display: inline-block;
+  width: 2px;
+  height: .78em;
+  margin-left: 4px;
+  vertical-align: -.05em;
+  background: var(--gold);
+  animation: visit-caret-blink .7s steps(1,end) infinite;
+}
+@keyframes visit-caret-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+.visit-typing-heading.is-complete .visit-type-caret {
+  display: none;
+}
+@media (max-width: 700px) {
+  .visit-typing-heading {
+    font-size: clamp(49px, 10.5vw, 79px);
+    line-height: 1.04;
+  }
+}
+@media (max-width: 390px) {
+  .visit-typing-heading { font-size: clamp(43px, 10.3vw, 55px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .visit-type-caret { animation: none; }
+}
