@@ -270,15 +270,25 @@ function Reviews() {
 }
 
 
-/** One-time scroll-triggered, per-character typing with a fully accessible title. */
+/** One-time on-scroll typewriter.
+ * Render a single text node per line to preserve the original font kerning and
+ * spacing; animating separate letter elements caused missing/disjointed text.
+ */
 function TypedVisitHeading() {
   const heading = useRef<HTMLHeadingElement>(null);
   const [started, setStarted] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const first = "We'd love";
+  const second = "to see ";
+  const emphasis = "you.";
+  const total = first.length + second.length + emphasis.length;
 
   useEffect(() => {
-    const target = heading.current;
-    if (!target) return;
-    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const node = heading.current;
+    if (!node) return;
+    const motionReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (motionReduced || !('IntersectionObserver' in window)) {
+      setProgress(total);
       setStarted(true);
       return;
     }
@@ -287,26 +297,33 @@ function TypedVisitHeading() {
         setStarted(true);
         observer.disconnect();
       }
-    }, { threshold: 0.4, rootMargin: '0px 0px -25px 0px' });
-    observer.observe(target);
+    }, { threshold: 0.2, rootMargin: '0px 0px -25px 0px' });
+    observer.observe(node);
     return () => observer.disconnect();
-  }, []);
+  }, [total]);
 
-  const letters = (value: string, offset: number) =>
-    Array.from(value).map((letter, index) =>
-      <span className="typing-letter" key={offset + index}
-        style={{ animationDelay: `${(offset + index) * 70}ms` }}>
-        {letter === ' ' ? '\u00A0' : letter}
-      </span>
-    );
+  useEffect(() => {
+    if (!started || progress >= total) return;
+    const timer = window.setInterval(() => {
+      setProgress(current => Math.min(current + 1, total));
+    }, 83);
+    return () => window.clearInterval(timer);
+  }, [started, progress, total]);
 
-  const first = "We'd love";
-  const second = "to see ";
-  const third = "you.";
+  const lineOne = first.slice(0, Math.min(progress, first.length));
+  const secondProgress = Math.max(0, progress - first.length);
+  const lineTwo = second.slice(0, secondProgress);
+  const lastWord = emphasis.slice(0, Math.max(0, secondProgress - second.length));
+  const finished = progress >= total;
+
   return <h2 ref={heading} aria-label="We'd love to see you."
-    className={'visit-typing-heading ' + (started ? 'is-typing' : '')}>
-    <span aria-hidden="true" className="visit-typing-line">{letters(first, 0)}</span>
-    <span aria-hidden="true" className="visit-typing-line">{letters(second, first.length)}<em>{letters(third, first.length + second.length)}</em></span>
+    className={'visit-typing-heading ' + (started ? 'is-typing' : '') + (finished ? ' is-complete' : '')}>
+    <span className="visit-typing-line" aria-hidden="true">
+      {lineOne}{started && !finished && progress <= first.length && <span className="visit-type-caret" />}
+    </span>
+    <span className="visit-typing-line" aria-hidden="true">
+      {lineTwo}<em>{lastWord}</em>{started && !finished && progress > first.length && <span className="visit-type-caret" />}
+    </span>
   </h2>;
 }
 
