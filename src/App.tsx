@@ -155,7 +155,7 @@ function Spotlight({ onCategory }: { onCategory: (id: string) => void }) {
       <div className="editorial-heading" data-reveal><div><span className="eyebrow gold-label">02 — THE TREATMENT COLLECTION</span><h2>Find your <em>ritual.</em></h2></div><p>Explore our treatments and choose what you’d love to experience.</p></div>
       <div className="spotlight-grid">{featureCategories.map(item => <button className="spotlight-card" type="button" key={item.id} onPointerMove={tilt} onPointerLeave={reset} onClick={() => onCategory(item.id)}>
         <span className="spotlight-image">
-          <SafeImage sources={[item.image,'backup' in item ? item.backup : '']} fallback={item.fallback} alt={item.alt} loading="lazy" decoding="async"/>
+          <SafeImage sources={[item.image,'backup' in item ? (item.backup || '') : '']} fallback={item.fallback} alt={item.alt} loading="lazy" decoding="async"/>
           <span className="spotlight-arrow"><ArrowUpRight size={21}/></span>
           <span className="spotlight-number">{item.num}/04</span>
           {item.illustrative && <span className="spotlight-illustrative">Illustrative photo</span>}
