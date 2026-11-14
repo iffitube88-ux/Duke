@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState, type FormEvent } from 'react';
 import { ArrowRight, CalendarDays, Check, Clock3, Plus, Search, X } from 'lucide-react';
 import { serviceCategories } from './salonData';
 import { brand } from './brand';
+import SafeImage from './SafeImage';
 import { appointmentSlots, catalog, dubaiNowMinutes, dubaiToday, formatDateForMessage, formatTimeForMessage, getEstimate, getSelected } from './catalog';
 
 
@@ -97,9 +98,9 @@ export default function Booking({ open, close, selected, setSelected }: BookingP
           <div className="booking-header-inner">
             <div className="booking-brand-mark" aria-label="Dukes of Beauty">
               <span className="booking-brand-fallback">DUKES<small>OF BEAUTY</small></span>
-              <img src={brand.logo} alt="Dukes of Beauty logo"
-                onLoad={event => event.currentTarget.parentElement?.classList.add('booking-logo-loaded')}
-                onError={event => { event.currentTarget.style.display = 'none'; }}/>
+              <SafeImage sources={[brand.logo,brand.logo.replace('/render/image/','/object/').split('?')[0]]}
+                fallback="/images/dukes-wordmark.svg" alt="Dukes of Beauty logo"
+                onLoad={event => event.currentTarget.parentElement?.classList.add('booking-logo-loaded')}/>
             </div>
             <div className="booking-title-group">
               <span className="overline">DUKES OF BEAUTY • PRIVATE APPOINTMENT REQUEST</span>
