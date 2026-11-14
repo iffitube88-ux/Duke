@@ -1,7 +1,8 @@
-import { useCallback, useEffect, useMemo, useRef, useState, type Dispatch, type PointerEvent, type SetStateAction, type SyntheticEvent } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type Dispatch, type PointerEvent, type SetStateAction } from 'react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, Check, ChevronLeft, ChevronRight, Clock3, Instagram, MapPin, Menu, MessageCircle, Phone, Plus, Search, X } from 'lucide-react';
 import Booking from './Booking';
+import SafeImage from './SafeImage';
 import { brand, treatmentEditorial } from './brand';
 import { catalog, getEstimate, getSelected } from './catalog';
 import { serviceCategories } from './salonData';
@@ -33,7 +34,7 @@ function useReveals() {
 }
 
 function Logo() {
-  return <a href="#top" aria-label="Dukes of Beauty home" className="logo"><img src={brand.logo} alt="Dukes of Beauty" /></a>;
+  return <a href="#top" aria-label="Dukes of Beauty home" className="logo"><SafeImage sources={[brand.logo, brand.logo.replace("/render/image/","/object/").split("?")[0]]} fallback="/images/dukes-wordmark.svg" alt="Dukes of Beauty"/></a>;
 }
 
 function Header({ onBook }: { onBook: Book }) {
@@ -82,7 +83,7 @@ function Hero({ onBook }: { onBook: Book }) {
     frame.current.style.setProperty('--rotate-y', (x * 6.5).toFixed(2) + 'deg');
   };
   return <section id="top" className="hero">
-    <div className="hero-image"><img src={brand.hero} alt="The Dukes of Beauty salon interior" fetchPriority="high"/></div>
+    <div className="hero-image"><SafeImage sources={[brand.hero,brand.photos[0],brand.photoFallbacks[0]]} fallback="/images/salon-fallback.svg" alt="The Dukes of Beauty salon interior" fetchPriority="high"/></div>
     <div className="hero-vignette"/>
     <div className="hero-inner wrap">
       <div className="hero-copy">
@@ -99,7 +100,7 @@ function Hero({ onBook }: { onBook: Book }) {
         frame.current?.style.setProperty('--rotate-x', '0deg');
         frame.current?.style.setProperty('--rotate-y', '0deg');
       }}>
-        <div className="hero-frame-inner"><img src={brand.photos[0]} alt="Dukes of Beauty salon" loading="eager"/></div>
+        <div className="hero-frame-inner"><SafeImage sources={[brand.photos[0],brand.photoFallbacks[0],brand.hero]} fallback="/images/salon-fallback.svg" alt="Dukes of Beauty salon" loading="eager"/></div>
         <div className="frame-corner frame-corner-a"/><div className="frame-corner frame-corner-b"/>
         <span className="hero-photo-label"><span>DUKES</span><small>BUSINESS BAY · DUBAI</small></span>
       </div>
@@ -116,8 +117,8 @@ function WordRibbon() {
 function SalonStory({ onBook }: { onBook: Book }) {
   return <section className="section-space salon-story" id="atelier"><div className="wrap story-layout">
     <div className="story-photos" data-reveal>
-      <div className="story-image-large"><img src={brand.photos[0]} alt="Inside the Dukes of Beauty salon" loading="lazy"/></div>
-      <div className="story-image-small"><img src={brand.photos[3]} alt="Dukes of Beauty nail colour swatches" loading="lazy"/></div>
+      <div className="story-image-large"><SafeImage sources={[brand.photos[0],brand.photoFallbacks[0],brand.hero]} fallback="/images/salon-fallback.svg" alt="Inside the Dukes of Beauty salon" loading="lazy"/></div>
+      <div className="story-image-small"><SafeImage sources={[brand.photos[3],brand.photoFallbacks[3]]} fallback="/images/nails-fallback.svg" alt="Dukes of Beauty nail colour swatches" loading="lazy"/></div>
       <div className="story-stamp"><span>THE SALON</span><strong>DB.</strong></div>
     </div>
     <div className="story-content" data-reveal>
@@ -132,10 +133,10 @@ function SalonStory({ onBook }: { onBook: Book }) {
 }
 
 const featureCategories = [
-  { id:'hair', title:'Hair & styling', subtitle:'CUT · COLOUR · TREATMENT', image:treatmentEditorial.hair.src, alt:treatmentEditorial.hair.alt, illustrative:true, num:'01'},
-  { id:'nails', title:'Nails & beauty', subtitle:'MANICURE · PEDICURE · ART', image:brand.photos[3], alt:'Nail swatches from the Dukes of Beauty photo collection', illustrative:false, num:'02'},
-  { id:'facials', title:'Skin & facials', subtitle:'HYDRAFACIAL · SKIN CARE', image:treatmentEditorial.facials.src, alt:treatmentEditorial.facials.alt, illustrative:true, num:'03'},
-  { id:'lashes', title:'Lashes & brows', subtitle:'EXTENSIONS · SHAPING', image:treatmentEditorial.lashes.src, alt:treatmentEditorial.lashes.alt, illustrative:true, num:'04'},
+  { id:'hair', title:'Hair & styling', subtitle:'CUT · COLOUR · TREATMENT', image:treatmentEditorial.hair.src, fallback:'/images/hair-fallback.svg', alt:treatmentEditorial.hair.alt, illustrative:true, num:'01'},
+  { id:'nails', title:'Nails & beauty', subtitle:'MANICURE · PEDICURE · ART', image:brand.photos[3], backup:brand.photoFallbacks[3], fallback:'/images/nails-fallback.svg', alt:'Nail swatches from the Dukes of Beauty photo collection', illustrative:false, num:'02'},
+  { id:'facials', title:'Skin & facials', subtitle:'HYDRAFACIAL · SKIN CARE', image:treatmentEditorial.facials.src, fallback:'/images/facials-fallback.svg', alt:treatmentEditorial.facials.alt, illustrative:true, num:'03'},
+  { id:'lashes', title:'Lashes & brows', subtitle:'EXTENSIONS · SHAPING', image:treatmentEditorial.lashes.src, fallback:'/images/lashes-fallback.svg', alt:treatmentEditorial.lashes.alt, illustrative:true, num:'04'},
 ];
 
 function Spotlight({ onCategory }: { onCategory: (id: string) => void }) {
@@ -154,7 +155,7 @@ function Spotlight({ onCategory }: { onCategory: (id: string) => void }) {
       <div className="editorial-heading" data-reveal><div><span className="eyebrow gold-label">02 — THE TREATMENT COLLECTION</span><h2>Find your <em>ritual.</em></h2></div><p>Explore our treatments and choose what you’d love to experience.</p></div>
       <div className="spotlight-grid">{featureCategories.map(item => <button className="spotlight-card" type="button" key={item.id} onPointerMove={tilt} onPointerLeave={reset} onClick={() => onCategory(item.id)}>
         <span className="spotlight-image">
-          <img src={item.image} alt={item.alt} loading="lazy" decoding="async" onError={event=>{event.currentTarget.style.display='none';event.currentTarget.parentElement?.classList.add('image-unavailable');}}/>
+          <SafeImage sources={[item.image,'backup' in item ? item.backup : '']} fallback={item.fallback} alt={item.alt} loading="lazy" decoding="async"/>
           <span className="spotlight-arrow"><ArrowUpRight size={21}/></span>
           <span className="spotlight-number">{item.num}/04</span>
           {item.illustrative && <span className="spotlight-illustrative">Illustrative photo</span>}
@@ -214,7 +215,7 @@ function Services({ category, onCategory, selected, setSelected, onBook }: {
 }
 
 function PhotoInterlude({ onBook }: { onBook:Book }) {
-  return <section className="photo-interlude"><img src={brand.photos[0]} alt="Dukes of Beauty salon interior" loading="lazy"/><div className="photo-interlude-shade"/>
+  return <section className="photo-interlude"><SafeImage sources={[brand.photos[0],brand.photoFallbacks[0],brand.hero]} fallback="/images/salon-fallback.svg" alt="Dukes of Beauty salon interior" loading="lazy"/><div className="photo-interlude-shade"/>
     <div className="wrap interlude-content" data-reveal><span className="eyebrow">A MOMENT JUST FOR YOU</span><h2>Your time <em>to glow.</em></h2><p>Choose your treatments and send your preferred visit details directly to the Dukes of Beauty team.</p><button className="gold-button" onClick={onBook}>Request your moment <ArrowUpRight size={18}/></button></div>
     <span className="interlude-side-label">DUKES OF BEAUTY / DUBAI</span>
   </section>;
@@ -240,21 +241,17 @@ function Gallery() {
     document.addEventListener('keydown',key);
     return()=>document.removeEventListener('keydown',key);
   },[open,navigate]);
-  const galleryImageError = (event: SyntheticEvent<HTMLImageElement>, fallback: string) => {
-    const image = event.currentTarget;
-    if (image.src !== fallback) image.src = fallback;
-  };
   return <section id="gallery" className="section-space gallery-section"><div className="wrap">
     <div className="editorial-heading" data-reveal><div><span className="eyebrow gold-label">04 — INSIDE DUKES</span><h2>The beauty of <em>details.</em></h2></div><p>Real photography from the salon, with every detail in focus.</p></div>
     <div className="gallery-grid">{galleryPhotos.map((photo,index)=><button type="button" key={photo.src} className={'gallery-tile tile-'+index} onClick={()=>setOpen(index)} aria-label={'View salon photo '+(index+1)}>
-      <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" onError={event=>galleryImageError(event,photo.fallback)}/><span><Plus size={20}/></span>
+      <SafeImage sources={[photo.src,photo.fallback]} fallback={index===0||index===4?"/images/salon-fallback.svg":"/images/nails-fallback.svg"} alt={photo.alt} loading="lazy" decoding="async"/><span><Plus size={20}/></span>
     </button>)}</div>
     <div className="gallery-footer"><span>DUKES OF BEAUTY · GENUINE SALON PHOTOGRAPHY</span><a href={brand.instagram} target="_blank" rel="noopener noreferrer">Explore our Instagram <Instagram size={17}/><ArrowUpRight size={17}/></a></div>
   </div>
   {open!==null&&<div className="lightbox" role="dialog" aria-label="Salon photo viewer" aria-modal="true" onClick={()=>setOpen(null)}>
     <button aria-label="Close image viewer" className="lightbox-close" onClick={()=>setOpen(null)}><X size={25}/></button>
     <button aria-label="Previous image" className="lightbox-prev" onClick={event=>{event.stopPropagation();navigate(-1);}}><ChevronLeft size={26}/></button>
-    <img src={galleryPhotos[open].src} alt={galleryPhotos[open].alt} onClick={event=>event.stopPropagation()} onError={event=>galleryImageError(event,galleryPhotos[open].fallback)}/>
+    <SafeImage key={galleryPhotos[open].src} sources={[galleryPhotos[open].src,galleryPhotos[open].fallback]} fallback={open===0||open===4?"/images/salon-fallback.svg":"/images/nails-fallback.svg"} alt={galleryPhotos[open].alt} onClick={event=>event.stopPropagation()}/>
     <button aria-label="Next image" className="lightbox-next" onClick={event=>{event.stopPropagation();navigate(1);}}><ChevronRight size={26}/></button>
     <small>{open+1} / {galleryPhotos.length}</small>
   </div>}
@@ -333,7 +330,7 @@ function Visit({ onBook }:{onBook:Book}) {
       <div className="visit-details"><div><MapPin size={19}/><span><strong>Find the salon</strong><small>{brand.address}</small></span></div><div><Phone size={19}/><span><strong>Call or WhatsApp</strong><a href={'tel:'+brand.phone}>+971 52 816 7306</a></span></div></div>
       <div className="visit-actions"><button className="gold-button" onClick={onBook}>Request appointment <ArrowUpRight size={18}/></button><a href={brand.maps} className="gold-underline-link" target="_blank" rel="noopener noreferrer">Get directions <ArrowRight size={17}/></a></div>
     </div>
-    <div className="visit-image" data-reveal><img src={brand.photos[0]} alt="Dukes of Beauty salon in Business Bay" loading="lazy"/><div className="visit-image-address"><MapPin size={20}/><span>15 NORTHSIDE 1 RETAIL<small>BUSINESS BAY · DUBAI</small></span></div></div>
+    <div className="visit-image" data-reveal><SafeImage sources={[brand.photos[0],brand.photoFallbacks[0],brand.hero]} fallback="/images/salon-fallback.svg" alt="Dukes of Beauty salon in Business Bay" loading="lazy"/><div className="visit-image-address"><MapPin size={20}/><span>15 NORTHSIDE 1 RETAIL<small>BUSINESS BAY · DUBAI</small></span></div></div>
   </div></section>;
 }
 
